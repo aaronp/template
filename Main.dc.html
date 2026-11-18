@@ -5,7 +5,7 @@
 <title>project-template — dashboard</title>
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
-<script src="./docs/summaries.js"></script>
+<script src="./docs/cards.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -86,8 +86,8 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 6px 14px">
 <sc-for list="{{item.segments}}" as="seg" hint-placeholder-count="3">
-<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #3D4452">
-<span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: {{seg.color}}"></span>{{seg.label}} <strong style="font-weight: 600">{{seg.n}}</strong></span>
+<a href="{{seg.url}}" style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #3D4452; text-decoration: none">
+<span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 2px; background: {{seg.color}}"></span>{{seg.label}} <strong style="font-weight: 600">{{seg.n}}</strong></a>
 </sc-for>
 </div>
 </div>
@@ -195,9 +195,9 @@ class Component extends DCLogic {
     const TOOLS_HOST = 'https://your-org.github.io/';
 
     const TONES = {
-      ok:      { bg: '#E3F4EC', fg: '#17603F' },
+      good:    { bg: '#E3F4EC', fg: '#17603F' },
       warn:    { bg: '#FFEBD9', fg: '#8A3B0B' },
-      alert:   { bg: '#FDE2E2', fg: '#9B1C1C' },
+      bad:     { bg: '#FDE2E2', fg: '#9B1C1C' },
       neutral: { bg: '#EEF0F3', fg: '#3D4452' }
     };
     const DARK = '#1F2633', MID = '#6E86E8', LIGHT = '#D5DAE1';
@@ -205,11 +205,11 @@ class Component extends DCLogic {
     // Order = walkthrough order. Example figures are the template's sample data.
     const AREAS = [
       { id: 'goals', area: 'Goals', tool: 'Hoshin Kanri', slug: 'hoshin-kanri', path: 'docs/goals.md', tint: '#FFDCC6',
-        status: 'On track', tone: 'ok', metric: '3', metricLabel: 'breakthrough objectives',
+        status: 'On track', tone: 'good', metric: '3', metricLabel: 'breakthrough objectives',
         segments: [{ label: 'On track', n: 5, color: DARK }, { label: 'At risk', n: 1, color: '#E8692E' }, { label: 'Not started', n: 2, color: LIGHT }],
         question: 'Do you know the main goal?', noLead: 'Agree the breakthrough objective and how you will measure it.' },
       { id: 'architecture', area: 'Architecture', tool: 'C4 diagrams', slug: 'c4', path: 'docs/architecture/c4.md', tint: '#D6E1FF',
-        status: 'Up to date', tone: 'ok', metric: '4', metricLabel: 'containers',
+        status: 'Up to date', tone: 'good', metric: '4', metricLabel: 'containers',
         segments: [{ label: 'Context', n: 1, color: DARK }, { label: 'Container', n: 1, color: MID }, { label: 'Component', n: 3, color: LIGHT }],
         question: 'Do you know how it’s built?', noLead: 'Sketch the context, containers and components as C4 diagrams.' },
       { id: 'contracts', area: 'Interfaces', tool: 'Contract-first', slug: 'contract-first', path: 'contracts/orders.v1.json', tint: '#D3F0E3',
@@ -217,16 +217,16 @@ class Component extends DCLogic {
         segments: [{ label: 'Stable', n: 4, color: DARK }, { label: 'Draft', n: 2, color: LIGHT }],
         question: 'Do you know how the parts talk to each other?', noLead: 'Define each interface first, then build both sides against the contract.' },
       { id: 'decisions', area: 'Decisions', tool: 'ADR log', path: 'docs/adr/decisions.md', tint: '#E6DCFF',
-        summary: 'adr', viewer: 'https://aaronp.github.io/adr/',
+        card: 'docs/adr/card.json',
         status: '1 proposed', tone: 'neutral', metric: '12', metricLabel: 'decision records',
         segments: [{ label: 'Accepted', n: 9, color: DARK }, { label: 'Proposed', n: 1, color: MID }, { label: 'Superseded', n: 2, color: LIGHT }],
         question: 'Do you know why it’s built this way?', noLead: 'Record each decision with its options and the trade-off you chose.' },
       { id: 'risks', area: 'Risks', tool: 'Risk register', slug: 'risk-register', path: 'docs/risks.md', tint: '#FFD9D9',
-        status: '2 high', tone: 'alert', metric: '8', metricLabel: 'open risks',
+        status: '2 high', tone: 'bad', metric: '8', metricLabel: 'open risks',
         segments: [{ label: 'High', n: 2, color: '#C2410C' }, { label: 'Medium', n: 3, color: '#F2A06B' }, { label: 'Low', n: 3, color: LIGHT }],
         question: 'Do you know what could go wrong?', noLead: 'Log each risk, score it and give it an owner and a mitigation.' },
       { id: 'schedule', area: 'Schedule', tool: 'Gantt', slug: 'gantt', path: 'docs/schedule.md', tint: '#FFEDB3',
-        status: 'On track', tone: 'ok', metric: '2/5', metricLabel: 'milestones met',
+        status: 'On track', tone: 'good', metric: '2/5', metricLabel: 'milestones met',
         segments: [{ label: 'Done', n: 9, color: DARK }, { label: 'In progress', n: 4, color: MID }, { label: 'Not started', n: 7, color: LIGHT }],
         question: 'Do you know when it’ll be done?', noLead: 'Lay out milestones and dependencies on a timeline.' },
       { id: 'work', area: 'Delivery', tool: 'Agile board', slug: 'board', path: 'docs/board.md', tint: '#CFEDF3',
@@ -235,21 +235,29 @@ class Component extends DCLogic {
         question: 'Do you know what’s happening right now?', noLead: 'Put the work on the board and limit what is in progress.' }
     ];
 
-    // Generated by `make summaries` (scripts/summarize.ts) into docs/summaries.js; areas without one show example figures.
-    const SUMMARIES = window.SUMMARIES ?? {};
+    // An area with a `card` shows that card.json (version 1, as `adr card` writes), bundled into docs/cards.js
+    // by `make snapshot`; areas without one show the example figures above.
+    const CARDS = window.CARDS ?? {};
+    const fromCard = (c) => ({
+      area: c.title, tool: c.subtitle, status: c.status.label, tone: c.status.tone,
+      metric: c.heading.primary, metricLabel: c.heading.label, url: c.source.url,
+      segments: c.legend.map((l) => ({ label: l.label, n: c.report[l.id] ?? 0, color: l.color ?? LIGHT, url: l.url }))
+    });
     const areas = AREAS.map((area, i) => {
-      const live = SUMMARIES[area.summary];
-      const a = live ? { ...area, ...live } : { ...area, tool: area.tool + ' · example' };
+      const live = CARDS[area.card];
+      const a = live ? { ...area, ...fromCard(live) } : { ...area, tool: area.tool + ' · example' };
       const tone = TONES[a.tone];
       if (!tone) throw new Error('bug: unknown tone "' + a.tone + '" for area ' + a.id);
       const next = AREAS[i + 1];
+      const href = a.url ?? TOOLS_HOST + a.slug + '/?src=' + encodeURIComponent(new URL(a.path, location.href).href);
       return {
         ...a,
         no: String(i + 1).padStart(2, '0'),
         anchor: 'q-' + a.id,
         statusBg: tone.bg,
         statusFg: tone.fg,
-        href: (a.viewer ?? TOOLS_HOST + a.slug + '/') + '?src=' + encodeURIComponent(new URL(a.path, location.href).href),
+        href,
+        segments: a.segments.map((seg) => ({ ...seg, url: seg.url ?? href })),
         nextHref: next ? '#q-' + next.id : '#q-done',
         barLabel: a.area + ': ' + a.segments.map((s) => s.label + ' ' + s.n).join(', ')
       };

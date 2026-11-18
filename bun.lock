@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "project-template",
+      "devDependencies": {
+        "@pritzlaff/adr": "^1.1.0",
+      },
+    },
+  },
+  "packages": {
+    "@pritzlaff/adr": ["@pritzlaff/adr@1.1.0", "", { "bin": { "adr": "bin/adr.mjs" } }, "sha512-M1Jm2BlL4suPcndztoemQA8OSyvqtmAWvCMfNeaTJAXkUt3T1d9cVLzpvhhz6IwqUPzEAzIZvNQEYBx7N0dUjQ=="],
+  }
+}

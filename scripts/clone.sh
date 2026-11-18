@@ -50,6 +50,10 @@ perl -pi -e "s#^\# project-template#\# $NAME#; s#^Dashboard: .*#Dashboard: $PAGE
 git init -q -b main
 git remote add origin "git@github.com:$SLUG.git"
 
+# Re-snapshot so the cards link to the new repo's Pages site (needs network for `bun install`).
+touch docs/adr/decisions.md
+make snapshot || echo "make snapshot failed; run it in $DEST once dependencies install" >&2
+
 cat <<MSG
 Created $DEST  (remote: git@github.com:$SLUG.git)
 Next:

@@ -22,30 +22,39 @@ GitHub links and Pages URL. It also removes the template-only parts: `Template.d
 template, using this checkout's `origin` (or `TEMPLATE=<url>`).
 
 <!-- template:end -->
-![Decisions](docs/badges/adr.svg)
+[![Decisions](docs/adr/badge.svg)](Main.dc.html)
 
 Dashboard: https://your-org.github.io/project-template/
 
 ## Running
 
 ```sh
-make dev          # regenerates stale summaries, then serves on http://localhost:8000/
-make summaries    # just the summaries and badges
-make test         # bun test scripts
-bun install && make adr   # open docs/adr/decisions.md in the ADR viewer locally
+make dev          # regenerates stale cards and badges, then serves on http://localhost:8000/
+make snapshot     # just the cards and badges
+make adr          # open docs/adr/decisions.md in the ADR viewer locally
 ```
 
-Each area's source file (e.g. `docs/adr/decisions.md`) is summarized by `scripts/summarize.ts` into
-`docs/summaries/<area>.json` (and `docs/badges/<area>.svg`). `make` only reruns an area when its
-source is newer than its summary. `docs/summaries.js` bundles them for `Main.dc.html`; cards with no
-summary yet show example figures.
+## Cards
+
+Each area keeps its source next to the code and snapshots it into a `card.json` (plus a `badge.svg`)
+in the same folder, e.g. `docs/adr/decisions.md` → `docs/adr/card.json` via `adr card` from
+[`@pritzlaff/adr`](https://github.com/aaronp/adr). `card.json` is a tool-neutral format (version 1:
+title, status pill, big number, a legend with counts and links), so the dashboard styles every
+area the same way. `make` only rebuilds a card when its source is newer.
+`scripts/cards.ts` bundles every `docs/**/card.json` into `docs/cards.js` for `Main.dc.html`;
+areas without a card show example figures.
+
+Card links open the hosted viewer with `?src=` pointing at the published markdown on this repo's
+Pages site (worked out from the `origin` remote, or `make snapshot PAGES=https://…/`), so they work
+once the repo is pushed and published. To change a card's titles, labels or colours, use
+**File → Design card…** in the viewer (`make adr`) and save `decisions.card.json` beside the markdown.
 
 ## Adding an area
 
-Add a function to `AREAS` in `scripts/summarize.ts`, a rule in the `Makefile`, and
-`summary: '<area>'` on its card in `Main.dc.html`.
+Have its tool write `<dir>/card.json` in the same format, add a Makefile rule for it (and list it
+under `docs/cards.js`), then set `card: '<dir>/card.json'` on its entry in `Main.dc.html`.
 
 ## Hosting
 
-Pushes to `main`/`master` publish the repo to GitHub Pages (`.github/workflows/pages.yml`;
-Settings → Pages → Source: **GitHub Actions**).
+Pushes to `main`/`master` publish the repo to GitHub Pages (`.github/workflows/pages.yml`, which
+re-snapshots the cards first; Settings → Pages → Source: **GitHub Actions**).
