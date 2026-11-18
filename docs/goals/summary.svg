@@ -1,15 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="520" height="143" role="img" aria-label="Plan 2027">
-<title>Plan 2027 — Updated 2026-11-18</title>
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="71" role="img" aria-label="Goals">
+<title>Goals — Not updated yet</title>
 <style>.b{fill:#fff;stroke:#d0d7de}.f{fill:#1f2328}.m{fill:#656d76}
 @media (prefers-color-scheme:dark){.b{fill:#0d1117;stroke:#30363d}.f{fill:#e6edf3}.m{fill:#9198a1}}</style>
 <g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="12">
-<rect class="b" fill="#fff" stroke="#d0d7de" x=".5" y=".5" width="519" height="142" rx="6"/>
-<text class="f" fill="#1f2328" x="16" y="26" font-size="15" font-weight="700">Plan 2027</text>
-<text class="m" fill="#656d76" x="16" y="45">Updated 2026-11-18</text>
-<rect x="16" y="54" width="3" height="27" fill="#3346D3"/>
-<text x="25" y="63" fill="#3346D3" font-size="9" font-weight="700" letter-spacing=".5">BREAKTHROUGH OBJECTIVES</text>
-<text class="f" fill="#1f2328" x="25" y="78">Become the default starter for small Bun services</text>
-<rect x="32" y="90" width="3" height="27" fill="#0A6E64"/>
-<text x="41" y="99" fill="#0A6E64" font-size="9" font-weight="700" letter-spacing=".5">ANNUAL OBJECTIVES</text>
-<text class="f" fill="#1f2328" x="41" y="114" font-weight="700">Ship v1 with docs</text>
+<rect class="b" fill="#fff" stroke="#d0d7de" x=".5" y=".5" width="519" height="70" rx="6"/>
+<text class="f" fill="#1f2328" x="16" y="26" font-size="15" font-weight="700">Goals</text>
+<text class="m" fill="#656d76" x="16" y="45">Not updated yet</text>
+
 </g></svg>

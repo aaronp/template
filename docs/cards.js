@@ -9,7 +9,7 @@ window.CARDS = {
       "tone": "good"
     },
     "heading": {
-      "primary": "2",
+      "primary": "0",
       "label": "decision records"
     },
     "legend": [
@@ -46,7 +46,7 @@ window.CARDS = {
     ],
     "report": {
       "proposed": 0,
-      "accepted": 2,
+      "accepted": 0,
       "superseded": 0,
       "deprecated": 0,
       "rejected": 0
@@ -59,14 +59,14 @@ window.CARDS = {
   },
   "docs/architecture/card.json": {
     "version": 1,
-    "title": "bun-app",
+    "title": "Project",
     "subtitle": "C4 model",
     "status": {
       "label": "Laid out",
       "tone": "good"
     },
     "heading": {
-      "primary": "7",
+      "primary": "0",
       "label": "elements"
     },
     "legend": [
@@ -102,12 +102,12 @@ window.CARDS = {
       }
     ],
     "report": {
-      "people": 2,
-      "systems": 1,
+      "people": 0,
+      "systems": 0,
       "externals": 0,
-      "containers": 2,
-      "components": 2,
-      "relationships": 2
+      "containers": 0,
+      "components": 0,
+      "relationships": 0
     },
     "source": {
       "label": "docs/architecture/c4.md",
@@ -117,14 +117,14 @@ window.CARDS = {
   },
   "docs/board/card.json": {
     "version": 1,
-    "title": "bun-app",
+    "title": "Board",
     "subtitle": "Kanban board",
     "status": {
-      "label": "2 open",
-      "tone": "neutral"
+      "label": "All done",
+      "tone": "good"
     },
     "heading": {
-      "primary": "1/3",
+      "primary": "0/0",
       "label": "tasks done"
     },
     "legend": [
@@ -145,9 +145,9 @@ window.CARDS = {
       }
     ],
     "report": {
-      "To Do": 1,
-      "Doing": 1,
-      "Done": 1
+      "To Do": 0,
+      "Doing": 0,
+      "Done": 0
     },
     "source": {
       "label": "docs/board/board.md",
@@ -160,11 +160,11 @@ window.CARDS = {
     "title": "Goals",
     "subtitle": "Hoshin Kanri",
     "status": {
-      "label": "Updated 2026-11-18",
-      "tone": "good"
+      "label": "Not stamped yet",
+      "tone": "neutral"
     },
     "heading": {
-      "primary": "1",
+      "primary": "0",
       "label": "breakthrough objectives"
     },
     "legend": [
@@ -194,10 +194,10 @@ window.CARDS = {
       }
     ],
     "report": {
-      "vision": 1,
-      "goals": 2,
-      "priorities": 2,
-      "kpis": 2
+      "vision": 0,
+      "goals": 0,
+      "priorities": 0,
+      "kpis": 0
     },
     "source": {
       "label": "docs/goals/x-matrix.md",
@@ -208,14 +208,13 @@ window.CARDS = {
   "docs/risks/card.json": {
     "version": 1,
     "title": "Risks",
-    "subtitle": "bun-app",
+    "subtitle": "Project",
     "status": {
-      "label": "1 outside appetite",
-      "tone": "bad",
-      "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+      "label": "None open",
+      "tone": "good"
     },
     "heading": {
-      "primary": "2",
+      "primary": "0",
       "label": "open risks"
     },
     "legend": [
@@ -241,9 +240,9 @@ window.CARDS = {
       }
     ],
     "report": {
-      "low": 1,
+      "low": 0,
       "medium": 0,
-      "high": 1,
+      "high": 0,
       "critical": 0
     },
     "source": {
@@ -254,14 +253,14 @@ window.CARDS = {
   },
   "docs/schedule/card.json": {
     "version": 1,
-    "title": "bun-app roadmap",
-    "subtitle": "2026-11-02 → 2026-11-19",
+    "title": "Schedule",
+    "subtitle": "",
     "status": {
-      "label": "2 late",
-      "tone": "warn"
+      "label": "On track",
+      "tone": "good"
     },
     "heading": {
-      "primary": "5",
+      "primary": "0",
       "label": "tasks"
     },
     "legend": [
@@ -287,10 +286,10 @@ window.CARDS = {
       }
     ],
     "report": {
-      "done": 1,
-      "active": 1,
-      "upcoming": 1,
-      "late": 2
+      "done": 0,
+      "active": 0,
+      "upcoming": 0,
+      "late": 0
     },
     "source": {
       "label": "docs/schedule/schedule.md",

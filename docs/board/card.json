@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "title": "bun-app",
+  "title": "Board",
   "subtitle": "Kanban board",
   "status": {
-    "label": "2 open",
-    "tone": "neutral"
+    "label": "All done",
+    "tone": "good"
   },
   "heading": {
-    "primary": "1/3",
+    "primary": "0/0",
     "label": "tasks done"
   },
   "legend": [
@@ -28,9 +28,9 @@
     }
   ],
   "report": {
-    "To Do": 1,
-    "Doing": 1,
-    "Done": 1
+    "To Do": 0,
+    "Doing": 0,
+    "Done": 0
   },
   "source": {
     "label": "docs/board/board.md",

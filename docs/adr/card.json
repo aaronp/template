@@ -7,7 +7,7 @@
     "tone": "good"
   },
   "heading": {
-    "primary": "2",
+    "primary": "0",
     "label": "decision records"
   },
   "legend": [
@@ -44,7 +44,7 @@
   ],
   "report": {
     "proposed": 0,
-    "accepted": 2,
+    "accepted": 0,
     "superseded": 0,
     "deprecated": 0,
     "rejected": 0

@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "title": "bun-app",
+  "title": "Project",
   "subtitle": "C4 model",
   "status": {
     "label": "Laid out",
     "tone": "good"
   },
   "heading": {
-    "primary": "3",
+    "primary": "0",
     "label": "elements"
   },
   "legend": [
@@ -43,12 +43,12 @@
     }
   ],
   "report": {
-    "people": 1,
-    "systems": 1,
+    "people": 0,
+    "systems": 0,
     "externals": 0,
-    "containers": 1,
+    "containers": 0,
     "components": 0,
-    "relationships": 1
+    "relationships": 0
   },
   "source": {
     "label": "docs/architecture/c4.md",

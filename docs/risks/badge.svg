@@ -1,9 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="148" height="20" role="img" aria-label="Risks: 1 low, 1 high">
-<title>Risks: 1 low, 1 high</title>
-<clipPath id="r"><rect width="148" height="20" rx="4"/></clipPath>
+<svg xmlns="http://www.w3.org/2000/svg" width="47" height="20" role="img" aria-label="Risks: none">
+<title>Risks: none</title>
+<clipPath id="r"><rect width="47" height="20" rx="4"/></clipPath>
 <g clip-path="url(#r)" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11" text-anchor="middle">
 <rect x="0" width="47" height="20" fill="#555"/><text x="23.5" y="14" fill="#fff">Risks</text>
-<rect x="47" width="47" height="20" fill="#4D7C3A"/><text x="70.5" y="14" fill="#fff">Low 1</text>
-<rect x="94" width="54" height="20" fill="#C2410C"/><text x="121" y="14" fill="#fff">High 1</text>
 </g>
 </svg>

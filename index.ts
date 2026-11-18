@@ -4,7 +4,10 @@
 // Local mode: each argument is <tool-bin>:<file.md> (make dev passes them). Each tool's own server is started
 // on PORT+1, PORT+2, … (it edits that file and saves back), and /local.js tells the dashboard where they are:
 // window.LOCAL = { '<file.md>': '<local editor url>' }. Pages has no local.js, so there cards link to the hosted tools.
-import { spawn } from 'node:child_process';
+// Local mode also watches docs/: a saved .md (or .card.json design) reruns `make snapshot`, and local.js reloads the
+// dashboard once the cards have been rebuilt.
+import { spawn, spawnSync } from 'node:child_process';
+import { watch } from 'node:fs';
 
 const PORT = Number(process.env.PORT ?? 8000);
 const local: Record<string, string> = {};
@@ -25,11 +28,31 @@ const children = process.argv.slice(2).map((arg, i) => {
 process.on('exit', () => children.forEach((c) => { try { process.kill(-c.pid!, 'SIGTERM'); } catch {} }));
 process.on('SIGINT', () => process.exit(0)).on('SIGTERM', () => process.exit(0));
 
+// Inputs only: card.json, badges and cards.js are outputs, so a rebuild can't retrigger itself.
+let version = 0, timer: Timer | undefined;
+const changed = new Set<string>();
+if (children.length) watch('docs', { recursive: true }, (_, name) => {
+  if (!name || !/\.md$|\.card\.json$/i.test(name)) return;
+  changed.add('docs/' + name);
+  clearTimeout(timer); // editors write a temp file then rename; settle before rebuilding
+  timer = setTimeout(() => {
+    // -W marks each changed file as new: make compares whole-second mtimes, so a save in the same second as the
+    // last build would otherwise look up to date.
+    const files = [...changed];
+    changed.clear();
+    const r = spawnSync('make', ['-s', ...files.flatMap((f) => ['-W', f]), 'snapshot'], { stdio: ['ignore', 'pipe', 'inherit'] });
+    if (r.status === 0) { version++; console.log(`  rebuilt cards (${files.join(', ')})`); } else console.error(`  make snapshot failed after ${files.join(', ')} changed`);
+  }, 300);
+});
+// Reloads the dashboard when the cards change. Only served locally.
+const reloader = `(() => { let v; setInterval(() => fetch('/version').then((r) => r.text()).then((n) => { if (v !== undefined && n !== v) location.reload(); v = n; }).catch(() => {}), 1000); })();`;
+
 const server = Bun.serve({
   port: PORT,
   async fetch(req) {
     const path = decodeURIComponent(new URL(req.url).pathname);
-    if (path === '/local.js') return new Response(`window.LOCAL = ${JSON.stringify(local)};\n`, { headers: { 'Content-Type': 'text/javascript', 'Cache-Control': 'no-store' } });
+    if (path === '/version') return new Response(String(version), { headers: { 'Cache-Control': 'no-store' } });
+    if (path === '/local.js') return new Response(`window.LOCAL = ${JSON.stringify(local)};\n${children.length ? reloader : ''}\n`, { headers: { 'Content-Type': 'text/javascript', 'Cache-Control': 'no-store' } });
     const file = Bun.file('.' + (path.endsWith('/') ? path + 'index.html' : path));
     if (path.includes('..') || !(await file.exists())) return new Response('Not found', { status: 404 });
     return new Response(file, { headers: { 'Access-Control-Allow-Origin': '*' } });

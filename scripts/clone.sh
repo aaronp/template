@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Copies this template into a new project repo, filling in its name and GitHub repo,
-# and leaves the template-only parts (Template.dc.html, this script, `make clone`) behind.
+# and leaves the template-only parts (Template.dc.html, examples/, this script, `make clone`) behind.
 # REPO, NAME, DEST and TEMPLATE may be set in the environment; anything missing is prompted for.
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -35,7 +35,7 @@ fi
 # Tracked and new (not ignored) files, minus the template-only ones.
 mkdir -p "$DEST"
 git ls-files -co --exclude-standard -z \
-  | grep -zv -e '^Template\.dc\.html$' -e '^scripts/clone\.sh$' \
+  | grep -zv -e '^Template\.dc\.html$' -e '^examples/' -e '^scripts/clone\.sh$' \
   | tar --null -T - -cf - | tar -xf - -C "$DEST"
 
 cd "$DEST"

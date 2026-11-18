@@ -14,7 +14,11 @@ Create an empty repo on GitHub, then:
 
 ```sh
 make clone        # asks for owner/repo and a project name; or REPO=… NAME=… DEST=…
+make demo         # a fictional Acme project with every area filled in, in ./temp/demo, served locally
 ```
+
+A new project starts with every area's file empty (no example content). `make demo` fills them from
+`examples/acme/docs`, each tool's own Acme example; `examples/` isn't copied by `make clone`.
 
 This copies the repo to `../<repo>` (tracked and new files only) and fills in the project's name,
 GitHub links and Pages URL. It also removes the template-only parts: `Template.dc.html`,
@@ -51,7 +55,8 @@ Cards always link to the hosted tools on the published files (that is what `card
 GitHub Pages serves). Under `make dev`, `index.ts` also starts each area's own editor (`make <area>`'s
 server) on its own port and serves `/local.js`, which maps each file to its editor; the dashboard then
 sends card links there instead, keeping filters, so **Save writes to this checkout**. Pages has no
-`local.js`, so nothing changes when deployed. Cards don't refresh after a Save: run `make snapshot` and reload.
+`local.js`, so nothing changes when deployed. It also watches `docs/`: saving a file (in its editor or your own)
+rebuilds that card and the open dashboard reloads itself.
 
 ## Cards
 

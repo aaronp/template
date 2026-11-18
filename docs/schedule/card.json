@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "title": "bun-app roadmap",
-  "subtitle": "2026-11-02 → 2026-11-19",
+  "title": "Schedule",
+  "subtitle": "",
   "status": {
-    "label": "2 late",
-    "tone": "warn"
+    "label": "On track",
+    "tone": "good"
   },
   "heading": {
-    "primary": "5",
+    "primary": "0",
     "label": "tasks"
   },
   "legend": [
@@ -33,10 +33,10 @@
     }
   ],
   "report": {
-    "done": 1,
-    "active": 1,
-    "upcoming": 1,
-    "late": 2
+    "done": 0,
+    "active": 0,
+    "upcoming": 0,
+    "late": 0
   },
   "source": {
     "label": "docs/schedule/schedule.md",

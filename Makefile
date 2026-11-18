@@ -25,7 +25,7 @@ snap = for c in card badge; do $(2)=$(if $(PAGES),$(PAGES)$(3)) $(1) $$c $(3) ||
 
 # Regenerates stale cards and badges, then serves the dashboard on http://localhost:8000/ with every area's
 # editor on 8001+ (Save writes to this checkout); locally the dashboard's cards link to those editors.
-# Cards don't refresh after a Save: run make snapshot (or make <area>-snapshot) and reload.
+# Saving any docs/ file rebuilds its card and reloads the open dashboard.
 dev: snapshot
 	bun index.ts $(ADR):$(ADR_MD) $(HK):$(GOALS_MD) $(C4):$(C4_MD) $(RR):$(RISKS_MD) $(GANTT):$(GANTT_MD) $(AGILE):$(AGILE_MD)
 
@@ -93,7 +93,7 @@ risks-snapshot: | node_modules
 	bun scripts/cards.ts
 
 # Template only (make clone removes this block from the copy).
-.PHONY: clone test
+.PHONY: clone test demo
 
 # Copies this template into a new project: make clone [REPO=owner/repo] [NAME="My project"] [DEST=../dir]
 clone:
@@ -105,3 +105,11 @@ test:
 	rm -rf temp/test
 	$(MAKE) clone REPO=aaronp/test NAME="Test project" DEST=./temp/test
 	cd temp/test && $(MAKE) dev
+
+# Clones into ./temp/demo (replacing any earlier one) as a fictional Acme project, fills every area from
+# examples/acme/docs (each tool's Acme example), then serves it with the local editors.
+demo:
+	rm -rf temp/demo
+	$(MAKE) clone REPO=acme/acme NAME="Acme" DEST=./temp/demo
+	cp -R examples/acme/docs/. temp/demo/docs/
+	cd temp/demo && $(MAKE) -B snapshot && $(MAKE) dev

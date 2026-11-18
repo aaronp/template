@@ -1,14 +1,13 @@
 {
   "version": 1,
   "title": "Risks",
-  "subtitle": "bun-app",
+  "subtitle": "Project",
   "status": {
-    "label": "1 outside appetite",
-    "tone": "bad",
-    "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+    "label": "None open",
+    "tone": "good"
   },
   "heading": {
-    "primary": "2",
+    "primary": "0",
     "label": "open risks"
   },
   "legend": [
@@ -34,9 +33,9 @@
     }
   ],
   "report": {
-    "low": 1,
+    "low": 0,
     "medium": 0,
-    "high": 1,
+    "high": 0,
     "critical": 0
   },
   "source": {

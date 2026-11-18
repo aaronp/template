@@ -3,11 +3,11 @@
   "title": "Goals",
   "subtitle": "Hoshin Kanri",
   "status": {
-    "label": "Updated 2026-11-18",
-    "tone": "good"
+    "label": "Not stamped yet",
+    "tone": "neutral"
   },
   "heading": {
-    "primary": "1",
+    "primary": "0",
     "label": "breakthrough objectives"
   },
   "legend": [
@@ -37,10 +37,10 @@
     }
   ],
   "report": {
-    "vision": 1,
-    "goals": 2,
-    "priorities": 2,
-    "kpis": 2
+    "vision": 0,
+    "goals": 0,
+    "priorities": 0,
+    "kpis": 0
   },
   "source": {
     "label": "docs/goals/x-matrix.md",
