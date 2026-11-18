@@ -80,7 +80,7 @@ Walkthrough</span>
 <span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
 <span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
 <span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
-<span style="margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B93A1">your-org/project-template</span>
+<span style="margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B93A1">aaronp/template</span>
 </div>
 <div style="padding: 22px 24px 26px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 2.0; color: #E6E8EC">
 <div style="color: #8B93A1">README.md</div>
@@ -118,7 +118,7 @@ Walkthrough</span>
 <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Every tool takes a <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">?src=</code> pointing at a file in this repo.</p>
 </div>
 </div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; background: #F5F6F8; border: 1px solid #E2E5EA; border-radius: 12px; padding: 16px 20px; overflow-x: auto; white-space: nowrap; color: #3D4452">https://your-org.github.io/risk-register/<span style="color: {{accent}}; font-weight: 500">?src=</span>https://raw.githubusercontent.com/your-org/project-template/main/docs/risks/risks.md</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; background: #F5F6F8; border: 1px solid #E2E5EA; border-radius: 12px; padding: 16px 20px; overflow-x: auto; white-space: nowrap; color: #3D4452">https://aaronp.github.io/risk-register/<span style="color: {{accent}}; font-weight: 500">?src=</span>https://raw.githubusercontent.com/aaronp/template/main/docs/risks/risks.md</div>
 </div>
 </section>
 
@@ -128,7 +128,7 @@ Walkthrough</span>
 <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; letter-spacing: -0.01em">Use this template</h2>
 <p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C; max-width: 680px">Create an empty repo on GitHub, then copy the template into it. You get the dashboard and walkthrough with your repo's name and links; this page is left behind.</p>
 <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; background: #12151C; color: #E6E8EC; border-radius: 12px; padding: 18px 22px; overflow-x: auto">git clone {{templateUrl}}.git
-cd project-template
+cd template
 make clone        # asks for owner/repo and a project name</pre>
 </section>
 
@@ -147,7 +147,7 @@ make clone        # asks for owner/repo and a project name</pre>
 class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#2F5BEA';
-    const templateUrl = 'https://github.com/your-org/project-template';
+    const templateUrl = 'https://github.com/aaronp/template';
     const areas = [
       { path: 'docs/goals/x-matrix.md', tool: 'Hoshin Kanri', tint: '#FFDCC6' },
       { path: 'docs/architecture/c4.md', tool: 'C4 diagrams', tint: '#D6E1FF' },

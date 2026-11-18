@@ -44,7 +44,7 @@ perl -pi -e 's#Template\.dc\.html#Main.dc.html#g; s#>project-template<#>'"$NAME"
 perl -pi -e 's#"name": "project-template"#"name": "'"$REPO_NAME"'"#' package.json
 perl -0pi -e 's/\n# Template only.*//s' Makefile
 perl -0pi -e 's/<!-- template:start -->.*?<!-- template:end -->\n//s' README.md
-perl -pi -e "s#^\# project-template#\# $NAME#; s#^Dashboard: .*#Dashboard: $PAGES · Generated from [project-template]($TEMPLATE)#; s#your-org/project-template#$SLUG#g" README.md
+perl -pi -e "s#^\# project-template#\# $NAME#; s#^Dashboard: .*#Dashboard: $PAGES · Generated from [project-template]($TEMPLATE)#" README.md
 
 git init -q -b main
 git remote add origin "git@github.com:$SLUG.git"

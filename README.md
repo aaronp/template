@@ -5,14 +5,18 @@ A template repository for keeping every project artifact (goals, architecture, d
 interfaces, schedule, delivery) as plain Markdown and JSON next to the code, with a dashboard that
 summarizes them.
 
-- `Template.dc.html`: the page describing this template (served at `/` here).
-- `Main.dc.html`: the project's own dashboard and walkthrough. This is what a new project gets.
+- `Template.dc.html`: the page describing this template, published at
+  [aaronp.github.io/template](https://aaronp.github.io/template/).
+- `Main.dc.html`: the project's own dashboard and walkthrough. This is what a new project gets:
+  [aaronp.github.io/template/Main.dc.html](https://aaronp.github.io/template/Main.dc.html) is what your
+  project's site will look like, with every area still empty (`make demo` shows one filled in).
 
 ## Using this template
 
 Create an empty repo on GitHub, then:
 
 ```sh
+git clone https://github.com/aaronp/template.git && cd template
 make clone        # asks for owner/repo and a project name; or REPO=… NAME=… DEST=…
 make demo         # a fictional Acme project with every area filled in, in ./temp/demo, served locally
 ```
@@ -28,7 +32,7 @@ template, using this checkout's `origin` (or `TEMPLATE=<url>`).
 <!-- template:end -->
 [![Goals](docs/goals/badge.svg)](Main.dc.html) [![Architecture](docs/architecture/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html) [![Risks](docs/risks/badge.svg)](Main.dc.html) [![Schedule](docs/schedule/badge.svg)](Main.dc.html) [![Delivery](docs/board/badge.svg)](Main.dc.html)
 
-Dashboard: https://your-org.github.io/project-template/
+Dashboard: https://aaronp.github.io/template/Main.dc.html
 
 ## Running
 
