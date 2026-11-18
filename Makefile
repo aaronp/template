@@ -16,9 +16,7 @@ ADR   := $(BIN)/adr
 HK    := $(BIN)/hoshin-kanri
 C4    := $(BIN)/c4
 AGILE := $(BIN)/agile
-# ponytail: the gantt package is published as @pritzlaff/agile@1.0.1 (aliased in package.json), so its
-# `agile` bin clashes with the kanban's; call it by path until it is published as @pritzlaff/gantt.
-GANTT := node node_modules/@pritzlaff/gantt/bin/agile.mjs
+GANTT := $(BIN)/gantt
 
 # $(call snap,<cli>,<SRC env var>,<file.md>): writes card.json and badge.svg beside the markdown.
 snap = for c in card badge; do $(2)=$(if $(PAGES),$(PAGES)$(3)) $(1) $$c $(3) || exit 1; done
@@ -42,7 +40,7 @@ docs/goals/card.json: $(GOALS_MD) $(wildcard docs/goals/x-matrix.card.json) | no
 docs/architecture/card.json: $(C4_MD) $(wildcard docs/architecture/c4.card.json) | node_modules
 	$(call snap,$(C4),C4_SRC,$(C4_MD))
 docs/schedule/card.json: $(GANTT_MD) $(wildcard docs/schedule/schedule.card.json) | node_modules
-	$(call snap,$(GANTT),AGILE_SRC,$(GANTT_MD))
+	$(call snap,$(GANTT),GANTT_SRC,$(GANTT_MD))
 docs/board/card.json: $(AGILE_MD) | node_modules
 	$(call snap,$(AGILE),AGILE_SRC,$(AGILE_MD))
 
@@ -73,7 +71,7 @@ c4-snapshot: | node_modules
 gantt: | node_modules
 	$(GANTT) $(GANTT_MD)
 gantt-snapshot: | node_modules
-	$(call snap,$(GANTT),AGILE_SRC,$(GANTT_MD))
+	$(call snap,$(GANTT),GANTT_SRC,$(GANTT_MD))
 	bun scripts/cards.ts
 
 agile: | node_modules

@@ -7,9 +7,9 @@
   },
   "devDependencies": {
     "@pritzlaff/adr": "^1.1.1",
-    "@pritzlaff/agile": "1.0.0",
+    "@pritzlaff/agile": "^1.0.2",
     "@pritzlaff/c4": "^0.1.0",
-    "@pritzlaff/gantt": "npm:@pritzlaff/agile@1.0.1",
+    "@pritzlaff/gantt": "^1.0.1",
     "@pritzlaff/hoshin-kanri": "^1.0.1"
   }
 }

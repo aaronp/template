@@ -40,8 +40,8 @@ make <area>-snapshot # rebuild that area's card.json and badge.svg now, even if 
 | Goals | `goals` | `docs/goals/x-matrix.md` | [`@pritzlaff/hoshin-kanri`](https://github.com/aaronp/Hoshin-Kanri) | migrated |
 | Architecture | `c4` | `docs/architecture/c4.md` | [`@pritzlaff/c4`](https://github.com/aaronp/c4) | migrated |
 | Decisions | `adr` | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
-| Schedule | `gantt` | `docs/schedule/schedule.md` | [gantt](https://github.com/aaronp/gantt) (published as `@pritzlaff/agile@1.0.1`, aliased) | migrated |
-| Delivery | `agile` | `docs/board/board.md` | [`@pritzlaff/agile`](https://github.com/aaronp/agile) `1.0.0` | migrated |
+| Schedule | `gantt` | `docs/schedule/schedule.md` | [`@pritzlaff/gantt`](https://github.com/aaronp/gantt) | migrated |
+| Delivery | `agile` | `docs/board/board.md` | [`@pritzlaff/agile`](https://github.com/aaronp/agile) | migrated |
 | Risks | — | — | [risk-register](https://github.com/aaronp/risk-register) | TODO: no npm package / card CLI yet |
 | Interfaces | — | — | — | TODO: example figures on the dashboard |
 
