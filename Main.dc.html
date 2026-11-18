@@ -209,8 +209,8 @@ class Component extends DCLogic {
         status: 'On track', tone: 'good', metric: '3', metricLabel: 'breakthrough objectives',
         segments: [{ label: 'On track', n: 5, color: DARK }, { label: 'At risk', n: 1, color: '#E8692E' }, { label: 'Not started', n: 2, color: LIGHT }],
         question: 'Do you know the main goal?', noLead: 'Agree the breakthrough objective and how you will measure it.' },
-      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'architecture', area: 'Architecture', tool: 'C4 diagrams', slug: 'c4', path: 'docs/architecture/c4.md', tint: '#D6E1FF',
+        card: 'docs/architecture/card.json',
         status: 'Up to date', tone: 'good', metric: '4', metricLabel: 'containers',
         segments: [{ label: 'Context', n: 1, color: DARK }, { label: 'Container', n: 1, color: MID }, { label: 'Component', n: 3, color: LIGHT }],
         question: 'Do you know how it’s built?', noLead: 'Sketch the context, containers and components as C4 diagrams.' },
@@ -229,13 +229,13 @@ class Component extends DCLogic {
         status: '2 high', tone: 'bad', metric: '8', metricLabel: 'open risks',
         segments: [{ label: 'High', n: 2, color: '#C2410C' }, { label: 'Medium', n: 3, color: '#F2A06B' }, { label: 'Low', n: 3, color: LIGHT }],
         question: 'Do you know what could go wrong?', noLead: 'Log each risk, score it and give it an owner and a mitigation.' },
-      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
-      { id: 'schedule', area: 'Schedule', tool: 'Gantt', slug: 'gantt', path: 'docs/schedule.md', tint: '#FFEDB3',
+      { id: 'schedule', area: 'Schedule', tool: 'Gantt', slug: 'gantt', path: 'docs/schedule/schedule.md', tint: '#FFEDB3',
+        card: 'docs/schedule/card.json',
         status: 'On track', tone: 'good', metric: '2/5', metricLabel: 'milestones met',
         segments: [{ label: 'Done', n: 9, color: DARK }, { label: 'In progress', n: 4, color: MID }, { label: 'Not started', n: 7, color: LIGHT }],
         question: 'Do you know when it’ll be done?', noLead: 'Lay out milestones and dependencies on a timeline.' },
-      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
-      { id: 'work', area: 'Delivery', tool: 'Agile board', slug: 'board', path: 'docs/board.md', tint: '#CFEDF3',
+      { id: 'work', area: 'Delivery', tool: 'Agile board', slug: 'agile', path: 'docs/board/board.md', tint: '#CFEDF3',
+        card: 'docs/board/card.json',
         status: 'Sprint 4', tone: 'neutral', metric: '5', metricLabel: 'cards in progress',
         segments: [{ label: 'To do', n: 12, color: LIGHT }, { label: 'Doing', n: 5, color: MID }, { label: 'Done', n: 23, color: DARK }],
         question: 'Do you know what’s happening right now?', noLead: 'Put the work on the board and limit what is in progress.' }
@@ -245,7 +245,7 @@ class Component extends DCLogic {
     // by `make snapshot`; areas without one show the example figures above.
     const CARDS = window.CARDS ?? {};
     const fromCard = (c) => ({
-      area: c.title, tool: c.subtitle, status: c.status.label, tone: c.status.tone,
+      tool: c.subtitle, status: c.status.label, tone: c.status.tone,
       metric: c.heading.primary, metricLabel: c.heading.label, url: c.source.url,
       segments: c.legend.map((l) => ({ label: l.label, n: c.report[l.id] ?? 0, color: l.color ?? LIGHT, url: l.url }))
     });

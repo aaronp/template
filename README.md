@@ -22,7 +22,7 @@ GitHub links and Pages URL. It also removes the template-only parts: `Template.d
 template, using this checkout's `origin` (or `TEMPLATE=<url>`).
 
 <!-- template:end -->
-[![Goals](docs/goals/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html)
+[![Goals](docs/goals/badge.svg)](Main.dc.html) [![Architecture](docs/architecture/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html) [![Schedule](docs/schedule/badge.svg)](Main.dc.html) [![Delivery](docs/board/badge.svg)](Main.dc.html)
 
 Dashboard: https://your-org.github.io/project-template/
 
@@ -31,21 +31,19 @@ Dashboard: https://your-org.github.io/project-template/
 ```sh
 make dev          # regenerates stale cards and badges, then serves on http://localhost:8000/
 make snapshot     # just the cards and badges
-make goals        # edit docs/goals/x-matrix.md in the Hoshin Kanri viewer on localhost (Save writes it back)
-make goals-snapshot # rebuild the goals card and badges now, even if not stale
-make adr          # edit docs/adr/decisions.md in the ADR viewer on localhost (File → Save writes it back)
-make adr-snapshot # rebuild the ADR card and badge now, even if not stale
+make <area>          # edit the area's file in its tool's viewer on localhost (Save writes it back)
+make <area>-snapshot # rebuild that area's card.json and badge.svg now, even if not stale
 ```
 
-## Areas
-
-Each area is a plain file in this repo, edited and summarized by a tool that lives in its own repo:
-
-| Area | File | Tool | Status |
-| --- | --- | --- | --- |
-| Goals | `docs/goals/x-matrix.md` | [`@pritzlaff/hoshin-kanri`](https://github.com/aaronp/Hoshin-Kanri) | migrated |
-| Decisions | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
-| Architecture, Interfaces, Risks, Schedule, Delivery | — | — | TODO: example figures on the dashboard |
+| Area | `make` target | File | Tool | Status |
+| --- | --- | --- | --- | --- |
+| Goals | `goals` | `docs/goals/x-matrix.md` | [`@pritzlaff/hoshin-kanri`](https://github.com/aaronp/Hoshin-Kanri) | migrated |
+| Architecture | `c4` | `docs/architecture/c4.md` | [`@pritzlaff/c4`](https://github.com/aaronp/c4) | migrated |
+| Decisions | `adr` | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
+| Schedule | `gantt` | `docs/schedule/schedule.md` | [gantt](https://github.com/aaronp/gantt) (published as `@pritzlaff/agile@1.0.1`, aliased) | migrated |
+| Delivery | `agile` | `docs/board/board.md` | [`@pritzlaff/agile`](https://github.com/aaronp/agile) `1.0.0` | migrated |
+| Risks | — | — | [risk-register](https://github.com/aaronp/risk-register) | TODO: no npm package / card CLI yet |
+| Interfaces | — | — | — | TODO: example figures on the dashboard |
 
 ## Cards
 

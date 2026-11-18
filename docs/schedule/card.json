@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "title": "bun-app roadmap",
+  "subtitle": "2026-11-02 → 2026-11-19",
+  "status": {
+    "label": "2 late",
+    "tone": "warn"
+  },
+  "heading": {
+    "primary": "5",
+    "label": "tasks"
+  },
+  "legend": [
+    {
+      "id": "done",
+      "label": "Done",
+      "color": "#1E7A46"
+    },
+    {
+      "id": "active",
+      "label": "In progress",
+      "color": "#2F5BD3"
+    },
+    {
+      "id": "upcoming",
+      "label": "Upcoming",
+      "color": "#6B7280"
+    },
+    {
+      "id": "late",
+      "label": "Late",
+      "color": "#B42318"
+    }
+  ],
+  "report": {
+    "done": 1,
+    "active": 1,
+    "upcoming": 1,
+    "late": 2
+  },
+  "source": {
+    "label": "docs/schedule/schedule.md",
+    "url": "https://aaronp.github.io/gantt/?src=docs/schedule/schedule.md"
+  },
+  "updated": "2026-11-18"
+}

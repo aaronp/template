@@ -57,6 +57,104 @@ window.CARDS = {
     },
     "updated": "2026-11-18"
   },
+  "docs/architecture/card.json": {
+    "version": 1,
+    "title": "bun-app",
+    "subtitle": "C4 model",
+    "status": {
+      "label": "Laid out",
+      "tone": "good"
+    },
+    "heading": {
+      "primary": "3",
+      "label": "elements"
+    },
+    "legend": [
+      {
+        "id": "people",
+        "label": "People",
+        "color": "#08427B"
+      },
+      {
+        "id": "systems",
+        "label": "Systems",
+        "color": "#1168BD"
+      },
+      {
+        "id": "externals",
+        "label": "External systems",
+        "color": "#5E6470"
+      },
+      {
+        "id": "containers",
+        "label": "Containers",
+        "color": "#3478C6"
+      },
+      {
+        "id": "components",
+        "label": "Components",
+        "color": "#2D6A9F"
+      },
+      {
+        "id": "relationships",
+        "label": "Relationships",
+        "color": "#7B4FA0"
+      }
+    ],
+    "report": {
+      "people": 1,
+      "systems": 1,
+      "externals": 0,
+      "containers": 1,
+      "components": 0,
+      "relationships": 1
+    },
+    "source": {
+      "label": "docs/architecture/c4.md",
+      "url": "https://aaronp.github.io/c4/?src=docs/architecture/c4.md"
+    },
+    "updated": "2026-11-18"
+  },
+  "docs/board/card.json": {
+    "version": 1,
+    "title": "bun-app",
+    "subtitle": "Kanban board",
+    "status": {
+      "label": "2 open",
+      "tone": "neutral"
+    },
+    "heading": {
+      "primary": "1/3",
+      "label": "tasks done"
+    },
+    "legend": [
+      {
+        "id": "To Do",
+        "label": "To Do",
+        "color": "#3b6fd8"
+      },
+      {
+        "id": "Doing",
+        "label": "Doing",
+        "color": "#b7791f"
+      },
+      {
+        "id": "Done",
+        "label": "Done",
+        "color": "#2f855a"
+      }
+    ],
+    "report": {
+      "To Do": 1,
+      "Doing": 1,
+      "Done": 1
+    },
+    "source": {
+      "label": "docs/board/board.md",
+      "url": "https://aaronp.github.io/agile/?src=docs/board/board.md"
+    },
+    "updated": "2026-11-18"
+  },
   "docs/goals/card.json": {
     "version": 1,
     "title": "Goals",
@@ -104,6 +202,52 @@ window.CARDS = {
     "source": {
       "label": "docs/goals/x-matrix.md",
       "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md"
+    },
+    "updated": "2026-11-18"
+  },
+  "docs/schedule/card.json": {
+    "version": 1,
+    "title": "bun-app roadmap",
+    "subtitle": "2026-11-02 → 2026-11-19",
+    "status": {
+      "label": "2 late",
+      "tone": "warn"
+    },
+    "heading": {
+      "primary": "5",
+      "label": "tasks"
+    },
+    "legend": [
+      {
+        "id": "done",
+        "label": "Done",
+        "color": "#1E7A46"
+      },
+      {
+        "id": "active",
+        "label": "In progress",
+        "color": "#2F5BD3"
+      },
+      {
+        "id": "upcoming",
+        "label": "Upcoming",
+        "color": "#6B7280"
+      },
+      {
+        "id": "late",
+        "label": "Late",
+        "color": "#B42318"
+      }
+    ],
+    "report": {
+      "done": 1,
+      "active": 1,
+      "upcoming": 1,
+      "late": 2
+    },
+    "source": {
+      "label": "docs/schedule/schedule.md",
+      "url": "https://aaronp.github.io/gantt/?src=docs/schedule/schedule.md"
     },
     "updated": "2026-11-18"
   }
