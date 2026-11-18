@@ -5,11 +5,30 @@ A template repository for keeping every project artifact (goals, architecture, d
 interfaces, schedule, delivery) as plain Markdown and JSON next to the code, with a dashboard that
 summarizes them.
 
+**See it:** [aaronp.github.io/template](https://aaronp.github.io/template/) ·
+[a filled-in example (Acme)](https://aaronp.github.io/template/demo/Main.dc.html) ·
+[the empty dashboard a new project starts with](https://aaronp.github.io/template/Main.dc.html)
+
+## Why
+
+- **One place, so projects stay small.** Goals, risks, rationale and the schedule change together as a
+  project evolves, so they live together, right beside the code. Keeping them current takes minutes,
+  which makes it cheap to start small, scope tightly and notice when scope drifts.
+- **A clear view for the whole team, human or AI.** Everyone on the project, people and AI agents alike,
+  reads the same goals, plan, risks and decision log: plain text in the repo, searchable with `grep`,
+  with the history of how each one got there.
+- **Data, not software.** The project data is nearly all Markdown. The tools here are optional viewers:
+  use them, use your own, or add and drop areas as the project needs. The data stays yours and outlives
+  any tool.
+
+## What's here
+
 - `Template.dc.html`: the page describing this template, published at
   [aaronp.github.io/template](https://aaronp.github.io/template/).
 - `Main.dc.html`: the project's own dashboard and walkthrough. This is what a new project gets:
   [aaronp.github.io/template/Main.dc.html](https://aaronp.github.io/template/Main.dc.html) is what your
-  project's site will look like, with every area still empty (`make demo` shows one filled in).
+  project's site will look like on day one, and [the Acme demo](https://aaronp.github.io/template/demo/Main.dc.html)
+  once it's filled in.
 
 ## Using this template
 
@@ -18,16 +37,16 @@ Create an empty repo on GitHub, then:
 ```sh
 git clone https://github.com/aaronp/template.git && cd template
 make clone        # asks for owner/repo and a project name; or REPO=… NAME=… DEST=…
-make demo         # a fictional Acme project with every area filled in, in ./temp/demo, served locally
+make demo         # the Acme demo in ./temp/demo, served locally (Pages publishes it at /demo/)
 ```
-
-A new project starts with every area's file empty (no example content). `make demo` fills them from
-`examples/acme/docs`, each tool's own Acme example; `examples/` isn't copied by `make clone`.
 
 This copies the repo to `../<repo>` (tracked and new files only) and fills in the project's name,
 GitHub links and Pages URL. It also removes the template-only parts: `Template.dc.html`,
 `scripts/clone.sh`, the `clone` target and this section. The dashboard's footer links back to this
 template, using this checkout's `origin` (or `TEMPLATE=<url>`).
+
+A new project starts with every area's file empty (no example content). `make demo` fills them from
+`examples/acme/docs`, each tool's own Acme example; `examples/` isn't copied by `make clone`.
 
 <!-- template:end -->
 [![Goals](docs/goals/badge.svg)](Main.dc.html) [![Architecture](docs/architecture/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html) [![Risks](docs/risks/badge.svg)](Main.dc.html) [![Schedule](docs/schedule/badge.svg)](Main.dc.html) [![Delivery](docs/board/badge.svg)](Main.dc.html)

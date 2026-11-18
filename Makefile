@@ -93,7 +93,7 @@ risks-snapshot: | node_modules
 	bun scripts/cards.ts
 
 # Template only (make clone removes this block from the copy).
-.PHONY: clone test demo
+.PHONY: clone test demo demo-build
 
 # Copies this template into a new project: make clone [REPO=owner/repo] [NAME="My project"] [DEST=../dir]
 clone:
@@ -106,10 +106,16 @@ test:
 	$(MAKE) clone REPO=aaronp/test NAME="Test project" DEST=./temp/test
 	cd temp/test && $(MAKE) dev
 
-# Clones into ./temp/demo (replacing any earlier one) as a fictional Acme project, fills every area from
-# examples/acme/docs (each tool's Acme example), then serves it with the local editors.
-demo:
-	rm -rf temp/demo
-	$(MAKE) clone REPO=acme/acme NAME="Acme" DEST=./temp/demo
-	cp -R examples/acme/docs/. temp/demo/docs/
-	cd temp/demo && $(MAKE) -B snapshot && $(MAKE) dev
+# A fictional Acme project with every area filled in from examples/acme/docs (each tool's Acme example),
+# served locally with the editors. The Pages workflow publishes the same build at <site>/demo/.
+demo: demo-build
+	cd $(DEMO) && $(MAKE) dev
+
+# Builds the Acme project into $(DEMO) (replacing any earlier one): a clone, with its cards linking under DEMO_PAGES.
+DEMO ?= temp/demo
+DEMO_REPO ?= acme/acme
+demo-build:
+	rm -rf $(DEMO)
+	$(MAKE) clone REPO=$(DEMO_REPO) NAME="Acme" DEST=$(DEMO)
+	cp -R examples/acme/docs/. $(DEMO)/docs/
+	cd $(DEMO) && $(MAKE) -B snapshot $(if $(DEMO_PAGES),PAGES=$(DEMO_PAGES))
