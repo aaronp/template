@@ -32,7 +32,7 @@ process.on('SIGINT', () => process.exit(0)).on('SIGTERM', () => process.exit(0))
 let version = 0, timer: Timer | undefined;
 const changed = new Set<string>();
 if (children.length) watch('docs', { recursive: true }, (_, name) => {
-  if (!name || !/\.md$|\.card\.json$/i.test(name)) return;
+  if (!name || !/\.md$|\.card\.json$|deck\.json$/i.test(name)) return;
   changed.add('docs/' + name);
   clearTimeout(timer); // editors write a temp file then rename; settle before rebuilding
   timer = setTimeout(() => {

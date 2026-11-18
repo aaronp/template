@@ -205,6 +205,46 @@ window.CARDS = {
     },
     "updated": "2026-11-18"
   },
+  "docs/overview/card.json": {
+    "version": 1,
+    "title": "Overview",
+    "subtitle": "Cell Deck",
+    "status": {
+      "label": "Empty",
+      "tone": "neutral"
+    },
+    "heading": {
+      "primary": "0",
+      "label": "saved views"
+    },
+    "legend": [
+      {
+        "id": "bubbles",
+        "label": "Bubbles",
+        "color": "#1F2633"
+      },
+      {
+        "id": "elements",
+        "label": "Elements",
+        "color": "#6E86E8"
+      },
+      {
+        "id": "links",
+        "label": "Links",
+        "color": "#D5DAE1"
+      }
+    ],
+    "report": {
+      "bubbles": 0,
+      "elements": 0,
+      "links": 0
+    },
+    "source": {
+      "label": "docs/overview/deck.json",
+      "url": "https://aaronp.github.io/celldeck/?src=https://aaronp.github.io/template/docs/overview/deck.json"
+    },
+    "updated": "2026-11-18"
+  },
   "docs/risks/card.json": {
     "version": 1,
     "title": "Risks",
@@ -247,7 +287,7 @@ window.CARDS = {
     },
     "source": {
       "label": "docs/risks/risks.md",
-      "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+      "url": "https://aaronp.github.io/risk-register/?src=https://aaronp.github.io/template/docs/risks/risks.md"
     },
     "updated": "2026-11-18"
   },

@@ -66,6 +66,7 @@ make <area>-snapshot # rebuild that area's card.json and badge.svg now, even if 
 | --- | --- | --- | --- | --- |
 | Goals | `goals` | `docs/goals/x-matrix.md` | [`@pritzlaff/hoshin-kanri`](https://github.com/aaronp/Hoshin-Kanri) | migrated |
 | Architecture | `c4` | `docs/architecture/c4.md` | [`@pritzlaff/c4`](https://github.com/aaronp/c4) | migrated |
+| Overview | `celldeck` | `docs/overview/deck.json` | [`@pritzlaff/celldeck`](https://github.com/aaronp/celldeck) | migrated (card written by `scripts/deck-card.ts`, no badge) |
 | Decisions | `adr` | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
 | Schedule | `gantt` | `docs/schedule/schedule.md` | [`@pritzlaff/gantt`](https://github.com/aaronp/gantt) | migrated |
 | Delivery | `agile` | `docs/board/board.md` | [`@pritzlaff/agile`](https://github.com/aaronp/agile) | migrated |
@@ -90,6 +91,9 @@ title, status pill, big number, a legend with counts and links), so the dashboar
 area the same way. `make` only rebuilds a card when its source is newer.
 `scripts/cards.ts` bundles every `docs/**/card.json` into `docs/cards.js` for `Main.dc.html`;
 areas without a card show example figures.
+
+Overview is the exception: Cell Deck has no card export, so `scripts/deck-card.ts` writes
+`docs/overview/card.json` from the deck (saved views as the headline; bubbles, elements and links in the legend).
 
 Goals works the same way with `hoshin-kanri card`: its headline is the first section's count, with one
 legend entry per section.

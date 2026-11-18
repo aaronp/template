@@ -64,7 +64,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 </div>
 
 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px">
-<sc-for list="{{areas}}" as="item" hint-placeholder-count="7">
+<sc-for list="{{areas}}" as="item" hint-placeholder-count="8">
 <article class="lift" style="display: flex; flex-direction: column; gap: 18px; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 18px; padding: 22px">
 <div style="display: flex; align-items: center; gap: 12px">
 <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: {{item.tint}}; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #14171F">{{item.no}}</span>
@@ -117,7 +117,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 </div>
 
 <div style="display: flex; flex-direction: column; align-items: center; width: 100%">
-<sc-for list="{{areas}}" as="item" hint-placeholder-count="7">
+<sc-for list="{{areas}}" as="item" hint-placeholder-count="8">
 <div id="{{item.anchor}}" class="qrow" style="display: flex; justify-content: center; align-items: flex-start; width: 100%; max-width: 1040px; scroll-margin-top: 32px">
 
 <!-- left column: card + yes arrow -->
@@ -161,7 +161,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <!-- end card -->
 <div id="q-done" style="width: 100%; max-width: 1040px; display: flex; justify-content: flex-start; scroll-margin-top: 32px">
 <div style="flex: 0 1 560px; min-width: 0; box-sizing: border-box; background: #14171F; color: #FFFFFF; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 18px; margin: 0 auto 0 0">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B8BEC9">All seven: yes</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B8BEC9">All eight: yes</span>
 <p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 38px; line-height: 1.12; letter-spacing: -0.02em">Everyone can answer them — and the answers live in the repo.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
 <a href="#dashboard" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #14171F; background: #FFFFFF; text-decoration: none; border-radius: 10px">Back to the dashboard</a>
@@ -214,6 +214,11 @@ class Component extends DCLogic {
         status: 'Up to date', tone: 'good', metric: '4', metricLabel: 'containers',
         segments: [{ label: 'Context', n: 1, color: DARK }, { label: 'Container', n: 1, color: MID }, { label: 'Component', n: 3, color: LIGHT }],
         question: 'Do you know how it’s built?', noLead: 'Sketch the context, containers and components as C4 diagrams.' },
+      { id: 'overview', area: 'Overview', tool: 'Cell Deck', slug: 'celldeck', path: 'docs/overview/deck.json', tint: '#F3DCF5',
+        card: 'docs/overview/card.json',
+        status: 'Ready to present', tone: 'good', metric: '3', metricLabel: 'saved views',
+        segments: [{ label: 'Bubbles', n: 4, color: DARK }, { label: 'Elements', n: 9, color: MID }, { label: 'Links', n: 6, color: LIGHT }],
+        question: 'Can you explain/visualise it?', noLead: 'Draw the moving parts as bubbles and save the views you would walk someone through.' },
       // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'contracts', area: 'Interfaces', tool: 'Contract-first', slug: 'contract-first', path: 'contracts/orders.v1.json', tint: '#D3F0E3',
         status: '2 drafts', tone: 'warn', metric: '6', metricLabel: 'contracts',

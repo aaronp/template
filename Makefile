@@ -1,4 +1,4 @@
-.PHONY: dev snapshot adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot
+.PHONY: dev snapshot adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot celldeck celldeck-snapshot
 
 # Where this repo's GitHub Pages site lives, worked out from the origin remote (owner/repo → https://owner.github.io/repo/).
 # Cards link to the published markdown under it. Override: make snapshot PAGES=https://…/
@@ -13,12 +13,14 @@ C4_MD    := docs/architecture/c4.md
 GANTT_MD := docs/schedule/schedule.md
 AGILE_MD := docs/board/board.md
 RISKS_MD := docs/risks/risks.md
+DECK     := docs/overview/deck.json
 ADR   := $(BIN)/adr
 HK    := $(BIN)/hoshin-kanri
 C4    := $(BIN)/c4
 AGILE := $(BIN)/agile
 GANTT := $(BIN)/gantt
 RR    := $(BIN)/risk-register
+CELLDECK := $(BIN)/celldeck
 
 # $(call snap,<cli>,<SRC env var>,<file.md>): writes card.json and badge.svg beside the markdown.
 snap = for c in card badge; do $(2)=$(if $(PAGES),$(PAGES)$(3)) $(1) $$c $(3) || exit 1; done
@@ -27,10 +29,10 @@ snap = for c in card badge; do $(2)=$(if $(PAGES),$(PAGES)$(3)) $(1) $$c $(3) ||
 # editor on 8001+ (Save writes to this checkout); locally the dashboard's cards link to those editors.
 # Saving any docs/ file rebuilds its card and reloads the open dashboard.
 dev: snapshot
-	bun index.ts $(ADR):$(ADR_MD) $(HK):$(GOALS_MD) $(C4):$(C4_MD) $(RR):$(RISKS_MD) $(GANTT):$(GANTT_MD) $(AGILE):$(AGILE_MD)
+	bun index.ts $(ADR):$(ADR_MD) $(HK):$(GOALS_MD) $(C4):$(C4_MD) $(RR):$(RISKS_MD) $(GANTT):$(GANTT_MD) $(AGILE):$(AGILE_MD) $(CELLDECK):$(DECK)
 
 # docs/cards.js bundles every docs/**/card.json for the dashboard. make only rebuilds what is older than its sources.
-CARDS := docs/adr/card.json docs/goals/card.json docs/architecture/card.json docs/schedule/card.json docs/board/card.json docs/risks/card.json
+CARDS := docs/adr/card.json docs/goals/card.json docs/architecture/card.json docs/overview/card.json docs/schedule/card.json docs/board/card.json docs/risks/card.json
 snapshot: docs/cards.js
 
 docs/cards.js: $(CARDS) scripts/cards.ts
@@ -49,6 +51,9 @@ docs/board/card.json: $(AGILE_MD) | node_modules
 	$(call snap,$(AGILE),AGILE_SRC,$(AGILE_MD))
 docs/risks/card.json: $(RISKS_MD) $(wildcard docs/risks/risks.card.json) | node_modules
 	$(call snap,$(RR),RR_SRC,$(RISKS_MD))
+# Cell Deck has no card export, so the template writes its card (no badge).
+docs/overview/card.json: $(DECK) scripts/deck-card.ts
+	PAGES=$(PAGES) bun scripts/deck-card.ts $(DECK)
 
 node_modules: package.json
 	bun install
@@ -90,6 +95,12 @@ risks: | node_modules
 	$(RR) $(RISKS_MD)
 risks-snapshot: | node_modules
 	$(call snap,$(RR),RR_SRC,$(RISKS_MD))
+	bun scripts/cards.ts
+
+celldeck: | node_modules
+	$(CELLDECK) $(DECK)
+celldeck-snapshot:
+	PAGES=$(PAGES) bun scripts/deck-card.ts $(DECK)
 	bun scripts/cards.ts
 
 # Template only (make clone removes this block from the copy).
