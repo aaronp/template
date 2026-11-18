@@ -5,11 +5,11 @@
     "": {
       "name": "project-template",
       "devDependencies": {
-        "@pritzlaff/adr": "^1.1.0",
+        "@pritzlaff/adr": "^1.1.1",
       },
     },
   },
   "packages": {
-    "@pritzlaff/adr": ["@pritzlaff/adr@1.1.0", "", { "bin": { "adr": "bin/adr.mjs" } }, "sha512-M1Jm2BlL4suPcndztoemQA8OSyvqtmAWvCMfNeaTJAXkUt3T1d9cVLzpvhhz6IwqUPzEAzIZvNQEYBx7N0dUjQ=="],
+    "@pritzlaff/adr": ["@pritzlaff/adr@1.1.1", "", { "bin": { "adr": "bin/adr.mjs" } }, "sha512-y3Y/WaddeY8AGZIKt5GhLIkbhl7fkLMqIDGZkkW6wDQnOOlqTVCZNTapjAN+4qE2mepMGXoK76EUTMLopQR23Q=="],
   }
 }

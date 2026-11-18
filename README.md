@@ -22,7 +22,7 @@ GitHub links and Pages URL. It also removes the template-only parts: `Template.d
 template, using this checkout's `origin` (or `TEMPLATE=<url>`).
 
 <!-- template:end -->
-[![Decisions](docs/adr/badge.svg)](Main.dc.html)
+[![Goals](docs/goals/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html)
 
 Dashboard: https://your-org.github.io/project-template/
 
@@ -31,9 +31,21 @@ Dashboard: https://your-org.github.io/project-template/
 ```sh
 make dev          # regenerates stale cards and badges, then serves on http://localhost:8000/
 make snapshot     # just the cards and badges
-make adr          # edit docs/adr/decisions.md in the ADR viewer on localhost
+make goals        # edit docs/goals/x-matrix.md in the Hoshin Kanri viewer on localhost (Save writes it back)
+make goals-snapshot # rebuild the goals card and badges now, even if not stale
+make adr          # edit docs/adr/decisions.md in the ADR viewer on localhost (File → Save writes it back)
 make adr-snapshot # rebuild the ADR card and badge now, even if not stale
 ```
+
+## Areas
+
+Each area is a plain file in this repo, edited and summarized by a tool that lives in its own repo:
+
+| Area | File | Tool | Status |
+| --- | --- | --- | --- |
+| Goals | `docs/goals/x-matrix.md` | [`@pritzlaff/hoshin-kanri`](https://github.com/aaronp/Hoshin-Kanri) | migrated |
+| Decisions | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
+| Architecture, Interfaces, Risks, Schedule, Delivery | — | — | TODO: example figures on the dashboard |
 
 ## Cards
 
@@ -44,6 +56,9 @@ title, status pill, big number, a legend with counts and links), so the dashboar
 area the same way. `make` only rebuilds a card when its source is newer.
 `scripts/cards.ts` bundles every `docs/**/card.json` into `docs/cards.js` for `Main.dc.html`;
 areas without a card show example figures.
+
+Goals works the same way with `hoshin-kanri card`: its headline is the first section's count, with one
+legend entry per section.
 
 Card links open the hosted viewer with `?src=` pointing at the published markdown on this repo's
 Pages site (worked out from the `origin` remote, or `make snapshot PAGES=https://…/`), so they work

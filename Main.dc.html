@@ -58,7 +58,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <div style="display: flex; flex-direction: column; gap: 10px; max-width: 680px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: {{accent}}">View 1 · Dashboard</span>
 <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.08; letter-spacing: -0.02em">A single pane of glass</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C">Each card reads one file from this repo and opens the tool that owns it. Cards marked “example” show the template's sample figures until their file exists.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C">Each card reads one file from this repo and opens the tool that owns it. Cards marked TODO aren't migrated yet and show example figures.</p>
 </div>
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #565E6C; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 999px; padding: 8px 14px">branch: main</span>
 </div>
@@ -201,16 +201,20 @@ class Component extends DCLogic {
     };
     const DARK = '#1F2633', MID = '#6E86E8', LIGHT = '#D5DAE1';
 
-    // Order = walkthrough order. Example figures are the template's sample data.
+    // Order = walkthrough order. Areas with a `card` are migrated: their figures come from that card.json.
+    // TODO-marked areas still show example figures until a tool snapshots their file into a card.json.
     const AREAS = [
-      { id: 'goals', area: 'Goals', tool: 'Hoshin Kanri', slug: 'hoshin-kanri', path: 'docs/goals.md', tint: '#FFDCC6',
+      { id: 'goals', area: 'Goals', tool: 'Hoshin Kanri', path: 'docs/goals/x-matrix.md', tint: '#FFDCC6',
+        card: 'docs/goals/card.json',
         status: 'On track', tone: 'good', metric: '3', metricLabel: 'breakthrough objectives',
         segments: [{ label: 'On track', n: 5, color: DARK }, { label: 'At risk', n: 1, color: '#E8692E' }, { label: 'Not started', n: 2, color: LIGHT }],
         question: 'Do you know the main goal?', noLead: 'Agree the breakthrough objective and how you will measure it.' },
+      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'architecture', area: 'Architecture', tool: 'C4 diagrams', slug: 'c4', path: 'docs/architecture/c4.md', tint: '#D6E1FF',
         status: 'Up to date', tone: 'good', metric: '4', metricLabel: 'containers',
         segments: [{ label: 'Context', n: 1, color: DARK }, { label: 'Container', n: 1, color: MID }, { label: 'Component', n: 3, color: LIGHT }],
         question: 'Do you know how it’s built?', noLead: 'Sketch the context, containers and components as C4 diagrams.' },
+      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'contracts', area: 'Interfaces', tool: 'Contract-first', slug: 'contract-first', path: 'contracts/orders.v1.json', tint: '#D3F0E3',
         status: '2 drafts', tone: 'warn', metric: '6', metricLabel: 'contracts',
         segments: [{ label: 'Stable', n: 4, color: DARK }, { label: 'Draft', n: 2, color: LIGHT }],
@@ -220,14 +224,17 @@ class Component extends DCLogic {
         status: '1 proposed', tone: 'neutral', metric: '12', metricLabel: 'decision records',
         segments: [{ label: 'Accepted', n: 9, color: DARK }, { label: 'Proposed', n: 1, color: MID }, { label: 'Superseded', n: 2, color: LIGHT }],
         question: 'Do you know why it’s built this way?', noLead: 'Record each decision with its options and the trade-off you chose.' },
+      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'risks', area: 'Risks', tool: 'Risk register', slug: 'risk-register', path: 'docs/risks.md', tint: '#FFD9D9',
         status: '2 high', tone: 'bad', metric: '8', metricLabel: 'open risks',
         segments: [{ label: 'High', n: 2, color: '#C2410C' }, { label: 'Medium', n: 3, color: '#F2A06B' }, { label: 'Low', n: 3, color: LIGHT }],
         question: 'Do you know what could go wrong?', noLead: 'Log each risk, score it and give it an owner and a mitigation.' },
+      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'schedule', area: 'Schedule', tool: 'Gantt', slug: 'gantt', path: 'docs/schedule.md', tint: '#FFEDB3',
         status: 'On track', tone: 'good', metric: '2/5', metricLabel: 'milestones met',
         segments: [{ label: 'Done', n: 9, color: DARK }, { label: 'In progress', n: 4, color: MID }, { label: 'Not started', n: 7, color: LIGHT }],
         question: 'Do you know when it’ll be done?', noLead: 'Lay out milestones and dependencies on a timeline.' },
+      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
       { id: 'work', area: 'Delivery', tool: 'Agile board', slug: 'board', path: 'docs/board.md', tint: '#CFEDF3',
         status: 'Sprint 4', tone: 'neutral', metric: '5', metricLabel: 'cards in progress',
         segments: [{ label: 'To do', n: 12, color: LIGHT }, { label: 'Doing', n: 5, color: MID }, { label: 'Done', n: 23, color: DARK }],
@@ -244,7 +251,7 @@ class Component extends DCLogic {
     });
     const areas = AREAS.map((area, i) => {
       const live = CARDS[area.card];
-      const a = live ? { ...area, ...fromCard(live) } : { ...area, tool: area.tool + ' · example' };
+      const a = live ? { ...area, ...fromCard(live) } : { ...area, tool: area.tool + ' · TODO', status: 'TODO', tone: 'neutral' };
       const tone = TONES[a.tone];
       if (!tone) throw new Error('bug: unknown tone "' + a.tone + '" for area ' + a.id);
       const next = AREAS[i + 1];
