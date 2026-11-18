@@ -1,21 +1,51 @@
-# Landing page — dashboard + question deck — design reference
+# project-template
 
-This is a design mockup created in a visual design tool, exported as a
-standalone page. Treat it as a REFERENCE MOCKUP, not production code:
-the markup and inline styles carry the design's precise values — colors,
-font sizes, spacing, radii, shadows, layout — which an implementation
-should replicate faithfully in its own components and styling system
-rather than copy wholesale.
+<!-- template:start -->
+A template repository for keeping every project artifact (goals, architecture, decisions, risks,
+interfaces, schedule, delivery) as plain Markdown and JSON next to the code, with a dashboard that
+summarizes them.
 
-## Contents
+- `Template.dc.html`: the page describing this template (served at `/` here).
+- `Main.dc.html`: the project's own dashboard and walkthrough. This is what a new project gets.
 
-- `Main.dc.html` — the artboard (a Design Component: an `<x-dc>`
-  template + a small logic class). The values to replicate live in its
-  inline `style="…"` attributes and the `<helmet><style>` block.
-- `support.js`, `vendor/react*.js` — the runtime that renders the
-  component in a browser; not part of the design.
+## Using this template
 
-## Viewing
+Create an empty repo on GitHub, then:
 
-Serve the folder (e.g. `python3 -m http.server`) and open `Main.dc.html`;
-some browsers block the scripts over file://.
+```sh
+make clone        # asks for owner/repo and a project name; or REPO=… NAME=… DEST=…
+```
+
+This copies the repo to `../<repo>` (tracked and new files only) and fills in the project's name,
+GitHub links and Pages URL. It also removes the template-only parts: `Template.dc.html`,
+`scripts/clone.sh`, the `clone` target and this section. The dashboard's footer links back to this
+template, using this checkout's `origin` (or `TEMPLATE=<url>`).
+
+<!-- template:end -->
+![Decisions](docs/badges/adr.svg)
+
+Dashboard: https://your-org.github.io/project-template/
+
+## Running
+
+```sh
+make dev          # regenerates stale summaries, then serves on http://localhost:8000/
+make summaries    # just the summaries and badges
+make test         # bun test scripts
+bun install && make adr   # open docs/adr/decisions.md in the ADR viewer locally
+```
+
+Each area's source file (e.g. `docs/adr/decisions.md`) is summarized by `scripts/summarize.ts` into
+`docs/summaries/<area>.json` (and `docs/badges/<area>.svg`). `make` only reruns an area when its
+source is newer than its summary. `docs/summaries.js` bundles them for `Main.dc.html`; cards with no
+summary yet show example figures.
+
+## Adding an area
+
+Add a function to `AREAS` in `scripts/summarize.ts`, a rule in the `Makefile`, and
+`summary: '<area>'` on its card in `Main.dc.html`.
+
+## Hosting
+
+Pushes to `main`/`master` publish the repo to GitHub Pages (`.github/workflows/pages.yml`;
+Settings → Pages → Source: **GitHub Actions**).

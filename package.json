@@ -1,0 +1,13 @@
+{
+  "name": "project-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun index.ts",
+    "adr": "adr docs/adr/decisions.md",
+    "test": "bun test scripts"
+  },
+  "devDependencies": {
+    "@pritzlaff/adr": "^1.0.0"
+  }
+}

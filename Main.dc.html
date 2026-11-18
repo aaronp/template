@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>project-template — every project artifact in one repo</title>
+<title>project-template — dashboard</title>
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
+<script src="./docs/summaries.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -33,101 +34,31 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <!-- NAV -->
 <header style="border-bottom: 1px solid #E2E5EA; background: #FFFFFF">
 <nav aria-label="Main" style="max-width: 1280px; margin: 0 auto; padding: 16px 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
-<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #14171F">
+<a href="#dashboard" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #14171F">
 <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3px; width: 26px; height: 26px">
 <span style="background: #FFC9A8; border-radius: 4px"></span>
 <span style="background: #B9CBFF; border-radius: 4px"></span>
 <span style="background: #B5E6D2; border-radius: 4px"></span>
 <span style="background: #14171F; border-radius: 4px"></span>
 </span>
-<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">project-template</span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">{{name}}</span>
 </a>
 <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; align-items: center">
 <a href="#dashboard" style="padding: 12px 14px; font-size: 15px; font-weight: 500; color: #3D4452; text-decoration: none">Dashboard</a>
 <a href="#walkthrough" style="padding: 12px 14px; font-size: 15px; font-weight: 500; color: #3D4452; text-decoration: none">Walkthrough</a>
-<a href="#how" style="padding: 12px 14px; font-size: 15px; font-weight: 500; color: #3D4452; text-decoration: none">How it works</a>
-<a href="https://github.com/your-org/project-template" style="padding: 11px 16px; font-size: 15px; font-weight: 500; color: #14171F; text-decoration: none; border: 1px solid #D5D9E0; border-radius: 10px; margin-left: 8px">View on GitHub</a>
-<a href="https://github.com/your-org/project-template/generate" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #FFFFFF; background: {{accent}}; text-decoration: none; border-radius: 10px">Use this template</a>
+<a href="{{repoUrl}}" style="padding: 11px 16px; font-size: 15px; font-weight: 500; color: #14171F; text-decoration: none; border: 1px solid #D5D9E0; border-radius: 10px; margin-left: 8px">View on GitHub</a>
 </div>
 </nav>
 </header>
 
-<!-- HERO -->
-<section id="top" style="max-width: 1280px; margin: 0 auto; padding: 88px 32px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
-<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
-<span style="align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #3D4452; background: #FFFFFF; border: 1px solid #E2E5EA; padding: 6px 12px; border-radius: 999px">Template repository · docs-as-code</span>
-<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 64px; line-height: 1.02; letter-spacing: -0.03em">Every project artifact.<br>One repo.</h1>
-<p style="margin: 0; font-size: 20px; line-height: 1.55; color: #464D5A; max-width: 560px">Goals, architecture, decisions, risks, interfaces, schedule and the work itself — kept as plain Markdown and JSON next to the code, reviewed in pull requests, and rendered by small web tools that read straight from this repo.</p>
-<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; max-width: 600px; margin-top: 8px">
-<a class="lift" href="#dashboard" style="display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 14px; text-decoration: none; color: #14171F">
-<span style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px">
-<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
-Dashboard</span>
-<span style="font-size: 14px; line-height: 1.45; color: #565E6C">The status of every area at once.</span>
-</a>
-<a class="lift" href="#walkthrough" style="display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: #14171F; border: 1px solid #14171F; border-radius: 14px; text-decoration: none; color: #FFFFFF">
-<span style="display: flex; align-items: center; gap: 8px; font-weight: 600; font-size: 16px">
-<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="9" rx="2"></rect><path d="M12 11v6"></path><path d="M9 14l3 3 3-3"></path><rect x="5" y="19" width="14" height="3" rx="1"></rect></svg>
-Walkthrough</span>
-<span style="font-size: 14px; line-height: 1.45; color: #C5CAD3">Seven yes/no questions, one card each.</span>
-</a>
-</div>
-</div>
-
-<!-- Repo tree -->
-<figure style="flex: 1 1 480px; min-width: 0; margin: 0; background: #12151C; border-radius: 20px; padding: 0; overflow: hidden; box-shadow: 0 24px 60px rgba(20,23,31,.18)">
-<div style="display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #262B36">
-<span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
-<span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
-<span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 50%; background: #3A4050"></span>
-<span style="margin-left: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8B93A1">your-org/project-template</span>
-</div>
-<div style="padding: 22px 24px 26px; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 2.0; color: #E6E8EC">
-<div style="color: #8B93A1">README.md</div>
-<div style="color: #8B93A1">src/</div>
-<sc-for list="{{areas}}" as="item" hint-placeholder-count="7">
-<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px">
-<span>{{item.path}}</span>
-<span style="color: {{item.tint}}">→ {{item.tool}}</span>
-</div>
-</sc-for>
-</div>
-<figcaption style="padding: 14px 24px; border-top: 1px solid #262B36; font-size: 13px; color: #8B93A1">Each file is the data model. Each tool is a view of it.</figcaption>
-</figure>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how" style="background: #FFFFFF; border-top: 1px solid #E2E5EA; border-bottom: 1px solid #E2E5EA">
-<div style="max-width: 1280px; margin: 0 auto; padding: 64px 32px; display: flex; flex-direction: column; gap: 32px">
-<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; letter-spacing: -0.01em">How it works</h2>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">01</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Write it as plain text</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Each area is a Markdown or JSON file with a simple, documented shape. No database, no SaaS account.</p>
-</div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">02</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Commit it next to the code</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Changes to a risk or a decision go through the same pull request, review and history as the code they affect.</p>
-</div>
-<div style="display: flex; flex-direction: column; gap: 10px">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">03</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Open it in a tool</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Every tool takes a <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">?src=</code> pointing at a file in this repo.</p>
-</div>
-</div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; background: #F5F6F8; border: 1px solid #E2E5EA; border-radius: 12px; padding: 16px 20px; overflow-x: auto; white-space: nowrap; color: #3D4452">https://your-org.github.io/risk-register/<span style="color: {{accent}}; font-weight: 500">?src=</span>https://raw.githubusercontent.com/your-org/project-template/main/docs/risks.md</div>
-</div>
-</section>
 
 <!-- DASHBOARD -->
-<section id="dashboard" style="max-width: 1280px; margin: 0 auto; padding: 96px 32px 48px; display: flex; flex-direction: column; gap: 32px; scroll-margin-top: 16px">
+<section id="dashboard" style="max-width: 1280px; margin: 0 auto; padding: 56px 32px 48px; display: flex; flex-direction: column; gap: 32px; scroll-margin-top: 16px">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 10px; max-width: 680px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: {{accent}}">View 1 · Dashboard</span>
 <h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; line-height: 1.08; letter-spacing: -0.02em">A single pane of glass</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C">Each card reads one file from this repo and opens the tool that owns it. The figures shown are the template's example data.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C">Each card reads one file from this repo and opens the tool that owns it. Cards marked “example” show the template's sample figures until their file exists.</p>
 </div>
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #565E6C; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 999px; padding: 8px 14px">branch: main</span>
 </div>
@@ -167,7 +98,7 @@ Walkthrough</span>
 </article>
 </sc-for>
 
-<a href="https://github.com/your-org/project-template/blob/main/docs/ADDING-AN-AREA.md" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; min-height: 280px; border: 2px dashed #CBD0D8; border-radius: 18px; padding: 22px; text-decoration: none; color: #14171F">
+<a href="{{repoUrl}}#adding-an-area" style="display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; min-height: 280px; border: 2px dashed #CBD0D8; border-radius: 18px; padding: 22px; text-decoration: none; color: #14171F">
 <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; border: 1px solid #CBD0D8">
 <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
 </span>
@@ -235,7 +166,7 @@ Walkthrough</span>
 <p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 38px; line-height: 1.12; letter-spacing: -0.02em">Everyone can answer them — and the answers live in the repo.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
 <a href="#dashboard" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #14171F; background: #FFFFFF; text-decoration: none; border-radius: 10px">Back to the dashboard</a>
-<a href="https://github.com/your-org/project-template/generate" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #FFFFFF; border: 1px solid #4A5160; text-decoration: none; border-radius: 10px">Use this template</a>
+<a href="{{repoUrl}}" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #FFFFFF; border: 1px solid #4A5160; text-decoration: none; border-radius: 10px">View on GitHub</a>
 </div>
 </div>
 </div>
@@ -245,9 +176,9 @@ Walkthrough</span>
 <!-- FOOTER -->
 <footer style="border-top: 1px solid #E2E5EA; background: #FFFFFF">
 <div style="max-width: 1280px; margin: 0 auto; padding: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
-<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px">project-template</span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px">{{name}}</span>
 <span style="font-size: 14px; color: #565E6C">Plain Markdown and JSON. Rendered by tools that take <code style="font-family: 'JetBrains Mono', monospace; font-size: 13px">?src=</code>.</span>
-<a href="https://github.com/your-org/project-template" style="font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 0">github.com/your-org/project-template</a>
+<span style="font-size: 14px; color: #565E6C">Generated from <a href="{{templateUrl}}" style="font-weight: 600; text-decoration: none">project-template</a></span>
 </div>
 </footer>
 
@@ -258,9 +189,10 @@ class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#2F5BEA';
 
-    // Placeholders: replace with the real GitHub Pages host and raw-content base.
+    // `make clone` rewrites this line for the new project.
+    const PROJECT = { name: 'project-template', repo: 'your-org/project-template', template: 'https://github.com/your-org/project-template' };
+    // Placeholder: where the not-yet-built tools (hoshin-kanri, c4, …) are hosted.
     const TOOLS_HOST = 'https://your-org.github.io/';
-    const RAW_BASE = 'https://raw.githubusercontent.com/your-org/project-template/main/';
 
     const TONES = {
       ok:      { bg: '#E3F4EC', fg: '#17603F' },
@@ -284,7 +216,8 @@ class Component extends DCLogic {
         status: '2 drafts', tone: 'warn', metric: '6', metricLabel: 'contracts',
         segments: [{ label: 'Stable', n: 4, color: DARK }, { label: 'Draft', n: 2, color: LIGHT }],
         question: 'Do you know how the parts talk to each other?', noLead: 'Define each interface first, then build both sides against the contract.' },
-      { id: 'decisions', area: 'Decisions', tool: 'ADR log', slug: 'adr', path: 'docs/adr/', tint: '#E6DCFF',
+      { id: 'decisions', area: 'Decisions', tool: 'ADR log', path: 'docs/adr/decisions.md', tint: '#E6DCFF',
+        summary: 'adr', viewer: 'https://aaronp.github.io/adr/',
         status: '1 proposed', tone: 'neutral', metric: '12', metricLabel: 'decision records',
         segments: [{ label: 'Accepted', n: 9, color: DARK }, { label: 'Proposed', n: 1, color: MID }, { label: 'Superseded', n: 2, color: LIGHT }],
         question: 'Do you know why it’s built this way?', noLead: 'Record each decision with its options and the trade-off you chose.' },
@@ -302,7 +235,11 @@ class Component extends DCLogic {
         question: 'Do you know what’s happening right now?', noLead: 'Put the work on the board and limit what is in progress.' }
     ];
 
-    const areas = AREAS.map((a, i) => {
+    // Generated by `make summaries` (scripts/summarize.ts) into docs/summaries.js; areas without one show example figures.
+    const SUMMARIES = window.SUMMARIES ?? {};
+    const areas = AREAS.map((area, i) => {
+      const live = SUMMARIES[area.summary];
+      const a = live ? { ...area, ...live } : { ...area, tool: area.tool + ' · example' };
       const tone = TONES[a.tone];
       if (!tone) throw new Error('bug: unknown tone "' + a.tone + '" for area ' + a.id);
       const next = AREAS[i + 1];
@@ -312,13 +249,13 @@ class Component extends DCLogic {
         anchor: 'q-' + a.id,
         statusBg: tone.bg,
         statusFg: tone.fg,
-        href: TOOLS_HOST + a.slug + '/?src=' + RAW_BASE + a.path,
+        href: (a.viewer ?? TOOLS_HOST + a.slug + '/') + '?src=' + encodeURIComponent(new URL(a.path, location.href).href),
         nextHref: next ? '#q-' + next.id : '#q-done',
         barLabel: a.area + ': ' + a.segments.map((s) => s.label + ' ' + s.n).join(', ')
       };
     });
 
-    return { accent, areas };
+    return { accent, areas, name: PROJECT.name, repoUrl: 'https://github.com/' + PROJECT.repo, templateUrl: PROJECT.template };
   }
 }
 </script>
