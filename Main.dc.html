@@ -148,14 +148,13 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 </div>
 
 <!-- tool badge -->
-<a class="lift qbadge" href="{{item.href}}" style="flex: 0 1 300px; min-width: 220px; box-sizing: border-box; margin-top: 64px; display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 18px; padding: 22px; text-decoration: none; color: #14171F">
-<span style="display: flex; align-items: center; gap: 10px">
+<div class="lift qbadge" style="flex: 0 1 300px; min-width: 220px; box-sizing: border-box; margin-top: 64px; display: flex; flex-direction: column; gap: 12px; background: #FFFFFF; border: 1px solid #E2E5EA; border-radius: 18px; padding: 22px; color: #14171F">
+<a href="{{item.href}}" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
 <span aria-hidden="true" style="width: 14px; height: 14px; border-radius: 4px; background: {{item.tint}}; border: 1px solid rgba(20,23,31,.12)"></span>
-<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px">{{item.tool}}</span>
-</span>
-<span style="font-size: 14px; line-height: 1.5; color: #565E6C">{{item.noLead}}</span>
-<span style="font-size: 14px; font-weight: 600; color: {{accent}}">Open with ?src={{item.path}} →</span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 20px">{{item.tool}} →</span>
 </a>
+<span style="font-size: 14px; line-height: 1.5; color: #565E6C">{{item.noLead}}</span>
+</div>
 </div>
 </sc-for>
 

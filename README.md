@@ -31,7 +31,8 @@ Dashboard: https://your-org.github.io/project-template/
 ```sh
 make dev          # regenerates stale cards and badges, then serves on http://localhost:8000/
 make snapshot     # just the cards and badges
-make adr          # open docs/adr/decisions.md in the ADR viewer locally
+make adr          # edit docs/adr/decisions.md in the ADR viewer on localhost
+make adr-snapshot # rebuild the ADR card and badge now, even if not stale
 ```
 
 ## Cards
