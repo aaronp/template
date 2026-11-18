@@ -22,14 +22,14 @@ GitHub links and Pages URL. It also removes the template-only parts: `Template.d
 template, using this checkout's `origin` (or `TEMPLATE=<url>`).
 
 <!-- template:end -->
-[![Goals](docs/goals/badge.svg)](Main.dc.html) [![Architecture](docs/architecture/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html) [![Schedule](docs/schedule/badge.svg)](Main.dc.html) [![Delivery](docs/board/badge.svg)](Main.dc.html)
+[![Goals](docs/goals/badge.svg)](Main.dc.html) [![Architecture](docs/architecture/badge.svg)](Main.dc.html) [![Decisions](docs/adr/badge.svg)](Main.dc.html) [![Risks](docs/risks/badge.svg)](Main.dc.html) [![Schedule](docs/schedule/badge.svg)](Main.dc.html) [![Delivery](docs/board/badge.svg)](Main.dc.html)
 
 Dashboard: https://your-org.github.io/project-template/
 
 ## Running
 
 ```sh
-make dev          # regenerates stale cards and badges, then serves on http://localhost:8000/
+make dev          # regenerates stale cards, serves the dashboard on :8000 and every area's editor on :8001+
 make snapshot     # just the cards and badges
 make <area>          # edit the area's file in its tool's viewer on localhost (Save writes it back)
 make <area>-snapshot # rebuild that area's card.json and badge.svg now, even if not stale
@@ -42,8 +42,16 @@ make <area>-snapshot # rebuild that area's card.json and badge.svg now, even if 
 | Decisions | `adr` | `docs/adr/decisions.md` | [`@pritzlaff/adr`](https://github.com/aaronp/adr) | migrated |
 | Schedule | `gantt` | `docs/schedule/schedule.md` | [`@pritzlaff/gantt`](https://github.com/aaronp/gantt) | migrated |
 | Delivery | `agile` | `docs/board/board.md` | [`@pritzlaff/agile`](https://github.com/aaronp/agile) | migrated |
-| Risks | — | — | [risk-register](https://github.com/aaronp/risk-register) | TODO: no npm package / card CLI yet |
+| Risks | `risks` | `docs/risks/risks.md` | [`@pritzlaff/risk-register`](https://github.com/aaronp/risk-register) | migrated |
 | Interfaces | — | — | — | TODO: example figures on the dashboard |
+
+### Local vs deployed
+
+Cards always link to the hosted tools on the published files (that is what `card.json` holds, and what
+GitHub Pages serves). Under `make dev`, `index.ts` also starts each area's own editor (`make <area>`'s
+server) on its own port and serves `/local.js`, which maps each file to its editor; the dashboard then
+sends card links there instead, keeping filters, so **Save writes to this checkout**. Pages has no
+`local.js`, so nothing changes when deployed. Cards don't refresh after a Save: run `make snapshot` and reload.
 
 ## Cards
 

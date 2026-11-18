@@ -1,4 +1,4 @@
-.PHONY: dev snapshot adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot
+.PHONY: dev snapshot adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot
 
 # Where this repo's GitHub Pages site lives, worked out from the origin remote (owner/repo → https://owner.github.io/repo/).
 # Cards link to the published markdown under it. Override: make snapshot PAGES=https://…/
@@ -12,21 +12,25 @@ GOALS_MD := docs/goals/x-matrix.md
 C4_MD    := docs/architecture/c4.md
 GANTT_MD := docs/schedule/schedule.md
 AGILE_MD := docs/board/board.md
+RISKS_MD := docs/risks/risks.md
 ADR   := $(BIN)/adr
 HK    := $(BIN)/hoshin-kanri
 C4    := $(BIN)/c4
 AGILE := $(BIN)/agile
 GANTT := $(BIN)/gantt
+RR    := $(BIN)/risk-register
 
 # $(call snap,<cli>,<SRC env var>,<file.md>): writes card.json and badge.svg beside the markdown.
 snap = for c in card badge; do $(2)=$(if $(PAGES),$(PAGES)$(3)) $(1) $$c $(3) || exit 1; done
 
-# Regenerates stale cards and badges, then serves the dashboard on http://localhost:8000/
+# Regenerates stale cards and badges, then serves the dashboard on http://localhost:8000/ with every area's
+# editor on 8001+ (Save writes to this checkout); locally the dashboard's cards link to those editors.
+# Cards don't refresh after a Save: run make snapshot (or make <area>-snapshot) and reload.
 dev: snapshot
-	bun index.ts
+	bun index.ts $(ADR):$(ADR_MD) $(HK):$(GOALS_MD) $(C4):$(C4_MD) $(RR):$(RISKS_MD) $(GANTT):$(GANTT_MD) $(AGILE):$(AGILE_MD)
 
 # docs/cards.js bundles every docs/**/card.json for the dashboard. make only rebuilds what is older than its sources.
-CARDS := docs/adr/card.json docs/goals/card.json docs/architecture/card.json docs/schedule/card.json docs/board/card.json
+CARDS := docs/adr/card.json docs/goals/card.json docs/architecture/card.json docs/schedule/card.json docs/board/card.json docs/risks/card.json
 snapshot: docs/cards.js
 
 docs/cards.js: $(CARDS) scripts/cards.ts
@@ -43,6 +47,8 @@ docs/schedule/card.json: $(GANTT_MD) $(wildcard docs/schedule/schedule.card.json
 	$(call snap,$(GANTT),GANTT_SRC,$(GANTT_MD))
 docs/board/card.json: $(AGILE_MD) | node_modules
 	$(call snap,$(AGILE),AGILE_SRC,$(AGILE_MD))
+docs/risks/card.json: $(RISKS_MD) $(wildcard docs/risks/risks.card.json) | node_modules
+	$(call snap,$(RR),RR_SRC,$(RISKS_MD))
 
 node_modules: package.json
 	bun install
@@ -78,6 +84,12 @@ agile: | node_modules
 	$(AGILE) $(AGILE_MD)
 agile-snapshot: | node_modules
 	$(call snap,$(AGILE),AGILE_SRC,$(AGILE_MD))
+	bun scripts/cards.ts
+
+risks: | node_modules
+	$(RR) $(RISKS_MD)
+risks-snapshot: | node_modules
+	$(call snap,$(RR),RR_SRC,$(RISKS_MD))
 	bun scripts/cards.ts
 
 # Template only (make clone removes this block from the copy).

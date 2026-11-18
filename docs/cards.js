@@ -66,7 +66,7 @@ window.CARDS = {
       "tone": "good"
     },
     "heading": {
-      "primary": "3",
+      "primary": "7",
       "label": "elements"
     },
     "legend": [
@@ -102,12 +102,12 @@ window.CARDS = {
       }
     ],
     "report": {
-      "people": 1,
+      "people": 2,
       "systems": 1,
       "externals": 0,
-      "containers": 1,
-      "components": 0,
-      "relationships": 1
+      "containers": 2,
+      "components": 2,
+      "relationships": 2
     },
     "source": {
       "label": "docs/architecture/c4.md",
@@ -202,6 +202,53 @@ window.CARDS = {
     "source": {
       "label": "docs/goals/x-matrix.md",
       "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md"
+    },
+    "updated": "2026-11-18"
+  },
+  "docs/risks/card.json": {
+    "version": 1,
+    "title": "Risks",
+    "subtitle": "bun-app",
+    "status": {
+      "label": "1 outside appetite",
+      "tone": "bad",
+      "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+    },
+    "heading": {
+      "primary": "2",
+      "label": "open risks"
+    },
+    "legend": [
+      {
+        "id": "low",
+        "label": "Low",
+        "color": "#4D7C3A"
+      },
+      {
+        "id": "medium",
+        "label": "Medium",
+        "color": "#B7791F"
+      },
+      {
+        "id": "high",
+        "label": "High",
+        "color": "#C2410C"
+      },
+      {
+        "id": "critical",
+        "label": "Critical",
+        "color": "#9E2F27"
+      }
+    ],
+    "report": {
+      "low": 1,
+      "medium": 0,
+      "high": 1,
+      "critical": 0
+    },
+    "source": {
+      "label": "docs/risks/risks.md",
+      "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
     },
     "updated": "2026-11-18"
   },

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "title": "Risks",
+  "subtitle": "bun-app",
+  "status": {
+    "label": "1 outside appetite",
+    "tone": "bad",
+    "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+  },
+  "heading": {
+    "primary": "2",
+    "label": "open risks"
+  },
+  "legend": [
+    {
+      "id": "low",
+      "label": "Low",
+      "color": "#4D7C3A"
+    },
+    {
+      "id": "medium",
+      "label": "Medium",
+      "color": "#B7791F"
+    },
+    {
+      "id": "high",
+      "label": "High",
+      "color": "#C2410C"
+    },
+    {
+      "id": "critical",
+      "label": "Critical",
+      "color": "#9E2F27"
+    }
+  ],
+  "report": {
+    "low": 1,
+    "medium": 0,
+    "high": 1,
+    "critical": 0
+  },
+  "source": {
+    "label": "docs/risks/risks.md",
+    "url": "https://aaronp.github.io/risk-register/?src=docs/risks/risks.md"
+  },
+  "updated": "2026-11-18"
+}

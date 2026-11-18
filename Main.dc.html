@@ -6,6 +6,8 @@
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
 <script src="./docs/cards.js"></script>
+<!-- Only `make dev` serves local.js (links to the local editors); on Pages it is missing and cards link to the hosted tools. -->
+<script src="./local.js"></script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -224,8 +226,8 @@ class Component extends DCLogic {
         status: '1 proposed', tone: 'neutral', metric: '12', metricLabel: 'decision records',
         segments: [{ label: 'Accepted', n: 9, color: DARK }, { label: 'Proposed', n: 1, color: MID }, { label: 'Superseded', n: 2, color: LIGHT }],
         question: 'Do you know why it’s built this way?', noLead: 'Record each decision with its options and the trade-off you chose.' },
-      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
-      { id: 'risks', area: 'Risks', tool: 'Risk register', slug: 'risk-register', path: 'docs/risks.md', tint: '#FFD9D9',
+      { id: 'risks', area: 'Risks', tool: 'Risk register', slug: 'risk-register', path: 'docs/risks/risks.md', tint: '#FFD9D9',
+        card: 'docs/risks/card.json',
         status: '2 high', tone: 'bad', metric: '8', metricLabel: 'open risks',
         segments: [{ label: 'High', n: 2, color: '#C2410C' }, { label: 'Medium', n: 3, color: '#F2A06B' }, { label: 'Low', n: 3, color: LIGHT }],
         question: 'Do you know what could go wrong?', noLead: 'Log each risk, score it and give it an owner and a mitigation.' },
@@ -244,14 +246,23 @@ class Component extends DCLogic {
     // An area with a `card` shows that card.json (version 1, as `adr card` writes), bundled into docs/cards.js
     // by `make snapshot`; areas without one show the example figures above.
     const CARDS = window.CARDS ?? {};
-    const fromCard = (c) => ({
+    // Under `make dev`, LOCAL maps an area's file to its local editor; a card's hosted link keeps its
+    // filters (e.g. &status=accepted) but opens that editor instead, so Save writes to this checkout.
+    const LOCAL = window.LOCAL ?? {};
+    const localize = (url, path) => {
+      if (!url || !LOCAL[path]) return url;
+      const to = new URL(LOCAL[path]);
+      new URL(url).searchParams.forEach((v, k) => { if (k !== 'src') to.searchParams.set(k, v); });
+      return to.href;
+    };
+    const fromCard = (c, path) => ({
       tool: c.subtitle, status: c.status.label, tone: c.status.tone,
-      metric: c.heading.primary, metricLabel: c.heading.label, url: c.source.url,
-      segments: c.legend.map((l) => ({ label: l.label, n: c.report[l.id] ?? 0, color: l.color ?? LIGHT, url: l.url }))
+      metric: c.heading.primary, metricLabel: c.heading.label, url: localize(c.source.url, path),
+      segments: c.legend.map((l) => ({ label: l.label, n: c.report[l.id] ?? 0, color: l.color ?? LIGHT, url: localize(l.url, path) }))
     });
     const areas = AREAS.map((area, i) => {
       const live = CARDS[area.card];
-      const a = live ? { ...area, ...fromCard(live) } : { ...area, tool: area.tool + ' · TODO', status: 'TODO', tone: 'neutral' };
+      const a = live ? { ...area, ...fromCard(live, area.path) } : { ...area, tool: area.tool + ' · TODO', status: 'TODO', tone: 'neutral' };
       const tone = TONES[a.tone];
       if (!tone) throw new Error('bug: unknown tone "' + a.tone + '" for area ' + a.id);
       const next = AREAS[i + 1];

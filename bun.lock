@@ -10,6 +10,7 @@
         "@pritzlaff/c4": "^0.1.0",
         "@pritzlaff/gantt": "^1.0.1",
         "@pritzlaff/hoshin-kanri": "^1.0.1",
+        "@pritzlaff/risk-register": "^0.2.0",
       },
     },
   },
@@ -23,5 +24,7 @@
     "@pritzlaff/gantt": ["@pritzlaff/gantt@1.0.1", "", { "bin": { "gantt": "bin/gantt.mjs" } }, "sha512-GUb4DnOCqFPEoEJaoX8UxQrXdZvrPQ9/Nv3cZ77FImQY5a4oJvUsdziAR7aquXvbpcDl9MPegbVU8lC7WlL7fQ=="],
 
     "@pritzlaff/hoshin-kanri": ["@pritzlaff/hoshin-kanri@1.0.1", "", { "bin": { "hoshin-kanri": "bin/hoshin-kanri.mjs" } }, "sha512-2mQ6Zua8F1U7MDBbHtwAoyJd0Xw6ro2VwNLPjyqZvkhwn592R7LpOZLLuIAii/IaljWG+hhpyP5KIh+BmzPA5Q=="],
+
+    "@pritzlaff/risk-register": ["@pritzlaff/risk-register@0.2.0", "", { "bin": { "risk-register": "bin/risk-register.mjs" } }, "sha512-vSx7uN5Wapiljf6fppWZcIeImiFDMZcMaothe3G7iWLvAoGu77l74ZtrujPy0w5P49BBGM8MD+Sg05hOPXi0Nw=="],
   }
 }
