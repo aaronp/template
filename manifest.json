@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "tools": [
+    {
+      "id": "goals",
+      "aliases": [],
+      "name": "Goals",
+      "tool": "Hoshin Kanri",
+      "package": "@pritzlaff/hoshin-kanri",
+      "bin": "hoshin-kanri",
+      "file": "docs/goals/x-matrix.md",
+      "srcEnv": "HK_SRC",
+      "homepage": "https://github.com/aaronp/Hoshin-Kanri",
+      "spec": "https://aaronp.github.io/Hoshin-Kanri/spec.md",
+      "viewer": "https://aaronp.github.io/Hoshin-Kanri/",
+      "dashboard": {
+        "tint": "#FFDCC6",
+        "question": "Do you know the main goal?",
+        "noLead": "Agree the breakthrough objective and how you will measure it."
+      }
+    },
+    {
+      "id": "architecture",
+      "aliases": [
+        "c4"
+      ],
+      "name": "Architecture",
+      "tool": "C4 diagrams",
+      "package": "@pritzlaff/c4",
+      "bin": "c4",
+      "file": "docs/architecture/c4.md",
+      "srcEnv": "C4_SRC",
+      "homepage": "https://github.com/aaronp/c4",
+      "spec": "https://aaronp.github.io/c4/spec.md",
+      "viewer": "https://aaronp.github.io/c4/",
+      "dashboard": {
+        "tint": "#D6E1FF",
+        "question": "Do you know how it’s built?",
+        "noLead": "Sketch the context, containers and components as C4 diagrams."
+      }
+    },
+    {
+      "id": "overview",
+      "aliases": [
+        "celldeck"
+      ],
+      "name": "Overview",
+      "tool": "Cell Deck",
+      "package": "@pritzlaff/celldeck",
+      "bin": "celldeck",
+      "file": "docs/overview/deck.json",
+      "srcEnv": null,
+      "homepage": "https://github.com/aaronp/celldeck",
+      "spec": "https://aaronp.github.io/celldeck/deck.schema.json",
+      "viewer": "https://aaronp.github.io/celldeck/",
+      "dashboard": {
+        "tint": "#F3DCF5",
+        "question": "Can you explain/visualise it?",
+        "noLead": "Draw the moving parts as bubbles and save the views you would walk someone through."
+      },
+      "card": {
+        "script": "cards/celldeck.mjs"
+      }
+    },
+    {
+      "id": "decisions",
+      "aliases": [
+        "adr"
+      ],
+      "name": "Decisions",
+      "tool": "ADR log",
+      "package": "@pritzlaff/adr",
+      "bin": "adr",
+      "file": "docs/adr/decisions.md",
+      "srcEnv": "ADR_SRC",
+      "homepage": "https://github.com/aaronp/adr",
+      "spec": "https://aaronp.github.io/adr/spec.md",
+      "viewer": "https://aaronp.github.io/adr/",
+      "dashboard": {
+        "tint": "#E6DCFF",
+        "question": "Do you know why it’s built this way?",
+        "noLead": "Record each decision with its options and the trade-off you chose."
+      }
+    },
+    {
+      "id": "risks",
+      "aliases": [],
+      "name": "Risks",
+      "tool": "Risk register",
+      "package": "@pritzlaff/risk-register",
+      "bin": "risk-register",
+      "file": "docs/risks/risks.md",
+      "srcEnv": "RR_SRC",
+      "homepage": "https://github.com/aaronp/risk-register",
+      "spec": "https://aaronp.github.io/risk-register/spec.md",
+      "viewer": "https://aaronp.github.io/risk-register/",
+      "dashboard": {
+        "tint": "#FFD9D9",
+        "question": "Do you know what could go wrong?",
+        "noLead": "Log each risk, score it and give it an owner and a mitigation."
+      }
+    },
+    {
+      "id": "schedule",
+      "aliases": [
+        "gantt"
+      ],
+      "name": "Schedule",
+      "tool": "Gantt",
+      "package": "@pritzlaff/gantt",
+      "bin": "gantt",
+      "file": "docs/schedule/schedule.md",
+      "srcEnv": "GANTT_SRC",
+      "homepage": "https://github.com/aaronp/gantt",
+      "spec": "https://aaronp.github.io/gantt/spec.md",
+      "viewer": "https://aaronp.github.io/gantt/",
+      "dashboard": {
+        "tint": "#FFEDB3",
+        "question": "Do you know when it’ll be done?",
+        "noLead": "Lay out milestones and dependencies on a timeline."
+      }
+    },
+    {
+      "id": "work",
+      "aliases": [
+        "agile"
+      ],
+      "name": "Delivery",
+      "tool": "Agile board",
+      "package": "@pritzlaff/agile",
+      "bin": "agile",
+      "file": "docs/board/board.md",
+      "srcEnv": "AGILE_SRC",
+      "homepage": "https://github.com/aaronp/agile",
+      "spec": "https://aaronp.github.io/agile/spec.md",
+      "viewer": "https://aaronp.github.io/agile/",
+      "dashboard": {
+        "tint": "#CFEDF3",
+        "question": "Do you know what’s happening right now?",
+        "noLead": "Put the work on the board and limit what is in progress."
+      }
+    }
+  ]
+}
