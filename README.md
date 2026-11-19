@@ -9,7 +9,9 @@ summarizes them.
 [a filled-in example (Acme)](https://aaronp.github.io/template/demo/dashboard.html) ·
 [the empty dashboard a new project starts with](https://aaronp.github.io/template/dashboard.html)
 
-## Why
+## Rationale
+
+Projects are self-contained units, with their respective data (goals, risks, architecture, tasks, etc) all in a text-based (typically markdown) form.
 
 - **One place, so projects stay small.** Goals, risks, rationale and the schedule change together as a
   project evolves, so they live together, right beside the code. Keeping them current takes minutes,
@@ -20,6 +22,7 @@ summarizes them.
 - **Data, not software.** The project data is nearly all Markdown. The tools here are optional viewers:
   use them, use your own, or add and drop areas as the project needs. The data stays yours and outlives
   any tool.
+- **Joined up history** All aspects of a project: risks, tasks, architecture, goals -- evolve together with clear history/lineage. Not just the code.  
 
 ## What's here
 
@@ -32,7 +35,7 @@ summarizes them.
   once it's filled in.
 - `manifest.json` and `cards/`: the tools the CLI can add, published with the site (not in the npm package).
 
-## Using this template
+## Using as a template
 
 Create an empty repo on GitHub, then:
 
@@ -44,7 +47,7 @@ make demo         # the Acme demo in ./temp/demo, served locally (Pages publishe
 
 `make clone` starts `../<repo>` as an install into an empty repo: a minimal `package.json`, this README
 (without this section, with the project's name and Pages URL), `git init` with the origin set, then
-`npx @pritzlaff/project add all` and `npx project pages`. The README links back to this template, using
+`bunx @pritzlaff/project add all` and `bunx project pages`. The README links back to this template, using
 this checkout's `origin` (or `TEMPLATE=<url>`).
 
 A new project starts with every area's file empty (no example content). `make demo` fills them from
@@ -53,13 +56,13 @@ A new project starts with every area's file empty (no example content). `make de
 
 ### Adding to an existing repo
 
-```sh
-npx @pritzlaff/project add adr risks                      # or: add all; installs the tools, writes docs/
-npx project build --out _site/project --pages https://<owner>.github.io/<repo>/project/
-npx project pages                                         # or: a GitHub Pages workflow that publishes the dashboard
-```
+`bunx project list` shows every tool; `remove` and `update` take the same names. `add`, `remove` and `update` also keep a managed block of `make` targets in your `Makefile` (`--no-makefile` skips it).
 
-`npx project list` shows every tool; `remove` and `update` take the same names. `add`, `remove` and `update` also keep a managed block of `make` targets in your `Makefile` (`--no-makefile` skips it).
+```sh
+bunx @pritzlaff/project add adr risks                      # or: add all; installs the tools, writes docs/
+bunx project build --out _site/project --pages https://<owner>.github.io/<repo>/project/
+bunx project pages                                         # or: a GitHub Pages workflow that publishes the dashboard
+```
 
 <!-- template:end -->
 [![Goals](docs/goals/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Architecture](docs/architecture/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Decisions](docs/adr/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Risks](docs/risks/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Schedule](docs/schedule/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Delivery](docs/board/badge.svg)](https://aaronp.github.io/template/dashboard.html)
@@ -69,10 +72,10 @@ Dashboard: https://aaronp.github.io/template/dashboard.html
 ## Running
 
 ```sh
-npx project dev          # writes stale cards, serves the dashboard on :8000 and every area's editor on :8001+
-npx project snapshot     # just the cards and badges (--force: all of them, stale or not)
-npx project build        # the site Pages publishes, in _site/
-npx <tool> <file>        # edit one area's file in its tool's viewer on localhost (Save writes it back)
+bunx project dev          # writes stale cards, serves the dashboard on :8000 and every area's editor on :8001+
+bunx project snapshot     # just the cards and badges (--force: all of them, stale or not)
+bunx project build        # the site Pages publishes, in _site/
+bunx <tool> <file>        # edit one area's file in its tool's viewer on localhost (Save writes it back)
 ```
 
 In the template repo, `make dev`, `make snapshot`, `make <area>`, `make <area>-snapshot` and `make test`
@@ -99,7 +102,7 @@ so an agent working in this repo can read it before editing.
 ### Local vs deployed
 
 Cards always link to the hosted tools on the published files (that is what `card.json` holds, and what
-GitHub Pages serves). `project dev` also starts each area's own editor (`npx <tool> <file>`'s
+GitHub Pages serves). `project dev` also starts each area's own editor (`bunx <tool> <file>`'s
 server) on its own port and serves `/local.js`, which maps each file to its editor; the dashboard then
 sends card links there instead, keeping filters, so **Save writes to this checkout**. Pages has no
 `local.js`, so nothing changes when deployed. It also watches `docs/`: saving a file (in its editor or your own)
@@ -125,7 +128,7 @@ legend entry per section.
 Card links open the hosted viewer with `?src=` pointing at the published markdown on this repo's
 Pages site (worked out from the `origin` remote, or `--pages https://…/`), so they work
 once the repo is pushed and published. To change a card's titles, labels or colours, use
-**File → Design card…** in the viewer (`npx adr docs/adr/decisions.md`) and save `decisions.card.json` beside the markdown.
+**File → Design card…** in the viewer (`bunx adr docs/adr/decisions.md`) and save `decisions.card.json` beside the markdown.
 
 ## Adding an area
 
@@ -136,4 +139,4 @@ format); otherwise set `card` to `{ "script": "cards/<tool>.mjs" }` or `false`. 
 ## Hosting
 
 Pushes to `main`/`master` publish the dashboard and `docs/` to GitHub Pages (`.github/workflows/pages.yml`,
-written by `npx project pages`, runs `project build`; Settings → Pages → Source: **GitHub Actions**).
+written by `bunx project pages`, runs `project build`; Settings → Pages → Source: **GitHub Actions**).
