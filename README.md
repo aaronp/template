@@ -59,7 +59,7 @@ npx project build --out _site/project --pages https://<owner>.github.io/<repo>/p
 npx project pages                                         # or: a GitHub Pages workflow that publishes the dashboard
 ```
 
-`npx project list` shows every tool; `remove` and `update` take the same names.
+`npx project list` shows every tool; `remove` and `update` take the same names. `add`, `remove` and `update` also keep a managed block of `make` targets in your `Makefile` (`--no-makefile` skips it).
 
 <!-- template:end -->
 [![Goals](docs/goals/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Architecture](docs/architecture/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Decisions](docs/adr/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Risks](docs/risks/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Schedule](docs/schedule/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Delivery](docs/board/badge.svg)](https://aaronp.github.io/template/dashboard.html)

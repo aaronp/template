@@ -26,6 +26,7 @@ Flags:
   --port <n>             dev server port (default 8000)
   --force                rewrite cards even if up to date
   --no-install           skip the package manager call (add/update/remove)
+  --no-makefile          leave the Makefile alone (add/update/remove)
 `;
 
 const fail = (msg) => {
@@ -41,7 +42,7 @@ try {
       manifest: { type: 'string', default: 'https://aaronp.github.io/template/manifest.json' },
       pages: { type: 'string' }, out: { type: 'string', default: '_site' }, name: { type: 'string' },
       port: { type: 'string', default: '8000' }, force: { type: 'boolean', default: false },
-      'no-install': { type: 'boolean', default: false }
+      'no-install': { type: 'boolean', default: false }, 'no-makefile': { type: 'boolean', default: false }
     }
   });
 } catch (e) { fail(e.message); }
@@ -49,14 +50,15 @@ const { values: v, positionals: [cmd, ...args] } = parsed;
 
 const cwd = process.cwd();
 const install = !v['no-install'];
+const makefile = !v['no-makefile'];
 const pg = () => pagesUrl(cwd, v.pages);
 const manifest = () => loadManifest(v.manifest);
 
 const commands = {
   list: async () => console.log(list(cwd, await manifest())),
-  add: async () => add(cwd, await manifest(), args, { install, pages: pg() }),
-  remove: async () => remove(cwd, args, { install }),
-  update: async () => update(cwd, await manifest(), args, { install, pages: pg() }),
+  add: async () => add(cwd, await manifest(), args, { install, makefile, pages: pg() }),
+  remove: async () => remove(cwd, args, { install, makefile }),
+  update: async () => update(cwd, await manifest(), args, { install, makefile, pages: pg() }),
   snapshot: async () => console.log((await snapshot({ cwd, pages: pg(), force: v.force })).length + ' cards written'),
   build: async () => build({ cwd, out: v.out, pages: pg(), name: v.name }),
   dev: async () => (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() }),
