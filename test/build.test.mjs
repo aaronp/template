@@ -24,6 +24,7 @@ test('builds a self-contained dashboard', async () => {
   // Each inline script closes where intended and still parses.
   for (const [, body] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
     assert.doesNotMatch(body, /<!--/);
+    assert.doesNotMatch(body, /<x-dc/); // the runtime takes the first <x-dc in the page as its component
     new vm.Script(body);
   }
   assert.ok(fs.existsSync(path.join(out, 'docs/adr/decisions.md')));
