@@ -41,3 +41,7 @@ test('record round-trips and keeps manifest order', async () => {
   assert.deepEqual(readRecord(dir).tools.map((t) => t.id), ['goals', 'schedule']);
   assert.ok(fs.readFileSync(path.join(dir, 'docs/project.json'), 'utf8').endsWith('}\n'));
 });
+
+test('goals carries a non-empty starter', async () => {
+  assert.ok(findTool(await load(), 'goals').starter.length > 0);
+});

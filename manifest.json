@@ -17,7 +17,8 @@
         "tint": "#FFDCC6",
         "question": "Do you know the main goal?",
         "noLead": "Agree the breakthrough objective and how you will measure it."
-      }
+      },
+      "starter": "# Goals\n\n## Breakthrough objectives: 3–5 year\nslug: vision\n\n## Annual objectives: This year\nslug: goals\n\n## Top-level priorities: Improvement\nslug: priorities\n\n## Targets to improve: Metrics\nslug: kpis\n"
     },
     {
       "id": "architecture",
@@ -37,7 +38,8 @@
         "tint": "#D6E1FF",
         "question": "Do you know how it’s built?",
         "noLead": "Sketch the context, containers and components as C4 diagrams."
-      }
+      },
+      "starter": "# Model: Project\n"
     },
     {
       "id": "overview",
@@ -60,7 +62,8 @@
       },
       "card": {
         "script": "cards/celldeck.mjs"
-      }
+      },
+      "starter": "{\n  \"version\": 1,\n  \"scene\": { \"bubbles\": [], \"elements\": [], \"links\": [] },\n  \"camera\": { \"x\": 0, \"y\": 0, \"zoom\": 1 },\n  \"views\": []\n}\n"
     },
     {
       "id": "decisions",
@@ -98,7 +101,8 @@
         "tint": "#FFD9D9",
         "question": "Do you know what could go wrong?",
         "noLead": "Log each risk, score it and give it an owner and a mitigation."
-      }
+      },
+      "starter": "---\nregister: Project\n---\n"
     },
     {
       "id": "schedule",
@@ -118,7 +122,8 @@
         "tint": "#FFEDB3",
         "question": "Do you know when it’ll be done?",
         "noLead": "Lay out milestones and dependencies on a timeline."
-      }
+      },
+      "starter": "# Schedule\n"
     },
     {
       "id": "work",
@@ -138,7 +143,8 @@
         "tint": "#CFEDF3",
         "question": "Do you know what’s happening right now?",
         "noLead": "Put the work on the board and limit what is in progress."
-      }
+      },
+      "starter": "# Board\n\n## To Do\n\n## Doing\n\n## Done\n"
     }
   ]
 }

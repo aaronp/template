@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { repo } from './helpers.mjs';
-import { detectPM, wire, unwire, list, pages } from '../lib/install.mjs';
+import { detectPM, wire, unwire, list, pages, add } from '../lib/install.mjs';
+import { snapshot } from '../lib/snapshot.mjs';
 import { loadManifest, findTool, readRecord, writeRecord } from '../lib/manifest.mjs';
 
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'inst-'));
@@ -62,4 +63,17 @@ test('pages does not overwrite', () => {
   fs.writeFileSync(f, 'mine');
   pages(cwd);
   assert.equal(fs.readFileSync(f, 'utf8'), 'mine');
+});
+
+test('every starter is accepted by its tool', async () => {
+  const cwd = tmp(), m = await manifest();
+  const warn = [], orig = console.warn, log = console.log;
+  console.warn = (...a) => warn.push(a.join(' '));
+  console.log = () => {};
+  try {
+    await add(cwd, m, m.tools.map((t) => t.id), { install: false });
+    const out = await snapshot({ cwd, force: true });
+    assert.equal(out.length, 7);
+  } finally { console.warn = orig; console.log = log; }
+  assert.deepEqual(warn, []);
 });
