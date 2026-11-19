@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { repo } from './helpers.mjs';
-import { detectPM, wire, unwire, list, pages, add } from '../lib/install.mjs';
+import { detectPM, wire, unwire, list, pages, add, pmArgs } from '../lib/install.mjs';
 import { snapshot } from '../lib/snapshot.mjs';
 import { loadManifest, findTool, readRecord, writeRecord } from '../lib/manifest.mjs';
 
@@ -76,4 +76,17 @@ test('every starter is accepted by its tool', async () => {
     assert.equal(out.length, 7);
   } finally { console.warn = orig; console.log = log; }
   assert.deepEqual(warn, []);
+});
+
+test('pmArgs per manager', () => {
+  const p = ['a', 'b'];
+  assert.deepEqual(pmArgs('bun', 'add', p), ['add', '-d', 'a', 'b']);
+  assert.deepEqual(pmArgs('pnpm', 'add', p), ['add', '-D', 'a', 'b']);
+  assert.deepEqual(pmArgs('yarn', 'add', p), ['add', '-D', 'a', 'b']);
+  assert.deepEqual(pmArgs('npm', 'add', p), ['i', '-D', 'a', 'b']);
+  for (const pm of ['bun', 'pnpm', 'yarn']) assert.deepEqual(pmArgs(pm, 'remove', p), ['remove', 'a', 'b']);
+  assert.deepEqual(pmArgs('npm', 'remove', p), ['uninstall', 'a', 'b']);
+  for (const pm of ['bun', 'pnpm']) assert.deepEqual(pmArgs(pm, 'update', p), ['update', '--latest', 'a', 'b']);
+  assert.deepEqual(pmArgs('yarn', 'update', p), ['upgrade', '--latest', 'a', 'b']);
+  assert.deepEqual(pmArgs('npm', 'update', p), ['i', '-D', 'a@latest', 'b@latest']);
 });
