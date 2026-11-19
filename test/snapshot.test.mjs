@@ -61,3 +61,12 @@ test('not stale, not rebuilt', async () => {
   await snapshot({ cwd, pages: PAGES, force: true });
   assert.deepEqual(await snapshot({ cwd, pages: PAGES, force: false }), []);
 });
+
+test('ignores node_modules/.bin shims', async () => {
+  const cwd = acmeProject();
+  only(cwd, ['decisions']);
+  const bin = readRecord(cwd).tools[0].bin;
+  fs.mkdirSync(path.join(cwd, 'node_modules/.bin'), { recursive: true });
+  fs.writeFileSync(path.join(cwd, 'node_modules/.bin', bin), '#!/bin/sh\nexec node "$@"\n');
+  assert.equal((await snapshot({ cwd, pages: PAGES, force: true })).length, 1);
+});
