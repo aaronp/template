@@ -60,3 +60,30 @@ demo-build: | node_modules
 
 demo: demo-build
 	cd $(DEMO_SRC) && $(P) dev
+
+# make package: the npm tarball, as `npm publish` would upload it, in temp/.
+.PHONY: package test-install
+VERSION := $(shell node -p "require('./package.json').version")
+TARBALL := $(CURDIR)/temp/pritzlaff-project-$(VERSION).tgz
+package:
+	mkdir -p temp
+	npm pack --pack-destination temp
+
+# make test-install: installs that tarball into a fresh repo in $(INSTALL_TEST) (replacing any earlier one) that
+# already has its own Makefile, adds $(INSTALL_AREAS) from this checkout's manifest, and builds the site.
+# Needs the network (bun fetches the tools). Then: cd $(INSTALL_TEST) && make dev, or open _site/dashboard.html.
+INSTALL_TEST ?= temp/install-test
+INSTALL_AREAS ?= adr risks celldeck
+test-install: package
+	rm -rf $(INSTALL_TEST)
+	mkdir -p $(INSTALL_TEST)
+	cd $(INSTALL_TEST) \
+	  && printf '{ "name": "install-test", "private": true }\n' > package.json \
+	  && printf 'build:\n\t@echo the host repo build\n' > Makefile \
+	  && bun add -d $(TARBALL) \
+	  && bunx project add $(INSTALL_AREAS) --manifest $(CURDIR)/manifest.json \
+	  && bunx project build \
+	  && test -f _site/dashboard.html && test -f docs/project.json \
+	  && grep -q '^build:' Makefile && grep -q '@pritzlaff/project' Makefile \
+	  && $(MAKE) -s build && $(MAKE) -s snapshot
+	@echo "OK: $(INSTALL_TEST)/_site/dashboard.html (or: cd $(INSTALL_TEST) && make dev)"
