@@ -1,5 +1,6 @@
 {
   "name": "@pritzlaff/project",
+  "displayName": "project-template",
   "version": "0.1.0",
   "description": "Adds the @pritzlaff project tools to a repo and builds their dashboard.",
   "license": "MIT",

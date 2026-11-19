@@ -149,7 +149,7 @@ worked out as the Makefile's `PAGES` does today (`owner.github.io/repo/`, or the
   `npx project build --out _site`, upload, deploy) if no file of that name exists. If one does, prints
   the `project build` step to add to it instead.
 
-Project info shown on the dashboard: name from `package.json` `name` (overridable with `--name`), repo
+Project info shown on the dashboard: name from `--name`, else `package.json` `displayName`, else its `name`, repo
 from `origin`, footer "Made with" link to this repo.
 
 ## This repo after the change

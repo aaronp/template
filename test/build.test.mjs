@@ -5,6 +5,7 @@ import path from 'node:path';
 import vm from 'node:vm';
 import { acmeProject } from './helpers.mjs';
 import { build } from '../lib/build.mjs';
+import { projectData } from '../lib/render.mjs';
 import { readRecord, writeRecord } from '../lib/manifest.mjs';
 
 const PAGES = 'https://x.github.io/y/';
@@ -47,4 +48,13 @@ test('basic card renders', async () => {
   await build({ cwd, out, pages: PAGES });
   const data = embedded(fs.readFileSync(path.join(out, 'dashboard.html'), 'utf8'));
   assert.equal(data.cards['docs/adr/card.json'].status.label, 'Not summarised');
+});
+
+test('project name: --name, then displayName, then name', () => {
+  const cwd = acmeProject();
+  fs.writeFileSync(path.join(cwd, 'package.json'), JSON.stringify({ name: 'my-proj', displayName: 'My Project' }));
+  assert.equal(projectData({ cwd }).project.name, 'My Project');
+  assert.equal(projectData({ cwd, name: 'Acme' }).project.name, 'Acme');
+  fs.writeFileSync(path.join(cwd, 'package.json'), JSON.stringify({ name: 'my-proj' }));
+  assert.equal(projectData({ cwd }).project.name, 'my-proj');
 });

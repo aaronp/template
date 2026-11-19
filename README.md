@@ -62,7 +62,7 @@ npx project pages                                         # or: a GitHub Pages w
 `npx project list` shows every tool; `remove` and `update` take the same names.
 
 <!-- template:end -->
-[![Goals](docs/goals/badge.svg)](dashboard.html) [![Architecture](docs/architecture/badge.svg)](dashboard.html) [![Decisions](docs/adr/badge.svg)](dashboard.html) [![Risks](docs/risks/badge.svg)](dashboard.html) [![Schedule](docs/schedule/badge.svg)](dashboard.html) [![Delivery](docs/board/badge.svg)](dashboard.html)
+[![Goals](docs/goals/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Architecture](docs/architecture/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Decisions](docs/adr/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Risks](docs/risks/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Schedule](docs/schedule/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Delivery](docs/board/badge.svg)](https://aaronp.github.io/template/dashboard.html)
 
 Dashboard: https://aaronp.github.io/template/dashboard.html
 

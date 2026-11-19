@@ -34,9 +34,9 @@ fi
 mkdir -p "$DEST"
 cp README.md "$DEST/"
 cd "$DEST"
-printf '{\n  "name": "%s",\n  "private": true,\n  "devDependencies": {}\n}\n' "$REPO_NAME" > package.json
+printf '{\n  "name": "%s",\n  "displayName": "%s",\n  "private": true,\n  "devDependencies": {}\n}\n' "$REPO_NAME" "$NAME" > package.json
 perl -0pi -e 's/<!-- template:start -->.*?<!-- template:end -->\n//s' README.md
-perl -pi -e "s#^\# project-template#\# $NAME#; s#^Dashboard: .*#Dashboard: $PAGES · Generated from [project-template]($TEMPLATE)#" README.md
+perl -pi -e "s#^\# project-template#\# $NAME#; s#https://aaronp\.github\.io/template/dashboard\.html#${PAGES}dashboard.html#g; s#^Dashboard: .*#Dashboard: $PAGES · Generated from [project-template]($TEMPLATE)#" README.md
 
 git init -q -b main
 git remote add origin "git@github.com:$SLUG.git"
