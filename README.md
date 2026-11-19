@@ -74,13 +74,18 @@ Dashboard: https://aaronp.github.io/template/dashboard.html
 ## Running
 
 ```sh
-bunx project dev          # writes stale cards, serves the dashboard on :8000 and every area's editor on :8001+
+make dashboard            # open the dashboard locally (= bunx project dashboard)
+make dashboard-build      # generate it: _site/dashboard.html (= bunx project dashboard-build)
+```
+
+```sh
+bunx project dashboard    # (alias dev) writes stale cards, serves and opens the dashboard on :8000 (NO_OPEN=1 skips), every area's editor on :8001+
 bunx project snapshot     # just the cards and badges (--force: all of them, stale or not)
-bunx project build        # the site Pages publishes, in _site/
+bunx project dashboard-build  # (alias build) the site Pages publishes, in _site/
 bunx <tool> <file>        # edit one area's file in its tool's viewer on localhost (Save writes it back)
 ```
 
-In the template repo, `make dev`, `make snapshot`, `make <area>`, `make <area>-snapshot` and `make test`
+In the template repo, `make dashboard`, `make dashboard-build`, `make snapshot`, `make <area>`, `make <area>-snapshot` and `make test`
 run this checkout's `bin/project.mjs` with `--manifest ./manifest.json`. `docs/project.json` records the
 added tools (`project add` writes it).
 

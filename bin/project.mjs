@@ -13,8 +13,8 @@ Commands:
   remove <tool...|all> unwire tools and uninstall their packages
   update [tool...|all] refresh recorded entries and upgrade packages
   snapshot             write cards and badges
-  build                write a self-contained site to --out
-  dev                  serve the dashboard locally
+  dashboard            serve the dashboard locally and open it (alias: dev)
+  dashboard-build      write the site (cards, badges, dashboard.html) to --out (alias: build)
   pages                write the GitHub Pages workflow
   help                 show this message
 
@@ -64,6 +64,8 @@ const commands = {
   dev: async () => (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() }),
   pages: async () => pages(cwd)
 };
+commands.dashboard = commands.dev;
+commands['dashboard-build'] = commands.build;
 
 if (!cmd || cmd === 'help') {
   console.log(USAGE);

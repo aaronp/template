@@ -1,13 +1,17 @@
-.PHONY: dev snapshot test adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot celldeck celldeck-snapshot
+.PHONY: dev dashboard dashboard-build snapshot test adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot celldeck celldeck-snapshot
 
 # This checkout's CLI and manifest (never the npm copy or the published manifest).
 P := node $(CURDIR)/bin/project.mjs --manifest $(CURDIR)/manifest.json
 BIN := node_modules/.bin
 
-# Serves the dashboard on http://localhost:8000/ with every area's editor beside it (Save writes to this
-# checkout); saving a docs/ file rebuilds its card and reloads the dashboard.
-dev: | node_modules
+# make dashboard: serves the dashboard on http://localhost:8000/ and opens it (NO_OPEN=1 skips), with every
+# area's editor beside it (Save writes to this checkout); saving a docs/ file rebuilds its card and reloads it.
+dashboard dev: | node_modules
 	$(P) dev
+
+# make dashboard-build: the self-contained site Pages publishes, in _site/ (open _site/dashboard.html).
+dashboard-build: | node_modules
+	$(P) build
 
 # Rewrites stale cards and badges beside each area's file.
 snapshot: | node_modules

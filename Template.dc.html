@@ -25,6 +25,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 .qno{display:none !important}
 .qbadge{display:none !important}
 .qmobileno{display:flex !important}
+.runners{grid-template-columns:minmax(0,1fr) !important}
 }
 </style>
 </helmet>
@@ -47,7 +48,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <a href="dashboard.html" style="padding: 12px 14px; font-size: 15px; font-weight: 500; color: #3D4452; text-decoration: none">Empty start</a>
 <a href="#how" style="padding: 12px 14px; font-size: 15px; font-weight: 500; color: #3D4452; text-decoration: none">How it works</a>
 <a href="{{templateUrl}}" style="padding: 11px 16px; font-size: 15px; font-weight: 500; color: #14171F; text-decoration: none; border: 1px solid #D5D9E0; border-radius: 10px; margin-left: 8px">View on GitHub</a>
-<a href="#use" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #FFFFFF; background: {{accent}}; text-decoration: none; border-radius: 10px">Use this template</a>
+<a href="#use" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #FFFFFF; background: {{accent}}; text-decoration: none; border-radius: 10px">How to use it</a>
 </div>
 </nav>
 </header>
@@ -128,32 +129,46 @@ Walkthrough</span>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">01</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Write it as plain text</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Each area is a Markdown or JSON file with a simple, documented shape. No database, no SaaS account.</p>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Edit and view</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Locally, in each tool from the dashboard, or straight in the Markdown: by you or your agent.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">02</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Commit it next to the code</h3>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Commit and publish</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Changes to a risk or a decision go through the same pull request, review and history as the code they affect.</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
 <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">03</span>
-<h3 style="margin: 0; font-size: 18px; font-weight: 600">Open it in a tool</h3>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">Every tool takes a <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">?src=</code> pointing at a file in this repo.</p>
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">View and share online</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #565E6C">The tools are published separately from your data: each opens a file in your repo from its <code style="font-family: 'JetBrains Mono', monospace; font-size: 14px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">?src=</code> link.</p>
 </div>
 </div>
-<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; background: #F5F6F8; border: 1px solid #E2E5EA; border-radius: 12px; padding: 16px 20px; overflow-x: auto; white-space: nowrap; color: #3D4452">https://aaronp.github.io/risk-register/<span style="color: {{accent}}; font-weight: 500">?src=</span>https://raw.githubusercontent.com/aaronp/template/main/docs/risks/risks.md</div>
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.6; background: #F5F6F8; border: 1px solid #E2E5EA; border-radius: 12px; padding: 16px 20px; overflow-x: auto; white-space: nowrap; color: #3D4452; font-size: 16px">https://celldeck.app/<span style="color: {{accent}}; font-weight: 700">?src=https://raw.githubusercontent.com/</span><span style="color: #FFFFFF; background: {{accent}}; font-weight: 700; padding: 3px 10px; border-radius: 6px">&lt;your-repo&gt;</span><span style="color: {{accent}}; font-weight: 700">/main/docs/overview/deck.json</span></div>
 </div>
 </section>
 
 
 <!-- USE -->
 <section id="use" style="max-width: 1280px; margin: 0 auto; padding: 64px 32px 96px; display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 16px">
-<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; letter-spacing: -0.01em">Use this template</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C; max-width: 680px">Create an empty repo on GitHub, then copy the template into it. You get the dashboard and walkthrough with your repo's name and links; this page is left behind.</p>
-<pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; background: #12151C; color: #E6E8EC; border-radius: 12px; padding: 18px 22px; overflow-x: auto">git clone {{templateUrl}}.git
-cd template
-make clone        # asks for owner/repo and a project name</pre>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 28px; letter-spacing: -0.01em">How to use it</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C; max-width: 680px">In your repo, list the tools and add the ones you want. That gives you a <code style="font-family: 'JetBrains Mono', monospace; font-size: 15px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">docs/</code> directory with a Markdown file per tool, and a Makefile with a target per tool (e.g. <code style="font-family: 'JetBrains Mono', monospace; font-size: 15px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">make adr</code>) unless you pass <code style="font-family: 'JetBrains Mono', monospace; font-size: 15px; background: #F0F2F5; padding: 2px 6px; border-radius: 6px">--no-makefile</code>.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C; max-width: 680px">There is no software to install: every tool is web-based and improved independently.</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #565E6C; max-width: 680px">You (or an AI agent) can edit the Markdown directly; people usually prefer to view and edit it through the dashboard. Every tool also generates cards, links and badges to include in your GitHub Pages or reports.</p>
+<div class="runners" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+<sc-for list="{{runners}}" as="item" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #565E6C">{{item.name}}</span>
+<pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 14px; line-height: 1.7; background: #12151C; color: #E6E8EC; border-radius: 12px; padding: 18px 22px; overflow-x: auto"><span style="color: #8B93A1"># 1. view the tools</span>
+{{item.name}} @pritzlaff/project list
+<span style="color: #8B93A1"># 2. add the ones you want (--no-makefile: leave the Makefile alone)</span>
+{{item.name}} @pritzlaff/project add adr risks
+<span style="color: #8B93A1"># view and edit them in the dashboard</span>
+{{item.name}} @pritzlaff/project dashboard
+<span style="color: #8B93A1"># generate cards, badges and the dashboard into _site/</span>
+{{item.name}} @pritzlaff/project dashboard-build</pre>
+</div>
+</sc-for>
+</div>
 </section>
 
 <!-- FOOTER -->
@@ -182,7 +197,8 @@ class Component extends DCLogic {
       { path: 'docs/schedule/schedule.md', tool: 'Gantt', tint: '#FFEDB3' },
       { path: 'docs/board/board.md', tool: 'Agile board', tint: '#CFEDF3' }
     ];
-    return { accent, areas, templateUrl };
+    const runners = [{ name: 'bunx' }, { name: 'npx' }];
+    return { accent, areas, templateUrl, runners };
   }
 }
 </script>

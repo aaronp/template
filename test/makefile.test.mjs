@@ -60,14 +60,14 @@ test('replaces in place', async () => {
 
 test('skips host-defined targets', async () => {
   const cwd = await project('decisions');
-  fs.writeFileSync(mk(cwd), 'dev:\n\tmy-dev\n');
+  fs.writeFileSync(mk(cwd), 'dashboard:\n\tmy-dashboard\n');
   const warn = console.warn; console.warn = () => {};
   let r;
   try { r = syncMakefile(cwd); } finally { console.warn = warn; }
-  assert.deepEqual(r.skipped, ['dev']);
+  assert.deepEqual(r.skipped, ['dashboard']);
   const block = read(cwd).slice(read(cwd).indexOf(START));
-  assert.ok(!/^dev:/m.test(block));
-  assert.ok(!/^\.PHONY:.*\bdev\b/m.test(block));
+  assert.ok(!/^dashboard:/m.test(block));
+  assert.ok(!/^\.PHONY:.*\bdashboard(\s|$)/m.test(block));
 });
 
 test('add honours --no-makefile', async () => {
