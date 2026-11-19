@@ -10,8 +10,8 @@ const USAGE = `Usage: project <command> [args] [flags]
 Commands:
   list                 show every tool and whether it is installed
   add <tool...|all>    install tools and wire them into docs/
-  remove <tool...>     unwire tools and uninstall their packages
-  update [tool...]     refresh recorded entries and upgrade packages
+  remove <tool...|all> unwire tools and uninstall their packages
+  update [tool...|all] refresh recorded entries and upgrade packages
   snapshot             write cards and badges
   build                write a self-contained site to --out
   dev                  serve the dashboard locally
@@ -28,15 +28,24 @@ Flags:
   --no-install           skip the package manager call (add/update/remove)
 `;
 
-const { values: v, positionals: [cmd, ...args] } = parseArgs({
-  allowPositionals: true,
-  options: {
-    manifest: { type: 'string', default: 'https://aaronp.github.io/template/manifest.json' },
-    pages: { type: 'string' }, out: { type: 'string', default: '_site' }, name: { type: 'string' },
-    port: { type: 'string', default: '8000' }, force: { type: 'boolean', default: false },
-    'no-install': { type: 'boolean', default: false }
-  }
-});
+const fail = (msg) => {
+  console.error(`project: ${msg}\n\n${USAGE}`);
+  process.exit(1);
+};
+
+let parsed;
+try {
+  parsed = parseArgs({
+    allowPositionals: true,
+    options: {
+      manifest: { type: 'string', default: 'https://aaronp.github.io/template/manifest.json' },
+      pages: { type: 'string' }, out: { type: 'string', default: '_site' }, name: { type: 'string' },
+      port: { type: 'string', default: '8000' }, force: { type: 'boolean', default: false },
+      'no-install': { type: 'boolean', default: false }
+    }
+  });
+} catch (e) { fail(e.message); }
+const { values: v, positionals: [cmd, ...args] } = parsed;
 
 const cwd = process.cwd();
 const install = !v['no-install'];
@@ -45,10 +54,7 @@ const manifest = () => loadManifest(v.manifest);
 
 const commands = {
   list: async () => console.log(list(cwd, await manifest())),
-  add: async () => {
-    const m = await manifest();
-    await add(cwd, m, args.length === 1 && args[0] === 'all' ? m.tools.map((t) => t.id) : args, { install, pages: pg() });
-  },
+  add: async () => add(cwd, await manifest(), args, { install, pages: pg() }),
   remove: async () => remove(cwd, args, { install }),
   update: async () => update(cwd, await manifest(), args, { install, pages: pg() }),
   snapshot: async () => console.log((await snapshot({ cwd, pages: pg(), force: v.force })).length + ' cards written'),
@@ -59,9 +65,10 @@ const commands = {
 
 if (!cmd || cmd === 'help') {
   console.log(USAGE);
-} else if (!commands[cmd]) {
-  console.error(USAGE);
-  process.exit(1);
+} else if (!Object.hasOwn(commands, cmd)) {
+  fail(`unknown command ${cmd}`);
+} else if ((cmd === 'add' || cmd === 'remove') && !args.length) {
+  fail(`${cmd} needs a tool name (or all)`);
 } else {
   commands[cmd]().catch((e) => {
     console.error(`project: ${e.message}`);
