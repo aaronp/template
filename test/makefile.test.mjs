@@ -79,3 +79,27 @@ test('add honours --no-makefile', async () => {
   await add(b, m, ['adr'], { install: false });
   assert.ok(fs.existsSync(mk(b)));
 });
+
+for (const [name, text] of [
+  ['lone START', `a:\n\tx\n${START}\nHOSTKEEP:\n\ty\n`],
+  ['lone END', 'a:\n\tx\n# <<< @pritzlaff/project\nHOSTKEEP:\n\ty\n'],
+  ['two blocks', `${START}\n# <<< @pritzlaff/project\nb:\n\tz\n${START}\n# <<< @pritzlaff/project\n`]
+])
+  test(`${name} leaves the file unchanged`, async () => {
+    const cwd = await project('decisions');
+    fs.writeFileSync(mk(cwd), text);
+    const warn = console.warn; console.warn = () => {};
+    try { syncMakefile(cwd); assert.equal(syncMakefile(cwd).unchanged, true); } finally { console.warn = warn; }
+    assert.equal(read(cwd), text);
+  });
+
+test('CRLF tail after the block stays byte-identical', async () => {
+  const cwd = await project('decisions');
+  syncMakefile(cwd);
+  fs.appendFileSync(mk(cwd), 'after:\r\n\techo hi\r\n');
+  syncMakefile(cwd);
+  assert.ok(read(cwd).endsWith('after:\r\n\techo hi\r\n'));
+  const once = read(cwd);
+  syncMakefile(cwd);
+  assert.equal(read(cwd), once);
+});
