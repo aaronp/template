@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { repo } from './helpers.mjs';
-import { detectPM, wire, unwire, list, pages, add, pmArgs } from '../lib/install.mjs';
+import { detectPM, wire, unwire, list, pages, add, remove, update, pmArgs } from '../lib/install.mjs';
 import { snapshot } from '../lib/snapshot.mjs';
 import { loadManifest, findTool, readRecord, writeRecord } from '../lib/manifest.mjs';
 
@@ -89,4 +89,49 @@ test('pmArgs per manager', () => {
   for (const pm of ['bun', 'pnpm']) assert.deepEqual(pmArgs(pm, 'update', p), ['update', '--latest', 'a', 'b']);
   assert.deepEqual(pmArgs('yarn', 'update', p), ['upgrade', '--latest', 'a', 'b']);
   assert.deepEqual(pmArgs('npm', 'update', p), ['i', '-D', 'a@latest', 'b@latest']);
+});
+
+test('pnpm workflow sets up pnpm and derives the Pages URL', () => {
+  const cwd = tmp(), log = console.log;
+  fs.writeFileSync(path.join(cwd, 'pnpm-lock.yaml'), '');
+  console.log = () => {};
+  try { pages(cwd); } finally { console.log = log; }
+  const y = fs.readFileSync(path.join(cwd, '.github/workflows/pages.yml'), 'utf8');
+  assert.match(y, /- uses: pnpm\/action-setup@v4\n {8}with:\n {10}version: 10\n {6}- uses: actions\/setup-node@v4/);
+  assert.match(y, /- run: pnpm install\n {6}- run: npx project build --out _site\n/);
+});
+
+const quiet = async (fn) => {
+  const warn = [], w = console.warn, l = console.log;
+  console.warn = (...a) => warn.push(a.join(' '));
+  console.log = () => {};
+  try { await fn(); } finally { console.warn = w; console.log = l; }
+  return warn;
+};
+
+test('update all refreshes every recorded tool', async () => {
+  const cwd = tmp(), m = await manifest();
+  await quiet(() => add(cwd, m, ['decisions', 'risks'], { install: false }));
+  const r = readRecord(cwd);
+  r.tools[0].dashboard.question = 'edited';
+  writeRecord(cwd, r);
+  await quiet(() => update(cwd, m, ['all'], { install: false }));
+  assert.deepEqual(readRecord(cwd).tools.map((t) => t.id), ['decisions', 'risks']);
+  assert.notEqual(readRecord(cwd).tools[0].dashboard.question, 'edited');
+});
+
+test('remove all unwires every recorded tool', async () => {
+  const cwd = tmp(), m = await manifest();
+  await quiet(() => add(cwd, m, ['decisions', 'risks'], { install: false }));
+  await quiet(() => remove(cwd, ['all'], { install: false }));
+  assert.deepEqual(readRecord(cwd).tools, []);
+});
+
+test('update skips recorded tools the manifest dropped', async () => {
+  const cwd = tmp(), m = await manifest();
+  await quiet(() => add(cwd, m, ['decisions'], { install: false }));
+  writeRecord(cwd, { ...readRecord(cwd), tools: [...readRecord(cwd).tools, { id: 'gone', order: 99 }] });
+  const warn = await quiet(() => update(cwd, m, [], { install: false }));
+  assert.ok(warn.includes('gone is no longer in the manifest; run: project remove gone'));
+  await assert.rejects(update(cwd, m, ['gone'], { install: false }), /Unknown tool "gone"/);
 });
