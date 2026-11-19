@@ -177,7 +177,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <div style="max-width: 1280px; margin: 0 auto; padding: 32px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between">
 <span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 16px">{{name}}</span>
 <span style="font-size: 14px; color: #565E6C">Plain Markdown and JSON. Rendered by tools that take <code style="font-family: 'JetBrains Mono', monospace; font-size: 13px">?src=</code>.</span>
-<span style="font-size: 14px; color: #565E6C">Generated from <a href="{{templateUrl}}" style="font-weight: 600; text-decoration: none">project-template</a></span>
+<span style="font-size: 14px; color: #565E6C">Made with <a href="{{templateUrl}}" style="font-weight: 600; text-decoration: none">project</a></span>
 </div>
 </footer>
 
@@ -188,10 +188,8 @@ class Component extends DCLogic {
   renderVals() {
     const accent = this.props.accent ?? '#2F5BEA';
 
-    // `make clone` rewrites this line for the new project.
-    const PROJECT = { name: 'project-template', repo: 'aaronp/template', template: 'https://github.com/aaronp/template' };
-    // Placeholder: where the not-yet-built tools (hoshin-kanri, c4, …) are hosted.
-    const TOOLS_HOST = 'https://aaronp.github.io/';
+    // Embedded by `project build` (or served as /project.js by `project dev`).
+    const { project: PROJECT, areas: ENTRIES, cards: CARDS } = window.PROJECT;
 
     const TONES = {
       good:    { bg: '#E3F4EC', fg: '#17603F' },
@@ -199,56 +197,15 @@ class Component extends DCLogic {
       bad:     { bg: '#FDE2E2', fg: '#9B1C1C' },
       neutral: { bg: '#EEF0F3', fg: '#3D4452' }
     };
-    const DARK = '#1F2633', MID = '#6E86E8', LIGHT = '#D5DAE1';
+    const LIGHT = '#D5DAE1';
 
-    // Order = walkthrough order. Areas with a `card` are migrated: their figures come from that card.json.
-    // TODO-marked areas still show example figures until a tool snapshots their file into a card.json.
-    const AREAS = [
-      { id: 'goals', area: 'Goals', tool: 'Hoshin Kanri', path: 'docs/goals/x-matrix.md', tint: '#FFDCC6',
-        card: 'docs/goals/card.json',
-        status: 'On track', tone: 'good', metric: '3', metricLabel: 'breakthrough objectives',
-        segments: [{ label: 'On track', n: 5, color: DARK }, { label: 'At risk', n: 1, color: '#E8692E' }, { label: 'Not started', n: 2, color: LIGHT }],
-        question: 'Do you know the main goal?', noLead: 'Agree the breakthrough objective and how you will measure it.' },
-      { id: 'architecture', area: 'Architecture', tool: 'C4 diagrams', slug: 'c4', path: 'docs/architecture/c4.md', tint: '#D6E1FF',
-        card: 'docs/architecture/card.json',
-        status: 'Up to date', tone: 'good', metric: '4', metricLabel: 'containers',
-        segments: [{ label: 'Context', n: 1, color: DARK }, { label: 'Container', n: 1, color: MID }, { label: 'Component', n: 3, color: LIGHT }],
-        question: 'Do you know how it’s built?', noLead: 'Sketch the context, containers and components as C4 diagrams.' },
-      { id: 'overview', area: 'Overview', tool: 'Cell Deck', slug: 'celldeck', path: 'docs/overview/deck.json', tint: '#F3DCF5',
-        card: 'docs/overview/card.json',
-        status: 'Ready to present', tone: 'good', metric: '3', metricLabel: 'saved views',
-        segments: [{ label: 'Bubbles', n: 4, color: DARK }, { label: 'Elements', n: 9, color: MID }, { label: 'Links', n: 6, color: LIGHT }],
-        question: 'Can you explain/visualise it?', noLead: 'Draw the moving parts as bubbles and save the views you would walk someone through.' },
-      // TODO: migrate (a tool that edits the file and writes card.json, like docs/adr and docs/goals)
-      { id: 'contracts', area: 'Interfaces', tool: 'Contract-first', slug: 'contract-first', path: 'contracts/orders.v1.json', tint: '#D3F0E3',
-        status: '2 drafts', tone: 'warn', metric: '6', metricLabel: 'contracts',
-        segments: [{ label: 'Stable', n: 4, color: DARK }, { label: 'Draft', n: 2, color: LIGHT }],
-        question: 'Do you know how the parts talk to each other?', noLead: 'Define each interface first, then build both sides against the contract.' },
-      { id: 'decisions', area: 'Decisions', tool: 'ADR log', path: 'docs/adr/decisions.md', tint: '#E6DCFF',
-        card: 'docs/adr/card.json',
-        status: '1 proposed', tone: 'neutral', metric: '12', metricLabel: 'decision records',
-        segments: [{ label: 'Accepted', n: 9, color: DARK }, { label: 'Proposed', n: 1, color: MID }, { label: 'Superseded', n: 2, color: LIGHT }],
-        question: 'Do you know why it’s built this way?', noLead: 'Record each decision with its options and the trade-off you chose.' },
-      { id: 'risks', area: 'Risks', tool: 'Risk register', slug: 'risk-register', path: 'docs/risks/risks.md', tint: '#FFD9D9',
-        card: 'docs/risks/card.json',
-        status: '2 high', tone: 'bad', metric: '8', metricLabel: 'open risks',
-        segments: [{ label: 'High', n: 2, color: '#C2410C' }, { label: 'Medium', n: 3, color: '#F2A06B' }, { label: 'Low', n: 3, color: LIGHT }],
-        question: 'Do you know what could go wrong?', noLead: 'Log each risk, score it and give it an owner and a mitigation.' },
-      { id: 'schedule', area: 'Schedule', tool: 'Gantt', slug: 'gantt', path: 'docs/schedule/schedule.md', tint: '#FFEDB3',
-        card: 'docs/schedule/card.json',
-        status: 'On track', tone: 'good', metric: '2/5', metricLabel: 'milestones met',
-        segments: [{ label: 'Done', n: 9, color: DARK }, { label: 'In progress', n: 4, color: MID }, { label: 'Not started', n: 7, color: LIGHT }],
-        question: 'Do you know when it’ll be done?', noLead: 'Lay out milestones and dependencies on a timeline.' },
-      { id: 'work', area: 'Delivery', tool: 'Agile board', slug: 'agile', path: 'docs/board/board.md', tint: '#CFEDF3',
-        card: 'docs/board/card.json',
-        status: 'Sprint 4', tone: 'neutral', metric: '5', metricLabel: 'cards in progress',
-        segments: [{ label: 'To do', n: 12, color: LIGHT }, { label: 'Doing', n: 5, color: MID }, { label: 'Done', n: 23, color: DARK }],
-        question: 'Do you know what’s happening right now?', noLead: 'Put the work on the board and limit what is in progress.' }
-    ];
+    // Order = walkthrough order (the record's order). Each area shows its card.json; without one it shows the basic look.
+    const AREAS = ENTRIES.map((e) => ({
+      id: e.id, area: e.name, tool: e.tool, path: e.file, viewer: e.viewer,
+      tint: e.dashboard.tint, question: e.dashboard.question, noLead: e.dashboard.noLead,
+      card: e.file.replace(/[^/]*$/, '') + 'card.json'
+    }));
 
-    // An area with a `card` shows that card.json (version 1, as `adr card` writes), bundled into docs/cards.js
-    // by `make snapshot`; areas without one show the example figures above.
-    const CARDS = window.CARDS ?? {};
     // Under `make dev`, LOCAL maps an area's file to its local editor; a card's hosted link keeps its
     // filters (e.g. &status=accepted) but opens that editor instead, so Save writes to this checkout.
     const LOCAL = window.LOCAL ?? {};
@@ -265,11 +222,12 @@ class Component extends DCLogic {
     });
     const areas = AREAS.map((area, i) => {
       const live = CARDS[area.card];
-      const a = live ? { ...area, ...fromCard(live, area.path) } : { ...area, tool: area.tool + ' · TODO', status: 'TODO', tone: 'neutral' };
+      const a = live ? { ...area, ...fromCard(live, area.path) }
+        : { ...area, status: 'No card yet', tone: 'neutral', metric: '—', metricLabel: '', segments: [] };
       const tone = TONES[a.tone];
       if (!tone) throw new Error('bug: unknown tone "' + a.tone + '" for area ' + a.id);
       const next = AREAS[i + 1];
-      const href = a.url ?? TOOLS_HOST + a.slug + '/?src=' + encodeURIComponent(new URL(a.path, location.href).href);
+      const href = a.url ?? localize(a.viewer + '?src=' + encodeURIComponent(new URL(a.path, location.href).href), a.path);
       return {
         ...a,
         no: String(i + 1).padStart(2, '0'),
