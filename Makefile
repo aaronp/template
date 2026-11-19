@@ -87,3 +87,12 @@ test-install: package
 	  && grep -q '^build:' Makefile && grep -q '@pritzlaff/project' Makefile \
 	  && $(MAKE) -s build && $(MAKE) -s snapshot
 	@echo "OK: $(INSTALL_TEST)/_site/dashboard.html (or: cd $(INSTALL_TEST) && make dev)"
+
+# Bumps package.json, commits and tags v<version> (needs a clean tree).
+.PHONY: publish bump-patch bump-minor bump-major
+bump-patch bump-minor bump-major:
+	npm version $(@:bump-%=%)
+
+# Publishes @pritzlaff/project to npm. Bump first: make bump-patch|bump-minor|bump-major
+publish: test
+	npm publish
