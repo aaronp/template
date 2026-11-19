@@ -15,25 +15,25 @@
       "id": "vision",
       "label": "Breakthrough objectives",
       "color": "#3346D3",
-      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md&view=breakthrough-objectives"
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/docs/goals/x-matrix.md&view=breakthrough-objectives"
     },
     {
       "id": "goals",
       "label": "Annual objectives",
       "color": "#0A6E64",
-      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md&view=annual-objectives"
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/docs/goals/x-matrix.md&view=annual-objectives"
     },
     {
       "id": "priorities",
       "label": "Top-level priorities",
       "color": "#A84C09",
-      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md&view=top-level-priorities"
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/docs/goals/x-matrix.md&view=top-level-priorities"
     },
     {
       "id": "kpis",
       "label": "Targets to improve",
       "color": "#7436C2",
-      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md&view=targets-to-improve"
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/docs/goals/x-matrix.md&view=targets-to-improve"
     }
   ],
   "report": {
@@ -44,7 +44,7 @@
   },
   "source": {
     "label": "docs/goals/x-matrix.md",
-    "url": "https://aaronp.github.io/Hoshin-Kanri/?src=docs/goals/x-matrix.md"
+    "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/docs/goals/x-matrix.md"
   },
-  "updated": "2026-11-18"
+  "updated": "2026-11-19"
 }
