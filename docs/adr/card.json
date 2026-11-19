@@ -15,31 +15,31 @@
       "id": "proposed",
       "label": "Proposed",
       "color": "#1F45B0",
-      "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md&status=proposed"
+      "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md&status=proposed"
     },
     {
       "id": "accepted",
       "label": "Accepted",
       "color": "#0B6B5F",
-      "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md&status=accepted"
+      "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md&status=accepted"
     },
     {
       "id": "superseded",
       "label": "Superseded",
       "color": "#6B7280",
-      "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md&status=superseded"
+      "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md&status=superseded"
     },
     {
       "id": "deprecated",
       "label": "Deprecated",
       "color": "#B26B00",
-      "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md&status=deprecated"
+      "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md&status=deprecated"
     },
     {
       "id": "rejected",
       "label": "Rejected",
       "color": "#A3283C",
-      "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md&status=rejected"
+      "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md&status=rejected"
     }
   ],
   "report": {
@@ -51,7 +51,7 @@
   },
   "source": {
     "label": "docs/adr/decisions.md",
-    "url": "https://aaronp.github.io/adr/?src=docs/adr/decisions.md"
+    "url": "https://aaronp.github.io/adr/?src=https://aaronp.github.io/template/docs/adr/decisions.md"
   },
-  "updated": "2026-11-18"
+  "updated": "2026-11-19"
 }

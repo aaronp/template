@@ -6,7 +6,7 @@
 <script src="./vendor/react.js"></script>
 <script src="./vendor/react-dom.js"></script>
 <script src="./docs/cards.js"></script>
-<!-- Only `make dev` serves local.js (links to the local editors); on Pages it is missing and cards link to the hosted tools. -->
+<!-- Only `project dev` serves local.js (links to the local editors); on Pages it is missing and cards link to the hosted tools. -->
 <script src="./local.js"></script>
 <script src="./support.js"></script>
 </head>
@@ -161,7 +161,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <!-- end card -->
 <div id="q-done" style="width: 100%; max-width: 1040px; display: flex; justify-content: flex-start; scroll-margin-top: 32px">
 <div style="flex: 0 1 560px; min-width: 0; box-sizing: border-box; background: #14171F; color: #FFFFFF; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 18px; margin: 0 auto 0 0">
-<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B8BEC9">All eight: yes</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #B8BEC9">All yes</span>
 <p style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 38px; line-height: 1.12; letter-spacing: -0.02em">Everyone can answer them — and the answers live in the repo.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 10px">
 <a href="#dashboard" style="padding: 12px 18px; font-size: 15px; font-weight: 600; color: #14171F; background: #FFFFFF; text-decoration: none; border-radius: 10px">Back to the dashboard</a>
@@ -206,7 +206,7 @@ class Component extends DCLogic {
       card: e.file.replace(/[^/]*$/, '') + 'card.json'
     }));
 
-    // Under `make dev`, LOCAL maps an area's file to its local editor; a card's hosted link keeps its
+    // Under `project dev`, LOCAL maps an area's file to its local editor; a card's hosted link keeps its
     // filters (e.g. &status=accepted) but opens that editor instead, so Save writes to this checkout.
     const LOCAL = window.LOCAL ?? {};
     const localize = (url, path) => {

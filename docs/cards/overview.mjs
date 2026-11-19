@@ -1,15 +1,16 @@
-// bun scripts/deck-card.ts <deck.json>: writes card.json beside a Cell Deck (celldeck has no card export of its own).
+// node docs/cards/overview.mjs <deck.json>: writes card.json beside a Cell Deck (celldeck has no card export of its own).
 // The headline is the number of saved views (the steps you present); the legend counts what is on the stage.
-// Links open the hosted viewer with ?src=<PAGES><deck.json> (or the bare path when PAGES is unset), like the other tools' cards.
-import { dirname, join } from 'node:path';
+// Links open the hosted viewer with ?src=<SRC> (or the bare path when SRC is unset), like the other tools' cards.
+import fs from 'node:fs';
+import path from 'node:path';
 
 const deckPath = process.argv[2];
-if (!deckPath) throw new Error('Usage: bun scripts/deck-card.ts <deck.json>');
-const deck = await Bun.file(deckPath).json();
+if (!deckPath) throw new Error('Usage: node cards/celldeck.mjs <deck.json>');
+const deck = JSON.parse(fs.readFileSync(deckPath, 'utf8'));
 const { bubbles = [], elements = [], links = [] } = deck.scene ?? {};
-const views: unknown[] = deck.views ?? [];
+const views = deck.views ?? [];
 
-const url = 'https://aaronp.github.io/celldeck/?src=' + (process.env.PAGES ? process.env.PAGES + deckPath : deckPath);
+const url = 'https://aaronp.github.io/celldeck/?src=' + (process.env.SRC ?? deckPath);
 const status =
   bubbles.length === 0 ? { label: 'Empty', tone: 'neutral' }
   : views.length === 0 ? { label: 'No views yet', tone: 'warn' }
@@ -29,6 +30,6 @@ const card = {
   source: { label: deckPath, url },
   updated: new Date().toLocaleDateString('en-CA')
 };
-const out = join(dirname(deckPath), 'card.json');
-await Bun.write(out, JSON.stringify(card, null, 2) + '\n');
+const out = path.join(path.dirname(deckPath), 'card.json');
+fs.writeFileSync(out, JSON.stringify(card, null, 2) + '\n');
 console.log(`Wrote ${out}`);
