@@ -236,3 +236,27 @@
 - [ ] **Step 8: Commit** `refactor: the template is @pritzlaff/project and uses its own CLI`
 
 Publishing `0.1.0` (`npm publish`) and pushing are left to the user; `make clone` needs the package on npm.
+
+### Task 7: Managed Makefile block (added after approval)
+
+**Files:**
+- Create: `lib/makefile.mjs`, `test/makefile.test.mjs`
+- Modify: `lib/install.mjs` (`add`, `remove`, `update` call `syncMakefile` unless `makefile === false`), `bin/project.mjs` (`--no-makefile`, help text), `README.md` (one line under adding to an existing repo)
+
+**Interfaces:**
+- Consumes: `readRecord(cwd)`.
+- Produces:
+  - `renderBlock(entries: Entry[], skip: Set<string>) → string`: markers exactly `# >>> @pritzlaff/project — managed by \`project add/remove/update\`; edits inside are overwritten` and `# <<< @pritzlaff/project`. Lines: `.PHONY:` with every emitted target, then `dev: ; npx project dev`, `snapshot: ; npx project snapshot`, `dashboard: ; npx project build`, then one `<name>: ; npx <bin> <file>` per entry in record order. `<name>` = `aliases[0] ?? id`. Targets in `skip` are left out.
+  - `syncMakefile(cwd) → { created: boolean, skipped: string[] }`: reads `<cwd>/Makefile` (or `''`), finds targets defined outside the block (`/^([A-Za-z0-9_.-]+)\s*:(?!=)/m` per line, outside the markers), renders the block skipping those (warn `Makefile already defines <t>; leaving it out of the managed block`), then replaces the existing block in place or appends it (preceded by one blank line if the file is non-empty and doesn't already end in one). Creates the file if absent. Nothing outside the markers changes.
+
+- [ ] **Step 1: Write the failing tests** in `test/makefile.test.mjs`
+  - `creates a Makefile`: in a temp project with decisions and risks recorded, `syncMakefile` → `created: true`. The file contains `adr: ; npx adr docs/adr/decisions.md` and `risks: ; npx risk-register docs/risks/risks.md`, and starts with the start marker.
+  - `appends and keeps the host's content`: pre-write `build:\n\tgo build\n`. After the sync the file starts with exactly that text, and the block follows.
+  - `idempotent`: syncing twice gives byte-identical files.
+  - `replaces in place`: record decisions, sync, record risks too, sync; one start marker, and the block contains `risks:`. Content after the block (`after:\n\techo hi\n` appended after the first sync) is preserved.
+  - `skips host-defined targets`: pre-write `dev:\n\tmy-dev\n`. The block has no `dev:` line, `skipped` deep-equals `['dev']`, and `.PHONY` lacks `dev`.
+  - `add honours --no-makefile`: `add(cwd, manifest, ['adr'], { install:false, makefile:false })` creates no Makefile; without the flag it does.
+- [ ] **Step 2: Run** `node --test test/makefile.test.mjs`. Expected: FAIL.
+- [ ] **Step 3: Implement** `lib/makefile.mjs`, wire it into `add`/`remove`/`update`, and add the flag. This repo's Makefile flows never call `add`, `remove` or `update`. Its README one-off command becomes `add all --no-install --no-makefile`.
+- [ ] **Step 4: Run** `node --test test/*.test.mjs`. Expected: PASS.
+- [ ] **Step 5: Commit** `feat: add/remove/update keep a managed Makefile block`

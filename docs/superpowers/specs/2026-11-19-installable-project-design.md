@@ -46,7 +46,8 @@ Three independently released components come out of it:
 - Requiring `make` or `bun` in the host repo. The CLI and card scripts are plain Node (≥ 22), like every
   tool's `bin/*.mjs`.
 - Touching anything in the host repo it didn't create: never overwrite an existing area file, workflow
-  or `package.json` script; `remove` never deletes area data.
+  or `package.json` script; `remove` never deletes area data. The one shared file it edits is the
+  `Makefile`, and only between its own markers (see Makefile targets).
 - Running code fetched from a URL at build time. Remote card scripts are copied into the repo by `add`
   and `update`, where they are reviewed and committed like any other code.
 - Bundling the tools into the package. The host owns the tool versions (and so the matching
@@ -148,6 +149,32 @@ worked out as the Makefile's `PAGES` does today (`owner.github.io/repo/`, or the
 - **`project pages`**: writes `.github/workflows/pages.yml` (checkout, setup-node, install,
   `npx project build --out _site`, upload, deploy) if no file of that name exists. If one does, prints
   the `project build` step to add to it instead.
+
+### Makefile targets (added 2026-11-19)
+
+`add`, `remove` and `update` keep a managed block in the host's `Makefile`, on by default;
+`--no-makefile` skips it. Make stays optional: everything also runs as `npx project …`.
+
+```make
+# >>> @pritzlaff/project — managed by `project add/remove/update`; edits inside are overwritten
+.PHONY: dev snapshot dashboard adr risks
+dev:       ; npx project dev
+snapshot:  ; npx project snapshot
+dashboard: ; npx project build
+adr:       ; npx adr docs/adr/decisions.md
+risks:     ; npx risk-register docs/risks/risks.md
+# <<< @pritzlaff/project
+```
+
+- No `Makefile`: create one with just the block. A `Makefile` without the block: append it. With the
+  block: replace it in place (idempotent). Nothing outside the markers is ever changed.
+- One target per recorded tool, named by its first alias, else its id (today's names: `goals`, `c4`,
+  `celldeck`, `adr`, `risks`, `gantt`, `agile`), running `npx <bin> <file>`.
+- A target name the host already defines outside the block is left out of the block, with a warning.
+- `remove` of the last tool leaves the block with just `dev`/`snapshot`/`dashboard`; it never deletes
+  the `Makefile`.
+- This repo keeps its own hand-written `Makefile` (it runs the checkout's CLI), so its flows pass
+  `--no-makefile`; `make clone` lets the clone get the block.
 
 Project info shown on the dashboard: name from `--name`, else `package.json` `displayName`, else its `name`, repo
 from `origin`, footer "Made with" link to this repo.
