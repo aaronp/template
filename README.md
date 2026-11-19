@@ -1,13 +1,15 @@
-# project-template
+# Project Governance as Code
 
 <!-- template:start -->
-A template repository for keeping every project artifact (goals, architecture, decisions, risks,
-interfaces, schedule, delivery) as plain Markdown and JSON next to the code, with a dashboard that
+Store more than code - keep your project artifacts together: goals, architecture, decisions, risks,
+interfaces, schedule, delivery, etc. -- all **as plain Markdown and JSON next to the code**, with a dashboard that
 summarizes them.
 
 **See it:** [aaronp.github.io/template](https://aaronp.github.io/template/) ·
 [a filled-in example (Acme)](https://aaronp.github.io/template/demo/dashboard.html) ·
 [the empty dashboard a new project starts with](https://aaronp.github.io/template/dashboard.html)
+
+[![The dashboard a new project starts with: one card per area, each linking to its tool](docs/images/dashboard.png)](https://aaronp.github.io/template/dashboard.html)
 
 ## Rationale
 
