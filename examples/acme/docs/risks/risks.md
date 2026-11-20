@@ -1,5 +1,5 @@
 ---
-register: Sample register (fictional organisation)
+register: Risk Register
 as_at: 2026-10-20
 scale: 5x5
 ---

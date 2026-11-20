@@ -93,7 +93,7 @@
       "id": "risks",
       "aliases": [],
       "name": "Risks",
-      "tool": "Risk register",
+      "tool": "Risk Register",
       "package": "@pritzlaff/risk-register",
       "bin": "risk-register",
       "file": "docs/risks/risks.md",
@@ -115,7 +115,7 @@
         "gantt"
       ],
       "name": "Schedule",
-      "tool": "Gantt",
+      "tool": "Gantt Chart",
       "package": "@pritzlaff/gantt",
       "bin": "gantt",
       "file": "docs/schedule/schedule.md",
@@ -125,7 +125,7 @@
       "viewer": "https://aaronp.github.io/gantt/",
       "dashboard": {
         "tint": "#FFEDB3",
-        "question": "Do you know when it’ll be done?",
+        "question": "Do you know how the schedules all fit together?",
         "noLead": "Lay out milestones and dependencies on a timeline."
       },
       "starter": "# Schedule\n",

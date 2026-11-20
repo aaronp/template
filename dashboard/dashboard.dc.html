@@ -70,7 +70,7 @@ a{color:#2F5BEA}a:hover{color:#1E3FB0}
 <span style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: {{item.tint}}; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500; color: #14171F">{{item.no}}</span>
 <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
 <h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 18px">{{item.area}}</h3>
-<span style="font-size: 13px; color: #565E6C">{{item.tool}}</span>
+<span style="font-size: 13px; color: #565E6C">{{item.subtitle}}</span>
 </div>
 <span style="margin-left: auto; font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 999px; background: {{item.statusBg}}; color: {{item.statusFg}}; white-space: nowrap">{{item.status}}</span>
 </div>
@@ -201,7 +201,7 @@ class Component extends DCLogic {
 
     // Order = walkthrough order (the record's order). Each area shows its card.json; without one it shows the basic look.
     const AREAS = ENTRIES.map((e) => ({
-      id: e.id, area: e.name, tool: e.tool, path: e.file, viewer: e.viewer,
+      id: e.id, area: e.name, tool: e.tool, subtitle: e.tool, path: e.file, viewer: e.viewer,
       tint: e.dashboard.tint, question: e.dashboard.question, noLead: e.dashboard.noLead,
       card: e.file.replace(/[^/]*$/, '') + 'card.json'
     }));
@@ -216,7 +216,7 @@ class Component extends DCLogic {
       return to.href;
     };
     const fromCard = (c, path) => ({
-      tool: c.subtitle, status: c.status.label, tone: c.status.tone,
+      subtitle: c.subtitle, status: c.status.label, tone: c.status.tone,
       metric: c.heading.primary, metricLabel: c.heading.label, url: localize(c.source.url, path),
       segments: c.legend.map((l) => ({ label: l.label, n: c.report[l.id] ?? 0, color: l.color ?? LIGHT, url: localize(l.url, path) }))
     });
