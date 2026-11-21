@@ -52,7 +52,7 @@ test('list marks installed and drifted', async () => {
   r.tools[0].dashboard.question = 'edited';
   writeRecord(cwd, r);
   const lines = list(cwd, m).split('\n');
-  assert.equal(lines.length, 7);
+  assert.equal(lines.length, 8);
   assert.ok(lines.find((l) => l.includes('decisions')).startsWith('~'));
   assert.ok(lines.find((l) => l.includes('goals')).startsWith(' '));
 });
@@ -73,7 +73,7 @@ test('every starter is accepted by its tool', async () => {
   try {
     await add(cwd, m, m.tools.map((t) => t.id), { install: false });
     const out = await snapshot({ cwd, force: true });
-    assert.equal(out.length, 7);
+    assert.equal(out.length, 8);
   } finally { console.warn = orig; console.log = log; }
   assert.deepEqual(warn, []);
 });
