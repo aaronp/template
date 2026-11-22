@@ -135,3 +135,12 @@ test('update skips recorded tools the manifest dropped', async () => {
   assert.ok(warn.includes('gone is no longer in the manifest; run: project remove gone'));
   await assert.rejects(update(cwd, m, ['gone'], { install: false }), /Unknown tool "gone"/);
 });
+
+test('newer compares x.y.z', async () => {
+  const { newer } = await import('../lib/install.mjs');
+  assert.ok(newer('1.2.0', '1.1.9'));
+  assert.ok(newer('1.10.0', '1.9.0'));
+  assert.ok(!newer('1.1.1', '1.1.1'));
+  assert.ok(!newer('0.9.0', '1.0.0'));
+  assert.ok(!newer('1.0.0-beta.1', '1.0.0'));
+});

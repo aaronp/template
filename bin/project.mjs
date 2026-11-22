@@ -3,12 +3,12 @@ import { parseArgs } from 'node:util';
 import { loadManifest } from '../lib/manifest.mjs';
 import { pagesUrl, snapshot } from '../lib/snapshot.mjs';
 import { build } from '../lib/build.mjs';
-import { list, add, remove, update, pages } from '../lib/install.mjs';
+import { list, add, remove, update, pages, outdated } from '../lib/install.mjs';
 
 const USAGE = `Usage: project <command> [args] [flags]
 
 Commands:
-  list                 show every tool and whether it is installed
+  list                 show every tool, whether it is installed and if npm has a newer version
   add <tool...|all>    install tools and wire them into docs/
   remove <tool...|all> unwire tools and uninstall their packages
   update [tool...|all] refresh recorded entries and upgrade packages
@@ -17,6 +17,8 @@ Commands:
   dashboard-build      write the site (cards, badges, dashboard.html) to --out (alias: build)
   pages                write the GitHub Pages workflow
   help                 show this message
+
+list and dashboard check npm for newer tool versions (NO_UPDATE_CHECK=1 or CI skips it).
 
 Flags:
   --manifest <url|path>  manifest to read (default https://aaronp.github.io/template/manifest.json)
@@ -55,13 +57,20 @@ const pg = () => pagesUrl(cwd, v.pages);
 const manifest = () => loadManifest(v.manifest);
 
 const commands = {
-  list: async () => console.log(list(cwd, await manifest())),
+  list: async () => {
+    console.log(list(cwd, await manifest()));
+    const o = await outdated(cwd);
+    if (o) console.log('\nNewer versions on npm:\n' + o);
+  },
   add: async () => add(cwd, await manifest(), args, { install, makefile, pages: pg() }),
   remove: async () => remove(cwd, args, { install, makefile }),
   update: async () => update(cwd, await manifest(), args, { install, makefile, pages: pg() }),
   snapshot: async () => console.log((await snapshot({ cwd, pages: pg(), force: v.force })).length + ' cards written'),
   build: async () => build({ cwd, out: v.out, pages: pg(), name: v.name }),
-  dev: async () => (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() }),
+  dev: async () => {
+    outdated(cwd).then((o) => o && console.log('\nNewer versions on npm:\n' + o + '\n'));
+    await (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() });
+  },
   pages: async () => pages(cwd)
 };
 commands.dashboard = commands.dev;
