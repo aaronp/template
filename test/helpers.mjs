@@ -6,7 +6,7 @@ import { writeRecord } from '../lib/manifest.mjs';
 
 export const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-// A temp project with the Acme docs, the overview card script and all seven tools recorded.
+// A temp project with the Acme docs, the overview card script and all eight tools recorded.
 export function acmeProject() {
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'project-'));
   fs.cpSync(path.join(repo, 'examples/acme/docs'), path.join(cwd, 'docs'), { recursive: true });

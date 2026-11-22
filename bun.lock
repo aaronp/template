@@ -8,7 +8,8 @@
         "@pritzlaff/adr": "^1.1.1",
         "@pritzlaff/agile": "^1.0.2",
         "@pritzlaff/c4": "^0.1.0",
-        "@pritzlaff/celldeck": "^0.1.1",
+        "@pritzlaff/celldeck": "^0.1.2",
+        "@pritzlaff/decision-map": "^0.1.0",
         "@pritzlaff/gantt": "^1.0.1",
         "@pritzlaff/hoshin-kanri": "^1.0.1",
         "@pritzlaff/risk-register": "^0.2.0",
@@ -22,7 +23,9 @@
 
     "@pritzlaff/c4": ["@pritzlaff/c4@0.1.0", "", { "bin": { "c4": "bin/c4.mjs" } }, "sha512-rmc1AZSZbZKos7FY+qyEyBqR7k0vw2cg3zTsu9Jsd3ctGa4SU/yu6WmGMbfCoDXmOurI/PIyUFq2TRsvJ2BFSg=="],
 
-    "@pritzlaff/celldeck": ["@pritzlaff/celldeck@0.1.1", "", { "bin": { "celldeck": "bin/celldeck.mjs" } }, "sha512-94+fILuu1xGsLt996ZXdgjK38ZBCtB7bDsNv1F7cQ/3yw1Ra9X068sZSCeV2olPZu1+hfGAOm123kOM61deURQ=="],
+    "@pritzlaff/celldeck": ["@pritzlaff/celldeck@0.1.2", "", { "bin": { "celldeck": "bin/celldeck.mjs" } }, "sha512-bkjZfK1m06jAsPtB3a+C8W4R8mYSZjGZxqADfqiLw6C3sYOnTiv49sIIqANimY644DKRNxDInftBQOvBcdn0LA=="],
+
+    "@pritzlaff/decision-map": ["@pritzlaff/decision-map@0.1.0", "", { "bin": { "decision-map": "bin/decision-map.mjs" } }, "sha512-KlJIjm1HKk6fUZMEKEHYp7AtSbJHW+jTKmwf1//v2I4c8FoTXiNki5+TsMjS7LwZyV5qYpfUr3q2aq5CpPLxlg=="],
 
     "@pritzlaff/gantt": ["@pritzlaff/gantt@1.0.1", "", { "bin": { "gantt": "bin/gantt.mjs" } }, "sha512-GUb4DnOCqFPEoEJaoX8UxQrXdZvrPQ9/Nv3cZ77FImQY5a4oJvUsdziAR7aquXvbpcDl9MPegbVU8lC7WlL7fQ=="],
 

@@ -52,7 +52,7 @@ test('list marks installed and drifted', async () => {
   r.tools[0].dashboard.question = 'edited';
   writeRecord(cwd, r);
   const lines = list(cwd, m).split('\n');
-  assert.equal(lines.length, 7);
+  assert.equal(lines.length, 8);
   assert.ok(lines.find((l) => l.includes('decisions')).startsWith('~'));
   assert.ok(lines.find((l) => l.includes('goals')).startsWith(' '));
 });
@@ -73,7 +73,7 @@ test('every starter is accepted by its tool', async () => {
   try {
     await add(cwd, m, m.tools.map((t) => t.id), { install: false });
     const out = await snapshot({ cwd, force: true });
-    assert.equal(out.length, 7);
+    assert.equal(out.length, 8);
   } finally { console.warn = orig; console.log = log; }
   assert.deepEqual(warn, []);
 });
@@ -134,4 +134,13 @@ test('update skips recorded tools the manifest dropped', async () => {
   const warn = await quiet(() => update(cwd, m, [], { install: false }));
   assert.ok(warn.includes('gone is no longer in the manifest; run: project remove gone'));
   await assert.rejects(update(cwd, m, ['gone'], { install: false }), /Unknown tool "gone"/);
+});
+
+test('newer compares x.y.z', async () => {
+  const { newer } = await import('../lib/install.mjs');
+  assert.ok(newer('1.2.0', '1.1.9'));
+  assert.ok(newer('1.10.0', '1.9.0'));
+  assert.ok(!newer('1.1.1', '1.1.1'));
+  assert.ok(!newer('0.9.0', '1.0.0'));
+  assert.ok(!newer('1.0.0-beta.1', '1.0.0'));
 });

@@ -110,6 +110,29 @@
       "order": 4
     },
     {
+      "id": "map",
+      "aliases": [
+        "decision-map"
+      ],
+      "name": "Map",
+      "tool": "Decision map",
+      "package": "@pritzlaff/decision-map",
+      "bin": "decision-map",
+      "file": "docs/map/map.md",
+      "srcEnv": null,
+      "homepage": "https://github.com/aaronp/decision-map",
+      "spec": "https://aaronp.github.io/decision-map/README.md",
+      "viewer": "https://aaronp.github.io/decision-map/",
+      "dashboard": {
+        "tint": "#D8F0DC",
+        "question": "Do you know what everyone thinks matters?",
+        "noLead": "Map the question, the arguments for and against, and how much each one weighs."
+      },
+      "card": false,
+      "starter": "# root\n",
+      "order": 4
+    },
+    {
       "id": "schedule",
       "aliases": [
         "gantt"

@@ -19,8 +19,8 @@ test('builds a self-contained dashboard', async () => {
   assert.match(html, /window\.PROJECT =/);
   assert.doesNotMatch(html, /src="\.\/vendor/);
   const data = embedded(html);
-  assert.equal(data.areas.length, 7);
-  assert.equal(Object.keys(data.cards).length, 7);
+  assert.equal(data.areas.length, 8);
+  assert.equal(Object.keys(data.cards).length, 8);
   // Each inline script closes where intended and still parses.
   for (const [, body] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) {
     assert.doesNotMatch(body, /<!--/);

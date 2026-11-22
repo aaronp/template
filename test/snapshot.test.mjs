@@ -16,11 +16,12 @@ const PAGES = 'https://x.github.io/y';
 test('writes a card for every area', async () => {
   const cwd = acmeProject();
   const out = await snapshot({ cwd, pages: PAGES, force: true });
-  assert.equal(out.length, 7);
+  assert.equal(out.length, 8);
   const adr = card(cwd, 'adr');
   assert.equal(adr.version, 1);
   assert.match(adr.source.url, /src=(https%3A%2F%2Fx\.github\.io%2Fy%2Fdocs%2Fadr%2Fdecisions\.md|https:\/\/x\.github\.io\/y\/docs\/adr\/decisions\.md)/);
   assert.equal(card(cwd, 'overview').subtitle, 'Cell Deck');
+  assert.equal(card(cwd, 'map').source.url, 'https://aaronp.github.io/decision-map/?src=https://x.github.io/y/docs/map/map.md');
 });
 
 test('pagesUrl adds one trailing slash', async () => {

@@ -7,24 +7,25 @@ import { loadManifest, findTool, readRecord, writeRecord } from '../lib/manifest
 
 const load = () => loadManifest('./manifest.json');
 
-test('manifest has the seven areas in walkthrough order', async () => {
+test('manifest has the eight areas in walkthrough order', async () => {
   const m = await load();
-  assert.deepEqual(m.tools.map((t) => t.id), ['goals', 'architecture', 'overview', 'decisions', 'risks', 'schedule', 'work']);
+  assert.deepEqual(m.tools.map((t) => t.id), ['goals', 'architecture', 'overview', 'decisions', 'map', 'risks', 'schedule', 'work']);
 });
 
 test("aliases match today's make targets", async () => {
   const m = await load();
   for (const [name, id] of [['adr', 'decisions'], ['risks', 'risks'], ['c4', 'architecture'], ['celldeck', 'overview'],
-    ['gantt', 'schedule'], ['agile', 'work'], ['goals', 'goals']]) {
+    ['gantt', 'schedule'], ['agile', 'work'], ['goals', 'goals'], ['decision-map', 'map']]) {
     assert.equal(findTool(m, name).id, id);
   }
   assert.throws(() => findTool(m, 'nope'), /Unknown tool "nope"/);
 });
 
-test('overview uses the card script', async () => {
+test('overview uses the card script; map the basic card', async () => {
   const m = await load();
   assert.deepEqual(findTool(m, 'celldeck').card, { script: 'cards/celldeck.mjs' });
-  for (const t of m.tools) if (t.id !== 'overview') assert.ok(!('card' in t), t.id);
+  assert.equal(findTool(m, 'map').card, false);
+  for (const t of m.tools) if (!['overview', 'map'].includes(t.id)) assert.ok(!('card' in t), t.id);
 });
 
 test('loadManifest rejects an unknown version', async () => {
