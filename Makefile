@@ -100,3 +100,9 @@ bump-patch bump-minor bump-major:
 # Publishes @pritzlaff/project to npm. Bump first: make bump-patch|bump-minor|bump-major
 publish: test
 	npm publish
+
+# >>> @pritzlaff/project — managed by `project add/remove/update`; edits inside are overwritten
+.PHONY: dashboard decision-map
+dashboard: ; npx project dev
+decision-map: ; npx decision-map docs/map/map.md
+# <<< @pritzlaff/project

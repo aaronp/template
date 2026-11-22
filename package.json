@@ -30,7 +30,8 @@
     "@pritzlaff/adr": "^1.1.1",
     "@pritzlaff/agile": "^1.0.2",
     "@pritzlaff/c4": "^0.1.0",
-    "@pritzlaff/celldeck": "^0.1.1",
+    "@pritzlaff/celldeck": "^0.1.2",
+    "@pritzlaff/decision-map": "^0.1.0",
     "@pritzlaff/gantt": "^1.0.1",
     "@pritzlaff/hoshin-kanri": "^1.0.1",
     "@pritzlaff/risk-register": "^0.2.0"
