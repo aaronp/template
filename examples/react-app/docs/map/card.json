@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "title": "Map",
+  "subtitle": "Decision map",
+  "status": {
+    "label": "Not summarised",
+    "tone": "neutral"
+  },
+  "heading": {
+    "primary": "new",
+    "label": "last changed"
+  },
+  "legend": [],
+  "report": {},
+  "source": {
+    "label": "docs/map/map.md",
+    "url": "https://aaronp.github.io/decision-map/?src=https://aaronp.github.io/template/react-app/project/docs/map/map.md"
+  }
+}

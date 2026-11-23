@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="71" role="img" aria-label="Goals">
+<title>Goals — Not updated yet</title>
+<style>.b{fill:#fff;stroke:#d0d7de}.f{fill:#1f2328}.m{fill:#656d76}
+@media (prefers-color-scheme:dark){.b{fill:#0d1117;stroke:#30363d}.f{fill:#e6edf3}.m{fill:#9198a1}}</style>
+<g font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="12">
+<rect class="b" fill="#fff" stroke="#d0d7de" x=".5" y=".5" width="519" height="70" rx="6"/>
+<text class="f" fill="#1f2328" x="16" y="26" font-size="15" font-weight="700">Goals</text>
+<text class="m" fill="#656d76" x="16" y="45">Not updated yet</text>
+
+</g></svg>

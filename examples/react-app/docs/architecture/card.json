@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "title": "Project",
+  "subtitle": "C4 model",
+  "status": {
+    "label": "Laid out",
+    "tone": "good"
+  },
+  "heading": {
+    "primary": "0",
+    "label": "elements"
+  },
+  "legend": [
+    {
+      "id": "people",
+      "label": "People",
+      "color": "#08427B"
+    },
+    {
+      "id": "systems",
+      "label": "Systems",
+      "color": "#1168BD"
+    },
+    {
+      "id": "externals",
+      "label": "External systems",
+      "color": "#5E6470"
+    },
+    {
+      "id": "containers",
+      "label": "Containers",
+      "color": "#3478C6"
+    },
+    {
+      "id": "components",
+      "label": "Components",
+      "color": "#2D6A9F"
+    },
+    {
+      "id": "relationships",
+      "label": "Relationships",
+      "color": "#7B4FA0"
+    }
+  ],
+  "report": {
+    "people": 0,
+    "systems": 0,
+    "externals": 0,
+    "containers": 0,
+    "components": 0,
+    "relationships": 0
+  },
+  "source": {
+    "label": "docs/architecture/c4.md",
+    "url": "https://aaronp.github.io/c4/?src=https://aaronp.github.io/template/react-app/project/docs/architecture/c4.md"
+  },
+  "updated": "2026-11-23"
+}

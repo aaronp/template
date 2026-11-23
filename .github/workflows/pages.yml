@@ -33,6 +33,9 @@ jobs:
         run: |
           make demo-build DEMO=_site/demo DEMO_PAGES=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/demo/
           cp Main.dc.html _site/demo/
+      # Template repo only: the React app example, the app at <site>/react-app/ and its dashboard under react-app/project/.
+      - if: hashFiles('examples/react-app/package.json') != ''
+        run: make react-app-build REACT_APP=_site/react-app REACT_APP_PAGES=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/react-app/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

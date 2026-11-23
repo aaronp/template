@@ -59,3 +59,16 @@ test('project name: --name, then displayName, then name', () => {
   fs.writeFileSync(path.join(cwd, 'package.json'), JSON.stringify({ name: 'my-proj' }));
   assert.equal(projectData({ cwd }).project.name, 'my-proj');
 });
+
+test('--app publishes the app at the root and the project under project/', async () => {
+  const cwd = acmeProject();
+  fs.mkdirSync(path.join(cwd, 'dist'));
+  fs.writeFileSync(path.join(cwd, 'dist/index.html'), 'app');
+  const out = path.join(cwd, 'site');
+  await build({ cwd, out, pages: PAGES, app: 'dist' });
+  assert.equal(fs.readFileSync(path.join(out, 'index.html'), 'utf8'), 'app');
+  assert.ok(fs.existsSync(path.join(out, 'project/dashboard.html')));
+  assert.ok(fs.existsSync(path.join(out, 'project/docs/adr/decisions.md')));
+  assert.match(fs.readFileSync(path.join(out, 'project/index.html'), 'utf8'), /href="\.\.\/"/);
+  assert.match(fs.readFileSync(path.join(out, 'project/docs/adr/card.json'), 'utf8'), /x\.github\.io\/y\/project\/docs\/adr/);
+});

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "title": "Goals",
+  "subtitle": "Hoshin Kanri",
+  "status": {
+    "label": "Not stamped yet",
+    "tone": "neutral"
+  },
+  "heading": {
+    "primary": "0",
+    "label": "breakthrough objectives"
+  },
+  "legend": [
+    {
+      "id": "vision",
+      "label": "Breakthrough objectives",
+      "color": "#3346D3",
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/react-app/project/docs/goals/x-matrix.md&view=breakthrough-objectives"
+    },
+    {
+      "id": "goals",
+      "label": "Annual objectives",
+      "color": "#0A6E64",
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/react-app/project/docs/goals/x-matrix.md&view=annual-objectives"
+    },
+    {
+      "id": "priorities",
+      "label": "Top-level priorities",
+      "color": "#A84C09",
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/react-app/project/docs/goals/x-matrix.md&view=top-level-priorities"
+    },
+    {
+      "id": "kpis",
+      "label": "Targets to improve",
+      "color": "#7436C2",
+      "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/react-app/project/docs/goals/x-matrix.md&view=targets-to-improve"
+    }
+  ],
+  "report": {
+    "vision": 0,
+    "goals": 0,
+    "priorities": 0,
+    "kpis": 0
+  },
+  "source": {
+    "label": "docs/goals/x-matrix.md",
+    "url": "https://aaronp.github.io/Hoshin-Kanri/?src=https://aaronp.github.io/template/react-app/project/docs/goals/x-matrix.md"
+  },
+  "updated": "2026-11-23"
+}

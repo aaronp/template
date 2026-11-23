@@ -65,6 +65,14 @@ demo-build: | node_modules
 demo: demo-build
 	cd $(DEMO_SRC) && $(P) dev
 
+# The React app example (examples/react-app) as Pages publishes it: the app at $(REACT_APP)/, the dashboard and
+# API docs under $(REACT_APP)/project/, its cards linking under REACT_APP_PAGES. Needs the network (bun install).
+.PHONY: react-app-build
+REACT_APP ?= temp/react-app
+react-app-build: | node_modules
+	cd examples/react-app && bun install && bun run build && \
+	  $(P) build --app dist --out $(abspath $(REACT_APP)) $(if $(REACT_APP_PAGES),--pages $(REACT_APP_PAGES))
+
 # make package: the npm tarball, as `npm publish` would upload it, in temp/.
 .PHONY: package test-install
 VERSION := $(shell node -p "require('./package.json').version")

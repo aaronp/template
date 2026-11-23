@@ -1,0 +1,35 @@
+# Publishes the repo (dashboard, docs/ and generated summaries) to GitHub Pages.
+# One-time setup: Settings -> Pages -> Source: "GitHub Actions".
+name: Pages
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: bun install
+      - run: bun run build
+      # The app's build output (dist for Vite) goes at the site root; the dashboard at /project/.
+      - run: npx project build --app dist --out _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

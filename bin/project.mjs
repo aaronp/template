@@ -24,6 +24,7 @@ Flags:
   --manifest <url|path>  manifest to read (default https://aaronp.github.io/template/manifest.json)
   --pages <url>          public Pages URL (default: from git remote)
   --out <dir>            build output directory (default _site)
+  --app <dir>            built app to publish at the site root; the dashboard then goes under project/
   --name <text>          project name for the dashboard
   --port <n>             dev server port (default 8000)
   --force                rewrite cards even if up to date
@@ -42,7 +43,7 @@ try {
     allowPositionals: true,
     options: {
       manifest: { type: 'string', default: 'https://aaronp.github.io/template/manifest.json' },
-      pages: { type: 'string' }, out: { type: 'string', default: '_site' }, name: { type: 'string' },
+      pages: { type: 'string' }, app: { type: 'string' }, out: { type: 'string', default: '_site' }, name: { type: 'string' },
       port: { type: 'string', default: '8000' }, force: { type: 'boolean', default: false },
       'no-install': { type: 'boolean', default: false }, 'no-makefile': { type: 'boolean', default: false }
     }
@@ -66,7 +67,7 @@ const commands = {
   remove: async () => remove(cwd, args, { install, makefile }),
   update: async () => update(cwd, await manifest(), args, { install, makefile, pages: pg() }),
   snapshot: async () => console.log((await snapshot({ cwd, pages: pg(), force: v.force })).length + ' cards written'),
-  build: async () => build({ cwd, out: v.out, pages: pg(), name: v.name }),
+  build: async () => build({ cwd, out: v.out, pages: pg(), name: v.name, app: v.app }),
   dev: async () => {
     outdated(cwd).then((o) => o && console.log('\nNewer versions on npm:\n' + o + '\n'));
     await (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() });

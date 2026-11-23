@@ -66,6 +66,65 @@ bunx project build --out _site/project --pages https://<owner>.github.io/<repo>/
 bunx project pages                                         # or: a GitHub Pages workflow that publishes the dashboard
 ```
 
+### Alongside an existing app and Pages workflow
+
+If the repo already publishes an app (e.g. a React build in `dist/`), the app keeps the root and the project
+site goes under `/project/`. No changes to the app or its router: Pages serves the real files under `/project/`
+before any SPA fallback.
+
+1. Add the tools, then commit what they write (`docs/`, `.project`, the `Makefile` block, `package.json`):
+
+   ```sh
+   bunx @pritzlaff/project add all     # or some: add adr risks schedule
+   make dashboard                      # optional: the dashboard and its editors on http://localhost:8000
+   ```
+
+2. Optional, API docs: `bun add -d typedoc` and a `typedoc.json` (e.g. `{ "entryPoints": ["src/index.ts"] }`).
+   With it, the build writes TypeDoc's output to `/project/api/`.
+
+3. Add one step to the existing workflow, after the app build and before the upload. Either keep the upload path:
+
+   ```yaml
+         - run: bun run build                 # the existing app build → dist/
+         - run: npx project build --out dist/project --pages https://<owner>.github.io/<repo>/project/
+         - uses: actions/upload-pages-artifact@v3
+           with:
+             path: dist                       # unchanged
+   ```
+
+   `--pages` matters here: without it the cards link under `/<repo>/` rather than `/<repo>/project/`.
+   Or let `--app` add the `/project/` part, and upload `_site` instead:
+
+   ```yaml
+         - run: npx project build --app dist --out _site
+         - uses: actions/upload-pages-artifact@v3
+           with:
+             path: _site                      # was: dist
+   ```
+
+   `--app` copies `dist/` to `_site/`, so `--out` can't be `dist` itself.
+
+4. Check the workflow:
+   - Node 22 or newer (`actions/setup-node` with `node-version: 22`).
+   - The install step installs devDependencies (`bun install`, `npm ci`; not `--production`): the tools are devDependencies.
+   - Deploying by pushing to a `gh-pages` branch (e.g. `peaceiris/actions-gh-pages`) rather than `deploy-pages`:
+     add `touch dist/.nojekyll`, or Jekyll converts the `docs/*.md` files the dashboard loads.
+   - A custom domain: pass `--pages https://<your-domain>/project/` (the default comes from the git remote and
+     only knows `github.io`).
+
+5. Push. The site is then:
+
+   | | URL |
+   |---|---|
+   | App (unchanged) | `https://<owner>.github.io/<repo>/` |
+   | Links page (App, Dashboard, API docs) | `https://<owner>.github.io/<repo>/project/` |
+   | Dashboard | `https://<owner>.github.io/<repo>/project/dashboard.html` |
+   | API docs | `https://<owner>.github.io/<repo>/project/api/` |
+
+With no workflow yet, `bunx project pages` writes one that does this when `package.json` has a `build` script.
+[`examples/react-app`](examples/react-app) is a shadcn/React app set up this way, published at
+[aaronp.github.io/template/react-app/](https://aaronp.github.io/template/react-app/) (`make react-app-build` builds it locally).
+
 <!-- template:end -->
 [![Goals](docs/goals/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Architecture](docs/architecture/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Decisions](docs/adr/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Risks](docs/risks/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Schedule](docs/schedule/badge.svg)](https://aaronp.github.io/template/dashboard.html) [![Delivery](docs/board/badge.svg)](https://aaronp.github.io/template/dashboard.html)
 

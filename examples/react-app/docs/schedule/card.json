@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "title": "Schedule",
+  "subtitle": "",
+  "status": {
+    "label": "On track",
+    "tone": "good"
+  },
+  "heading": {
+    "primary": "0",
+    "label": "tasks"
+  },
+  "legend": [
+    {
+      "id": "done",
+      "label": "Done",
+      "color": "#1E7A46"
+    },
+    {
+      "id": "active",
+      "label": "In progress",
+      "color": "#2F5BD3"
+    },
+    {
+      "id": "upcoming",
+      "label": "Upcoming",
+      "color": "#6B7280"
+    },
+    {
+      "id": "late",
+      "label": "Late",
+      "color": "#B42318"
+    }
+  ],
+  "report": {
+    "done": 0,
+    "active": 0,
+    "upcoming": 0,
+    "late": 0
+  },
+  "source": {
+    "label": "docs/schedule/schedule.md",
+    "url": "https://aaronp.github.io/gantt/?src=https://aaronp.github.io/template/react-app/project/docs/schedule/schedule.md"
+  },
+  "updated": "2026-11-23"
+}
