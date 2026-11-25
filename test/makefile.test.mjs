@@ -26,6 +26,8 @@ test('creates a Makefile', async () => {
   assert.ok(s.startsWith(START));
   assert.ok(s.includes('adr: ; npx adr docs/adr/decisions.md'));
   assert.ok(s.includes('risks: ; npx risk-register docs/risks/risks.md'));
+  assert.ok(s.includes('usage: ; npx project usage'));
+  assert.ok(s.includes('dashboard: ; npx project dev'));
 });
 
 test('appends and keeps the host content', async () => {

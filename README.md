@@ -133,6 +133,7 @@ Dashboard: https://aaronp.github.io/template/dashboard.html
 ## Running
 
 ```sh
+make usage                # commands, plus each server (dashboard, area editors) and how to start it (= bunx project usage)
 make dashboard            # open the dashboard locally (= bunx project dashboard)
 make dashboard-build      # generate it: _site/dashboard.html (= bunx project dashboard-build)
 ```

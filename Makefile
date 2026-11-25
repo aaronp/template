@@ -1,8 +1,12 @@
-.PHONY: dev dashboard dashboard-build snapshot test adr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot celldeck celldeck-snapshot
+.PHONY: usage dev dashboard dashboard-build snapshot testadr adr-snapshot goals goals-snapshot c4 c4-snapshot gantt gantt-snapshot agile agile-snapshot risks risks-snapshot celldeck celldeck-snapshot
 
 # This checkout's CLI and manifest (never the npm copy or the published manifest).
 P := node $(CURDIR)/bin/project.mjs --manifest $(CURDIR)/manifest.json
 BIN := node_modules/.bin
+
+# make usage: the CLI's commands, plus each server (dashboard, one editor per area) with its port and how to start it.
+usage: | node_modules
+	@$(P) usage
 
 # make dashboard: serves the dashboard on http://localhost:8000/ and opens it (NO_OPEN=1 skips), with every
 # area's editor beside it (Save writes to this checkout); saving a docs/ file rebuilds its card and reloads it.

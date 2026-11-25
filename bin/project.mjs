@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
-import { loadManifest } from '../lib/manifest.mjs';
+import { loadManifest, readRecord } from '../lib/manifest.mjs';
 import { pagesUrl, snapshot } from '../lib/snapshot.mjs';
 import { build } from '../lib/build.mjs';
 import { list, add, remove, update, pages, outdated } from '../lib/install.mjs';
@@ -16,6 +16,7 @@ Commands:
   dashboard            serve the dashboard locally and open it (alias: dev)
   dashboard-build      write the site (cards, badges, dashboard.html) to --out (alias: build)
   pages                write the GitHub Pages workflow
+  usage                this message plus the servers this repo runs and how to start each
   help                 show this message
 
 list and dashboard check npm for newer tool versions (NO_UPDATE_CHECK=1 or CI skips it).
@@ -72,7 +73,18 @@ const commands = {
     outdated(cwd).then((o) => o && console.log('\nNewer versions on npm:\n' + o + '\n'));
     await (await import('../lib/dev.mjs')).dev({ cwd, port: Number(v.port), pages: pg() });
   },
-  pages: async () => pages(cwd)
+  pages: async () => pages(cwd),
+  // Mirrors dev(): the dashboard on --port, then one editor per recorded tool on port+1, port+2, ...
+  usage: async () => {
+    const port = Number(v.port);
+    const tools = readRecord(cwd).tools;
+    const row = (a, b, c) => `  ${a.padEnd(16)} ${b.padEnd(24)} ${c}`;
+    console.log(USAGE + '\nServers (make dashboard starts them all; Ctrl-C stops them all):\n' +
+      [row('dashboard', `http://localhost:${port}/`, 'make dashboard    | npx project dev'),
+        ...tools.map((e, i) => row(e.aliases?.[0] ?? e.id, `http://localhost:${port + 1 + i}/`, `make ${e.aliases?.[0] ?? e.id}`.padEnd(17) + ` | npx ${e.bin} ${e.file}`))
+      ].join('\n') +
+      (tools.length ? '\n\nRun alone (make <area>), PORT=<n> sets an editor port.' : '\n\nNo tools recorded yet: npx project add <tool...|all>'));
+  }
 };
 commands.dashboard = commands.dev;
 commands['dashboard-build'] = commands.build;
